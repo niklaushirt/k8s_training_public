@@ -1,6 +1,10 @@
 # IBM Kubernetes Training
 
-Before attending the workshop, you need to complete the following 4 steps. 
+Before attending the workshop, you need to have the following:
+
+* Laptop with at least 16GB of RAM (8GB is sufficient for the Basic Module) running macOS/Windows 10/Linux
+* Completed the following 4 steps
+
 
 
 ---
