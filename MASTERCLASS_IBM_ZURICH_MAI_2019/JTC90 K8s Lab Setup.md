@@ -1,18 +1,9 @@
-# IBM Kubernetes Training
-## JTC90 Kubernetes Lab Setup
-
-Before attending the workshop, you need to have the following:
-
-* Laptop with at least 16GB of RAM (8GB is sufficient for the Basic Module) running macOS/Windows 10/Linux
-* Completed the following 4 steps
-
-
-
+# JTC90 Kubernetes Lab Setup
 
 ---
 ---
 
-# Step1 - Setting up Minikube
+# Setting up Minikube
 
 ### Getting set up
 
@@ -218,7 +209,7 @@ If you need some more details: [Install MiniKube](https://kubernetes.io/docs/tas
 ---
 
 
-# Step2 - Set Up Kubectl
+# Task Set Up Kubectl
 
 ----
 
@@ -285,7 +276,7 @@ Download from:
 ---
 ---
 
-# Step3 - Set Up GIT
+## Task Set Up GIT
 
 ----
 
@@ -304,44 +295,3 @@ At some point during the installation, change to the **"Use Windows default cons
 
 ---
 ---
-
-
-
-# Step4 - Check if everything works as expected
-
-
-## 1. Check kubectl 
-
-	type the following command :
-	
-	`kubectl version --short`
-	
-And you should check that you are using the same version as the kubernetes verson running in minikube. 
-
-The `client verson` should match the `server version`:
-
-
-	```
-	$ kubectl version                                                                                          
-	
-	Client Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.0", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-25T15:53:57Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"darwin/amd64"}
-	Server Version: version.Info{Major:"1", Minor:"14", GitVersion:"v1.14.1", GitCommit:"b7394102d6ef778017f2ca4046abbaa23b88c290", GitTreeState:"clean", BuildDate:"2019-04-08T17:02:58Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"linux/amd64"}
-	 ```
-		
-	
-
-## 1. Check git 
-
-	type the following command :
-	
-	`git version `
-	
-	And you should get something similar :
-	
-	```
-	$ git version                                                                                                                         
-	git version 2.18.0
-	```
-
-
-
