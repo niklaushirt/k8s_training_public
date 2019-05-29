@@ -65,15 +65,27 @@ $ sudo mv minikube /usr/local/bin
 ### Linux
   * Requires either the [kvm2 driver](https://github.com/kubernetes/minikube/blob/master/docs/drivers.md#kvm2-driver) (recommended), or VirtualBox
   * VT-x/AMD-v virtualization must be enabled in BIOS
-  * manually:  `curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && sudo install minikube-linux-amd64 /usr/local/bin/minikube`
+  * and by using
+  
+	   ```
+	  $ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && sudo install minikube-linux-amd64 /usr/local/bin/minikube
+	   ```
 
 ---
 
 ### Windows 10
   * Requires a hypervisor, such as VirtualBox (recommended) or HyperV
   * VT-x/AMD-v virtualization must be enabled in BIOS
-  * using [chocolatey](https://chocolatey.org/) `choco install minikube`
-  * manually: Download and run the [installer](https://storage.googleapis.com/minikube/releases/latest/minikube-installer.exe)
+  * You can install minikube:
+	  * either using [chocolatey](https://chocolatey.org/install) 
+	  
+	  ```
+	  $ choco install minikube
+	  ```
+	  
+	  * or manually: Download and run the [installer](https://storage.googleapis.com/minikube/releases/latest/minikube-installer.exe)
+
+
 
 ---
 
@@ -83,7 +95,7 @@ $ sudo mv minikube /usr/local/bin
 Then we start minikube (parameters are important for the Istio Lab):
 
 ```
-$ minikube start --vm-driver virtualbox --memory=8192 --cpus=4                                                                                                                                              
+$ minikube start --vm-driver=virtualbox --kubernetes-version v1.14.1 --cpus=4 --memory=8192                                                                                                                                             
 
 😄  minikube v1.0.1 on darwin (amd64)
 💿  Downloading Minikube ISO ...
@@ -122,7 +134,7 @@ If you need some more details: [Install MiniKube](https://kubernetes.io/docs/tas
 ---
 ---
 
-# Tips and Tricks for 
+## Some Tips and Tricks if you run into problems 
 
 **Hint**
 
@@ -137,7 +149,7 @@ $ sudo chown root:wheel /usr/local/bin/docker-machine-driver-hyperkit && sudo ch
 And start minikube with
 
 ```
-$ minikube start --vm-driver hyperkit --memory=8192 --cpus=4                                                                                                                                              
+$ minikube start --vm-driver=virtualbox --kubernetes-version v1.14.1 --cpus=4 --memory=8192                                                                                                                                             
 ```
 
 
@@ -157,10 +169,10 @@ Try deactivating your VPN (Cisco AnyConnect, ...) and/or reboot.
 
 If needed you can specify the VM provider:
 
-`minikube start --memory=8192 --cpus=4 --vm-driver=virtualbox`
+`minikube start --vm-driver=virtualbox --kubernetes-version v1.14.1 --cpus=4 --memory=8192`
 
 
-`minikube start --memory=8192 --cpus=4 --vm-driver=vmwarefusion`
+`minikube start --vm-driver=vmwarefusion --kubernetes-version v1.14.1 --cpus=4 --memory=8192`
 
 ---
 
@@ -188,15 +200,19 @@ To interact with your cluster, you will need to install the Kubernetes CLI that 
 
 **For Windows users:** 
 
-Manual install 
 
-* [Download for Windows](https://storage.googleapis.com/kubernetes-release/release/v1.14.0/bin/windows/amd64/kubectl.exe)
-* And add the binary in to your PATH.
 
-or using [chocolatey](https://chocolatey.org/) 
-```
-choco install kubernetes-cli
-```
+You can install kubectl: 
+
+* either manually: 
+	* [Download for Windows](https://storage.googleapis.com/kubernetes-release/release/v1.14.0/bin/windows/amd64/kubectl.exe) and 
+	* add the binary in to your PATH.
+	
+* or using [chocolatey](https://chocolatey.org/install) 
+	
+	```
+	$ choco install kubernetes-cli
+	```
 
 ---
 
@@ -220,8 +236,8 @@ $ chmod +x /usr/local/bin/kubectl
 
 Download from:
 
-* [OS X](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/darwin/amd64/kubectl)
-* [Linux](https://storage.googleapis.com/kubernetes-release/release/v1.10.8/bin/linux/amd64/kubectl)
+* [OS X](https://storage.googleapis.com/kubernetes-release/release/v1.14.0/bin/darwin/amd64/kubectl)
+* [Linux](https://storage.googleapis.com/kubernetes-release/release/v1.14.0/bin/linux/amd64/kubectl)
 
 1. Move the executable file to the `/usr/local/bin` directory using the command `mv /<path_to_file>/kubectl /usr/local/bin/kubectl` .
 
