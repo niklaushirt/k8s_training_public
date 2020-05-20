@@ -1,15 +1,3 @@
-<center> <h1>JTC90 Lab Setup</h1> </center>
-
-![K8s CNI](./images/Kube.png)
-
-©2020 Niklaus Hirt / IBM 
-
-
-
-<div style="page-break-after: always;"></div>
-
-
-
 
 # Prerequisites for the Lab
 
