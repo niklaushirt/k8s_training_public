@@ -50,7 +50,7 @@ It is important that you use a version equal or newer than 6.1.6!
 
 ## Part 2 - Download the Lab VM on your PC
 
-The VM is an 11GB zip file that has to be downloaded.
+The VM is an 13GB zip file that has to be downloaded.
 
 
 
@@ -71,9 +71,9 @@ Download it here:
 
 You can also download it from Google Drive, which is **much** slower.
 
-Download it here (VMWare only):
+Download it here (VirtualBox only):
 
-[Google Drive VMWare](https://drive.google.com/open?id=1Vjs7zeDoQ7rsUd9W541tPDRlPhMbEnmV)
+[Google Drive VirtualBox](https://drive.google.com/drive/folders/12YFacjjc92Ens-XEecqgmOG9d0YCz4IQ?usp=sharing)
 
 
 
@@ -95,19 +95,10 @@ Download it here (VMWare only):
 **IMPORTANT**: There have been problems reported running VirtualBox and Docker Desktop on Mac at the same time.
 If you have Docker Desktop running please shut it down first, we'll use Docker in the VM.
 
-1. Import the VM
+1. Open the VM by double-clicking on the Training2020.vbox file.
 
-	* Open VirtualBox and select File>Import Appliance.
-	* Select the Training2020.ova file
-	* Accept the default values
-	* Select "Import"
+2. Start the VM from the VmWare interface.
 
-
-2. You have to enable nested virtualization in VirtualBox by running the following on your PC/Mac `VBoxManage modifyvm Training2020 --nested-hw-virt on`
-
-3. Start the VM
-
-   You can now start the VM from the Virtual Box interface.
 
 <div style="page-break-after: always;"></div>
 
