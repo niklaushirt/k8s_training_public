@@ -124,11 +124,11 @@ If you have Docker Desktop running please shut it down first, we'll use Docker i
 	```
 	
 	This will
-	pull the latest example code from my GitHub repository
-	start minikube if not already running
-	installs the registry
-	installs the Network Plugin (Cilium)
-	starts the Personal Training Environment
+	* 	pull the latest example code from my GitHub repository
+	* 	start minikube if not already running
+	* 	installs the registry
+	* 	installs the Network Plugin (Cilium)
+	* 	starts the Personal Training Environment
 	
 	> During this you will have to provide a name (your name) that will be used to show your progress in the Instructor Dashboard in order to better assist you.
 	
