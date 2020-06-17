@@ -136,4 +136,21 @@ If you have Docker Desktop running please shut it down first, we'll use Docker i
 
 > If you encounter any trouble starting minikube you can try running `./reset.sh`
 
+<div style="page-break-after: always;"></div>
+
+
+## Part 5 - Troubleshooting
+
+1. If the startup script doesn’t work you can run ./resetEnvironment.sh 	(this can take up to 30 minutes as it has to redownload all Docker images)
+
+2. If you lose your PTE Webpage just run minikube service student-ui
+
+3. Problems on Windows 10
+
+	Can be fixed in most cases by turning off Hyper-V by running (as admin): 
+	`bcdedit /set hypervisorlaunchtype off` and rebooting. 
+	
+	This disables Hyper-V and allows Virtualbox to support nested virtualisation.
+	
+	You can turn it back on again with`bcdedit /set hypervisorlaunchtype auto`
 
