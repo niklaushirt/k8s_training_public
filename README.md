@@ -152,3 +152,28 @@ If you have Docker Desktop running please shut it down first, we'll use Docker i
 	
 	You can turn it back on again with `bcdedit /set hypervisorlaunchtype auto`
 
+
+
+## Part 6 - Standalone installation
+
+This describes how to setup an environment on your local PC. 
+This is untested and I cannot guarantee that all the Labs will be working 100%.
+
+You must have the following setup on your PC:
+* Minikube
+* Docker 
+* Git
+
+
+1. Clone the repository to your home directory
+
+	`git clone https://github.com/niklaushirt/training.git`
+
+
+2. Go to the installation directory
+
+	`cd ~/training/standalone`
+
+3. Run the preparation script
+
+	`./welcome.sh`
