@@ -150,5 +150,5 @@ If you have Docker Desktop running please shut it down first, we'll use Docker i
 
 	This disables Hyper-V and allows Virtualbox to support nested virtualisation.
 	
-	You can turn it back on again with `bcdedit /set hypervisorlaunchtype auto`
+	You can turn it back on again with `bcdedit /set hypervisorlaunchtype auto`
 
