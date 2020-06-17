@@ -67,6 +67,8 @@ Download it here:
 [Aspera VirtualBox](https://aspera.pub/zM7YiFk/k8s_training)
 
 
+[Aspera OVA](https://aspera.pub/zM7YiFk/k8s_training)
+
 ### Option 2: Download from Google Drive (not recommended)
 
 You can also download it from Google Drive, which is **much** slower.
