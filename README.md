@@ -134,8 +134,6 @@ If you have Docker Desktop running please shut it down first, we'll use Docker i
 	
 	
 
-> If you encounter any trouble starting minikube you can try running `./reset.sh`
-
 <div style="page-break-after: always;"></div>
 
 
@@ -148,9 +146,9 @@ If you have Docker Desktop running please shut it down first, we'll use Docker i
 3. Problems on Windows 10
 
 	Can be fixed in most cases by turning off Hyper-V by running (as admin): 
-	`bcdedit /set hypervisorlaunchtype off` and rebooting. 
-	
-	This disables Hyper-V and allows Virtualbox to support nested virtualisation.
+	`bcdedit /set hypervisorlaunchtype off` and rebooting.
 
-	You can turn it back on again with`bcdedit /set hypervisorlaunchtype auto`
+	This disables Hyper-V and allows Virtualbox to support nested virtualisation.
+	
+	You can turn it back on again with `bcdedit /set hypervisorlaunchtype auto`
 
