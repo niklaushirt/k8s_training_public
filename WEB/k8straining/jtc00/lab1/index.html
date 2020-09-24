@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="http://niklaushirt.github.io/jtc00/lab1/">
+
+    <title>
+        
+        Getting set up | Kubernetes Training
+        
+    </title>
+
+    
+    <link href="http://niklaushirt.github.io/css/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="http://niklaushirt.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                
+                Kubernetes Training
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/vantagedesign/ace-documentation1" >
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/jtc00/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc00/"><h6>Introduction</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc00/lab1/" class="nav-item my-1 active">
+                
+                 <a href="/jtc00/lab1/" class="nav-link p-0">
+                    Getting set up
+                </a>
+        </li>
+        <li data-nav-id="/jtc00/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc00/lab2/" class="nav-link p-0">
+                    Lab Information and Semantics
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc01/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc01/"><h6>JTC01 Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc01/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Docker
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab2/" class="nav-link p-0">
+                    Lab 2: Docker Basics
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab3/" class="nav-link p-0">
+                    Lab 3: Docker Internals
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc02/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc02/"><h6>JTC02 Kubernetes Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc02/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Kubernetes
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab2/" class="nav-link p-0">
+                    Lab 2: Deploy your first Pod
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy your first application
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab4/" class="nav-link p-0">
+                    Lab 4: Scale and Update Deployments
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab5/" class="nav-link p-0">
+                    Lab 5: Stateful Deployments
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab6/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab6/" class="nav-link p-0">
+                    Lab 6: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc10/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc10/"><h6>JTC10 Istio</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc10/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know ISTIO
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab2/" class="nav-link p-0">
+                    Lab 2: Installing Istio 
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy BookInfo application 
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab4/" class="nav-link p-0">
+                    Lab 4: Monitoring with Kiali
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab5/" class="nav-link p-0">
+                    Lab 5: Traffic flow management
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab6/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab6/" class="nav-link p-0">
+                    Lab 6: Telemetry data
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab7/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab7/" class="nav-link p-0">
+                    Lab 7: End-user authentication
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab8/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab8/" class="nav-link p-0">
+                    Lab 8: Traffic Mirroring
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab9/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab9/" class="nav-link p-0">
+                    Lab 9: Fault Injection
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab10/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab10/" class="nav-link p-0">
+                    Lab 10: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc14/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc14/"><h6>JTC14 Kubernetes Ansible Operators</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc14/lab0/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab0/" class="nav-link p-0">
+                    Lab 0: Prepare the Lab environment
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab1/" class="nav-link p-0">
+                    Lab 1: Kubernetes Operators
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab2/" class="nav-link p-0">
+                    Lab 2: Create the Lab Operator Project
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy the Lab Operator
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc16/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc16/"><h6>JTC16 Kubernetes Security Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc16/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc16/lab1/" class="nav-link p-0">
+                    Lab 1: Network Policies
+                </a>
+        </li>
+        <li data-nav-id="/jtc16/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc16/lab2/" class="nav-link p-0">
+                    Lab 2: Security Tooling
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc17/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc17/"><h6>JTC17 Kubernetes Advanced Security</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc17/lab0/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab0/" class="nav-link p-0">
+                    Lab 0: Preparation
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab1/" class="nav-link p-0">
+                    Lab 1: RBAC - Users, Roles and RoleBindings
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab2/" class="nav-link p-0">
+                    Lab 2: Service Accounts
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab3/" class="nav-link p-0">
+                    Lab 3: RBAC Tooling
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab4/" class="nav-link p-0">
+                    Lab 4: Image Scanning
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc18/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc18/"><h6>JTC18 Kubernetes Advanced Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc18/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab1/" class="nav-link p-0">
+                    Lab 1: Liveness and Readiness Probes
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab2/" class="nav-link p-0">
+                    Lab 2: Init Containers
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab3/" class="nav-link p-0">
+                    Lab 3: Persistent Volumes
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab4/" class="nav-link p-0">
+                    Lab 4: Dynamic NFS provisioning
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab5/" class="nav-link p-0">
+                    Lab 5: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc19/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc19/"><h6>JTC19 CloudNative DevOps</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc19/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab1/" class="nav-link p-0">
+                    Lab 1: Tekton
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab5/" class="nav-link p-0">
+                    Lab 5: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#prerequisites-for-the-lab">Prerequisites for the Lab</a></li>
+    <li><a href="#part-1---install-hypervisor">Part 1 - Install Hypervisor</a>
+      <ul>
+        <li><a href="#option-1-installing-vmware-preferred">Option 1: Installing VMWare (preferred)</a></li>
+        <li><a href="#option-2-installing-virtualbox">Option 2: Installing VirtualBox</a></li>
+      </ul>
+    </li>
+    <li><a href="#part-2---download-the-lab-vm-on-your-pc">Part 2 - Download the Lab VM on your PC</a>
+      <ul>
+        <li><a href="#option-1-download-with-aspera-recommended">Option 1: Download with Aspera (recommended)</a></li>
+        <li><a href="#option-2-download-from-google-drive-not-recommended">Option 2: Download from Google Drive (not recommended)</a></li>
+      </ul>
+    </li>
+    <li><a href="#part-3---starting-the-vm">Part 3 - Starting the VM</a>
+      <ul>
+        <li><a href="#vmware">VMWare</a></li>
+        <li><a href="#virtualbox">VirtualBox</a></li>
+      </ul>
+    </li>
+    <li><a href="#part-4---testing-the-vm">Part 4 - Testing the VM</a></li>
+    <li><a href="#using-your-own-environment">Using your own environment</a>
+      <ul>
+        <li><a href="#standalone-installation">Standalone installation</a></li>
+        <li><a href="#cloud-installation">Cloud Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#troubleshooting">Troubleshooting</a></li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>Getting set up</h1>
+
+<h2 id="prerequisites-for-the-lab">Prerequisites for the Lab</h2>
+<p><strong>Before we dive into the Labs, you need to be able to run the provided Lab VM. It contains a Minikube cluster and all the configurations for the subsequent labs.</strong></p>
+<ul>
+<li>Internet Access</li>
+<li>PC with at least:
+<ul>
+<li>4 Core CPU</li>
+<li>8GB of RAM / 16GB recommended (16GB needed for the Istio Lab)</li>
+<li>40GB of free Disk Space</li>
+</ul>
+</li>
+</ul>
+<h2 id="part-1---install-hypervisor">Part 1 - Install Hypervisor</h2>
+<p>Before we dive into the Labs, you need to be able to run the provided Lab VM. It contains a Minikube cluster and all the configurations for the subsequent labs.</p>
+<blockquote>
+<p>VMWare is the preferred option as it handles nested virtualization that we need for this lab very well.
+VirtualBox has this option in the latest releases but might prove unstable on certain PCs/Macs (especially the MacBook Pro 16&rsquo; seems to run into problems).</p>
+</blockquote>
+<h3 id="option-1-installing-vmware-preferred">Option 1: Installing VMWare (preferred)</h3>
+<p>If you do not already have VMWare installed, install a 60 days trial for your OS now:</p>
+<ul>
+<li>macOS	<a href="https://www.vmware.com/products/fusion/fusion-evaluation.html">VMWare</a></li>
+<li>Windows	<a href="https://www.vmware.com/products/workstation/workstation-evaluation.html">VMWare</a></li>
+</ul>
+<h3 id="option-2-installing-virtualbox">Option 2: Installing VirtualBox</h3>
+<p>If you do not already have VirtualBox installed, install it for your OS now:</p>
+<p>It is important that you use a version equal or newer than 6.1.6!</p>
+<ul>
+<li>macOS	<a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>, VMware Fusion, HyperKit</li>
+<li>Linux	<a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>, KVM</li>
+<li>Windows	<a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>, Hyper-V</li>
+</ul>
+<h2 id="part-2---download-the-lab-vm-on-your-pc">Part 2 - Download the Lab VM on your PC</h2>
+<p>The VM is an 13GB zip file that has to be downloaded.</p>
+<h3 id="option-1-download-with-aspera-recommended">Option 1: Download with Aspera (recommended)</h3>
+<p>The easiest way to download the file is with IBM Aspera high-speed transfer solution.</p>
+<p>Download it here:</p>
+<p><a href="https://aspera.pub/zM7YiFk/k8s_training">Aspera VMWare</a></p>
+<p><a href="https://aspera.pub/zM7YiFk/k8s_training">Aspera VirtualBox</a></p>
+<p><a href="https://aspera.pub/zM7YiFk/k8s_training">Aspera OVA</a></p>
+<h3 id="option-2-download-from-google-drive-not-recommended">Option 2: Download from Google Drive (not recommended)</h3>
+<p>You can also download it from Google Drive, which is <strong>much</strong> slower.</p>
+<p>Download it here (VirtualBox only):</p>
+<p><a href="https://drive.google.com/drive/folders/12YFacjjc92Ens-XEecqgmOG9d0YCz4IQ?usp=sharing">Google Drive VirtualBox</a></p>
+<h2 id="part-3---starting-the-vm">Part 3 - Starting the VM</h2>
+<h3 id="vmware">VMWare</h3>
+<ol>
+<li>
+<p>Open the VM by double-clicking on the Training2020.vmx file.</p>
+</li>
+<li>
+<p>Start the VM from the VmWare interface.</p>
+</li>
+</ol>
+<h3 id="virtualbox">VirtualBox</h3>
+<p><strong>IMPORTANT</strong>: There have been problems reported running VirtualBox and Docker Desktop on Mac at the same time.
+If you have Docker Desktop running please shut it down first, we&rsquo;ll use Docker in the VM.</p>
+<ol>
+<li>
+<p>Open the VM by double-clicking on the Training2020.vbox file.</p>
+</li>
+<li>
+<p>Start the VM from the VmWare interface.</p>
+</li>
+</ol>
+<h2 id="part-4---testing-the-vm">Part 4 - Testing the VM</h2>
+<ol>
+<li>
+<p>When the VM is up and running you can login with</p>
+<p>User: training</p>
+<p>Pwd: passw0rd</p>
+</li>
+<li>
+<p>You can now open the Firefox browser in the VM and check that you can open a webpage (google.com for example)</p>
+</li>
+<li>
+<p>Open a terminal window (in the dock)</p>
+</li>
+<li>
+<p>Execute the following commands to initialize your Training Environment</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./welcome.sh
+</code></pre></div><p>``</p>
+<p>This will</p>
+<ul>
+<li>pull the latest example code from my GitHub repository</li>
+<li>start minikube if not already running</li>
+<li>installs the registry</li>
+<li>installs the Network Plugin (Cilium)</li>
+<li>starts the Personal Training Environment</li>
+</ul>
+<blockquote>
+<p>During this you will have to provide a name (your name) that will be used to show your progress in the Instructor Dashboard in order to better assist you.</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>If you encounter any trouble starting minikube you can try running <code>./reset.sh</code></p>
+</blockquote>
+<h2 id="using-your-own-environment">Using your own environment</h2>
+<p>These are two methods to perform the Labs without downloading and starting the VM.</p>
+<p><img src="./images/important.png" alt=""> This is <strong><code>untested</code></strong> and I cannot guarantee that all the Labs will be working 100%.</p>
+<h3 id="standalone-installation">Standalone installation</h3>
+<p>For installation on your local PC</p>
+<h4 id="1-install-the-prerequisites">1) Install the prerequisites</h4>
+<p>This describes how to setup an environment on your local PC.
+This is <strong><code>untested</code></strong> and I cannot guarantee that all the Labs will be working 100%.</p>
+<p>You must have the following setup on your PC:</p>
+<ul>
+<li>Minikube</li>
+<li>Docker</li>
+<li>Git</li>
+</ul>
+<ol>
+<li>
+<p>Clone the lab repository to your home directory</p>
+<p><code>git clone https://github.com/niklaushirt/training.git</code></p>
+</li>
+<li>
+<p>Go to the installation directory</p>
+<p><code>cd ~/training/standalone</code></p>
+</li>
+<li>
+<p>Run the preparation script</p>
+<p><code>./standalone-pc.sh</code></p>
+</li>
+<li>
+<p>Get the Cluster IP (MY-CLUSTER-IP)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">minikube ip
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>You can access the PTE via</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">http://&lt;MY-CLUSTER-IP&gt;:31222
+</code></pre></div><p>``</p>
+</li>
+</ol>
+<h3 id="cloud-installation">Cloud Installation</h3>
+<h4 id="1-create-kubernetes-cluster-on-ibm-cloud">1) Create Kubernetes Cluster on IBM Cloud</h4>
+<ol>
+<li>
+<p>Go to <a href="https://cloud.ibm.com">https://cloud.ibm.com</a></p>
+</li>
+<li>
+<p>Login or create your account</p>
+</li>
+<li>
+<p>Type <code>Kubernetes</code> in the search field and select <code>Kubernetes Service</code></p>
+</li>
+<li>
+<p>Select <code>Free Cluster</code> and click <code>Create</code></p>
+</li>
+<li>
+<p>Follow the instructions on the <code>Access</code> tab:</p>
+<ol>
+<li>
+<p>Download and install the CLI tools</p>
+</li>
+<li>
+<p>Log in to your IBM Cloud account.</p>
+</li>
+<li>
+<p>Set the Kubernetes context</p>
+</li>
+<li>
+<p>Verify that you can connect</p>
+</li>
+<li>
+<p>Run the following</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get nodes                                                                                                                           
+       
+&gt; NAME           STATUS   ROLES    AGE   VERSION
+&gt; w.x.y.z.       Ready    &lt;none&gt;   24d   v1.17.6+IKS
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Now you&rsquo;re ready to follow the next steps</p>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="2-install-the-prerequisites">2) Install the prerequisites</h4>
+<p>This describes how to setup an environment in the Cloud.
+This is <strong>untested</strong> and I cannot guarantee that all the Labs will be working 100%.</p>
+<p>You must have the following setup on your PC:</p>
+<ul>
+<li>Docker</li>
+<li>Git</li>
+</ul>
+<ol>
+<li>
+<p>Clone the lab repository to your home directory</p>
+<p><code>git clone https://github.com/niklaushirt/training.git</code></p>
+</li>
+<li>
+<p>Go to the installation directory</p>
+<p><code>cd ~/training/standalone</code></p>
+</li>
+<li>
+<p>Run the preparation script</p>
+<p><code>./standalone-cloud.sh</code></p>
+</li>
+<li>
+<p>Get the Cluster IP (MY-CLUSTER-IP)</p>
+<p>IBM Cloud Kubernetes Service</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ibmcloud ks worker ls --cluster mycluster-free
+</code></pre></div><p>``</p>
+<p>Or any other means for other clouds.</p>
+</li>
+<li>
+<p>You can access the PTE via</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">http://&lt;MY-CLUSTER-IP&gt;:31222
+</code></pre></div><p>``</p>
+</li>
+</ol>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<ol>
+<li>
+<p>If the startup script doesn’t work you can run ./resetEnvironment.sh 	(this can take up to 30 minutes as it has to redownload all Docker images)</p>
+</li>
+<li>
+<p>If you lose your PTE Webpage just run minikube service student-ui</p>
+</li>
+<li>
+<p>Problems on Windows 10</p>
+<p>Can be fixed in most cases by turning off Hyper-V by running (as admin):
+<code>bcdedit /set hypervisorlaunchtype off</code> and rebooting.</p>
+<p>This disables Hyper-V and allows Virtualbox to support nested virtualisation.</p>
+<p>You can turn it back on again with <code>bcdedit /set hypervisorlaunchtype auto</code></p>
+</li>
+</ol>
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/jtc00/" title="Introduction"><i class="fas fa-chevron-left p-1"></i>Introduction</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/jtc00/lab2/" title="Lab Information and Semantics">Lab Information and Semantics<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="http://niklaushirt.github.io/lib/jquery.min.js"></script> 
+<script src="http://niklaushirt.github.io/lib/popper.min.js"></script> 
+
+<script src="http://niklaushirt.github.io/js/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "http:\/\/niklaushirt.github.io\/";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

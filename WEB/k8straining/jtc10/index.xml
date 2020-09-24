@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JTC10 Istio on Kubernetes Training</title>
+    <link>http://niklaushirt.github.io/jtc10/</link>
+    <description>Recent content in JTC10 Istio on Kubernetes Training</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 23 Sep 2020 09:12:06 +0200</lastBuildDate>
+    
+	<atom:link href="http://niklaushirt.github.io/jtc10/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lab 1: Get to know ISTIO</title>
+      <link>http://niklaushirt.github.io/jtc10/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc10/lab1/</guid>
+      <description>Microservices and containers changed application design and deployment patterns, but along with them brought challenges like service discovery, routing, failure handling, and visibility to microservices. &amp;ldquo;Service mesh&amp;rdquo; architecture was born to handle these features. Applications are getting decoupled internally as microservices, and the responsibility of maintaining coupling between these microservices is passed to the service mesh.
+Istio, a joint collaboration between IBM, Google and Lyft provides an easy way to create a service mesh that will manage many of these complex tasks automatically, without the need to modify the microservices themselves.</description>
+    </item>
+    
+    <item>
+      <title>Lab 2: Installing Istio </title>
+      <link>http://niklaushirt.github.io/jtc10/lab2/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc10/lab2/</guid>
+      <description>In this module, you download and install Istio.
+  Execute the following command to get the latest ISTIO source:
+cd #Linux (Lab VM) wget https://github.com/istio/istio/releases/download/1.6.4/istio-1.6.4-linux-amd64.tar.gz tar xfvz istio-1.6.4-linux-amd64.tar.gz #Mac wget https://github.com/istio/istio/releases/download/1.6.4/istio-1.6.4-osx.tar.gz tar xfvz istio-1.6.4-osx.tar.gz #Windows Download https://github.com/istio/istio/releases/download/1.6.4/istio-1.6.4-win.zip   Add the istioctl client to your executables.
+export PATH=./istio-1.6.4/bin:$PATH   Install Istio into the cluster:
+istioctl install --set profile=demo &amp;gt; Detected that your cluster does not support third party JWT authentication.</description>
+    </item>
+    
+    <item>
+      <title>Lab 3: Deploy BookInfo application </title>
+      <link>http://niklaushirt.github.io/jtc10/lab3/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc10/lab3/</guid>
+      <description>In this part, we will be using the sample BookInfo Application that comes as default with Istio code base. As mentioned above, the application that is composed of four microservices, written in different languages for each of its microservices namely Python, Java, Ruby, and Node.js. The default application doesn&amp;rsquo;t use a database and all the microservices store their data in the local file system.
+Envoys are deployed as sidecars on each microservice.</description>
+    </item>
+    
+    <item>
+      <title>Lab 4: Monitoring with Kiali</title>
+      <link>http://niklaushirt.github.io/jtc10/lab4/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc10/lab4/</guid>
+      <description>Kiali is an open-source project that installs on top of Istio to visualize your service mesh. It provides deeper insight into how your microservices interact with one another, and provides features such as circuit breakers and request rates for your services
+  In order to create some more sustained traffic, execute the following command:
+kubectl apply -f ~/training/istio/createTraffic.yaml ``
+This starts a Pod that makes requests to the productpage.</description>
+    </item>
+    
+    <item>
+      <title>Lab 5: Traffic flow management</title>
+      <link>http://niklaushirt.github.io/jtc10/lab5/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc10/lab5/</guid>
+      <description>Using rules to manage traffic The core component used for traffic management in Istio is Pilot, which manages and configures all the Envoy proxy instances deployed in a particular Istio service mesh. It lets you specify what rules you want to use to route traffic between Envoy proxies, which run as sidecars to each service in the mesh. Each service consists of any number of instances running on pods, containers, VMs etc.</description>
+    </item>
+    
+    <item>
+      <title>Lab 6: Telemetry data</title>
+      <link>http://niklaushirt.github.io/jtc10/lab6/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc10/lab6/</guid>
+      <description>Challenges with microservices We all know that microservice architecture is the perfect fit for cloud native applications and it increases the delivery velocities greatly. Envision you have many microservices that are delivered by multiple teams, how do you observe the the overall platform and each of the service to find out exactly what is going on with each of the services? When something goes wrong, how do you know which service or which communication among the few services are causing the problem?</description>
+    </item>
+    
+    <item>
+      <title>Lab 7: End-user authentication</title>
+      <link>http://niklaushirt.github.io/jtc10/lab7/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc10/lab7/</guid>
+      <description>Istio provides two types of authentication:
+  Peer authentication: used for service-to-service authentication to verify the client making the connection. Istio offers mutual TLS for transport authentication, which can be enabled without requiring service code changes.
+ Provides each service with a strong identity representing its role to enable interoperability across clusters and clouds. Secures service-to-service communication. Provides a key management system to automate key and certificate generation, distribution, and rotation.</description>
+    </item>
+    
+    <item>
+      <title>Lab 8: Traffic Mirroring</title>
+      <link>http://niklaushirt.github.io/jtc10/lab8/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc10/lab8/</guid>
+      <description>Traffic mirroring, also called shadowing, is a powerful concept that provides a risk-free method of testing your releases in the production environment without impacting your end users.
+Instead of using traditional pre-production environments which used to be a replica of production, mirroring can provide synthetic traffic to mimic the live environment.
+Traffic monitoring works in the following way:
+ You deploy a new version of your component (v2) The existing version (v1) works loke before but sends an asynchronous copy to the new version The new version (v2) processes the incoming traffic but does not respond to the user (fire-and-forget) The Dev and Ops teams can monitor the new version in order to identify potential problems before starting the rollout  Let&amp;rsquo;s start the Lab.</description>
+    </item>
+    
+    <item>
+      <title>Lab 9: Fault Injection</title>
+      <link>http://niklaushirt.github.io/jtc10/lab9/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc10/lab9/</guid>
+      <description>To test microservices for resiliency, Istio allows us to inject delays and errors between services.
+Let&amp;rsquo;s start the Lab.
+  Let&amp;rsquo;s create a VirtualService that creates 50% of 501 errors when the details service is called.
+apiVersion: networking.istio.io/v1alpha3 kind: VirtualService metadata: name: details spec: hosts: - details http: - fault: abort: httpStatus: 500 percentage: value: 50 route: - destination: host: details subset: v1 ... ``
+Run the following:
+kubectl apply -f ~/training/istio/samples/bookinfo/networking/fault-injection-details-v1.</description>
+    </item>
+    
+    <item>
+      <title>Lab 10: Cleanup</title>
+      <link>http://niklaushirt.github.io/jtc10/lab10/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc10/lab10/</guid>
+      <description>To delete the BookInfo app and its route-rules:  ~/training/istio/samples/bookinfo/platform/kube/cleanup.sh
+  To delete Istio from your cluster
+  kubectl delete -f ~/training/istio/createTraffic.yaml kubectl delete -f ~/training/istio/samples/bookinfo/platform/kube/bookinfo.yaml kubectl delete -f ~/training/istio/samples/bookinfo/networking/bookinfo-gateway.yaml kubectl delete -f ~/training/istio/samples/bookinfo/networking/destination-rule-reviews.yaml kubectl delete -f ~/training/istio/samples/bookinfo/networking/virtual-service-reviews-80-20.yaml istioctl manifest generate --set profile=demo | kubectl delete -f - kubectl delete ns istio-system Congratulations!!! This concludes the Istio Lab</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JTC17 Kubernetes Advanced Security on Kubernetes Training</title>
+    <link>http://niklaushirt.github.io/jtc17/</link>
+    <description>Recent content in JTC17 Kubernetes Advanced Security on Kubernetes Training</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 23 Sep 2020 09:12:06 +0200</lastBuildDate>
+    
+	<atom:link href="http://niklaushirt.github.io/jtc17/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lab 0: Preparation</title>
+      <link>http://niklaushirt.github.io/jtc17/lab0/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc17/lab0/</guid>
+      <description>Open a Terminal window by clicking on the Termnial icon in the left sidebar - we will use this extensively later as well
+  Start the demo application
+kubectl create -f ~/training/deployment/demoapp.yaml kubectl create -f ~/training/deployment/demoapp-service.yaml kubectl create -f ~/training/deployment/demoapp-backend.yaml kubectl create -f ~/training/deployment/demoapp-backend-service.yaml ``
+  Wait for the demo application to be available (the status must be 1/1)
+kubectl get pods &amp;gt; NAME READY STATUS RESTARTS AGE &amp;gt; k8sdemo-backend-5b779f567f-2rbgj 1/1 Running 0 21s &amp;gt; k8sdemo-backend-5b779f567f-p6j76 1/1 Running 0 21s &amp;gt; k8sdemo-bd6bbd548-jcb6r 1/1 Running 0 21s ``</description>
+    </item>
+    
+    <item>
+      <title>Lab 1: RBAC - Users, Roles and RoleBindings</title>
+      <link>http://niklaushirt.github.io/jtc17/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc17/lab1/</guid>
+      <description>RBAC policies are vital for the correct management of your cluster, as they allow you to specify which types of actions are permitted depending on the user and their role in your organization. Examples include:
+Secure your cluster by granting privileged operations (accessing secrets, for example) only to admin users. Force user authentication in your cluster. Limit resource creation (such as pods, persistent volumes, deployments) to specific namespaces. You can also use quotas to ensure that resource usage is limited and under control.</description>
+    </item>
+    
+    <item>
+      <title>Lab 2: Service Accounts</title>
+      <link>http://niklaushirt.github.io/jtc17/lab2/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc17/lab2/</guid>
+      <description>Create a ServiceAccount for a Deployment In this chapter we will start this Pod with a limited ServiceAccount.
+Create the resources To create the ServiceAccount:
+apiVersion: v1 kind: ServiceAccount metadata: name: service-account-1 labels: app: tools-rbac Run the following command:
+kubectl apply -f ~/training/rbac/service-accounts.yaml &amp;gt; serviceaccount &amp;#34;service-account-1&amp;#34; Now we will create a Deployment that runs under the ServiceAccount that we have just created. The Pod contains the kubectl executable, so that we can test the access rights from withing this Pod.</description>
+    </item>
+    
+    <item>
+      <title>Lab 3: RBAC Tooling</title>
+      <link>http://niklaushirt.github.io/jtc17/lab3/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc17/lab3/</guid>
+      <description>Rakkess Have you ever wondered what access rights you have on a provided kubernetes cluster? For single resources you can use kubectl auth can-i list deployments, but maybe you are looking for a complete overview? This is what rakkess is for. It lists access rights for the current user and all server resources.
+You can get more details here.
+  Install Rakkess
+curl -LO https://github.com/corneliusweig/rakkess/releases/download/v0.4.4/rakkess-amd64-linux.tar.gz \  &amp;amp;&amp;amp; tar xf rakkess-amd64-linux.</description>
+    </item>
+    
+    <item>
+      <title>Lab 4: Image Scanning</title>
+      <link>http://niklaushirt.github.io/jtc17/lab4/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc17/lab4/</guid>
+      <description>Deploy Clair In this chapter we will deploy the Clair image scanner and scan an example image.
+Clair is an open source project for the static analysis of vulnerabilities in application containers (currently including appc and docker).
+ In regular intervals, Clair ingests vulnerability metadata from a configured set of sources and stores it in the database. Clients use the Clair API to index their container images; this creates a list of features present in the image and stores them in the database.</description>
+    </item>
+    
+  </channel>
+</rss>

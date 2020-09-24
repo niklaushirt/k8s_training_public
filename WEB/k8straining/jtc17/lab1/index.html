@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="http://niklaushirt.github.io/jtc17/lab1/">
+
+    <title>
+        
+        Lab 1: RBAC - Users, Roles and RoleBindings | Kubernetes Training
+        
+    </title>
+
+    
+    <link href="http://niklaushirt.github.io/css/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="http://niklaushirt.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                
+                Kubernetes Training
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/vantagedesign/ace-documentation1" >
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/jtc00/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc00/"><h6>Introduction</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc00/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc00/lab1/" class="nav-link p-0">
+                    Getting set up
+                </a>
+        </li>
+        <li data-nav-id="/jtc00/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc00/lab2/" class="nav-link p-0">
+                    Lab Information and Semantics
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc01/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc01/"><h6>JTC01 Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc01/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Docker
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab2/" class="nav-link p-0">
+                    Lab 2: Docker Basics
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab3/" class="nav-link p-0">
+                    Lab 3: Docker Internals
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc02/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc02/"><h6>JTC02 Kubernetes Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc02/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Kubernetes
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab2/" class="nav-link p-0">
+                    Lab 2: Deploy your first Pod
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy your first application
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab4/" class="nav-link p-0">
+                    Lab 4: Scale and Update Deployments
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab5/" class="nav-link p-0">
+                    Lab 5: Stateful Deployments
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab6/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab6/" class="nav-link p-0">
+                    Lab 6: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc10/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc10/"><h6>JTC10 Istio</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc10/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know ISTIO
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab2/" class="nav-link p-0">
+                    Lab 2: Installing Istio 
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy BookInfo application 
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab4/" class="nav-link p-0">
+                    Lab 4: Monitoring with Kiali
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab5/" class="nav-link p-0">
+                    Lab 5: Traffic flow management
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab6/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab6/" class="nav-link p-0">
+                    Lab 6: Telemetry data
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab7/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab7/" class="nav-link p-0">
+                    Lab 7: End-user authentication
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab8/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab8/" class="nav-link p-0">
+                    Lab 8: Traffic Mirroring
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab9/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab9/" class="nav-link p-0">
+                    Lab 9: Fault Injection
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab10/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab10/" class="nav-link p-0">
+                    Lab 10: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc14/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc14/"><h6>JTC14 Kubernetes Ansible Operators</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc14/lab0/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab0/" class="nav-link p-0">
+                    Lab 0: Prepare the Lab environment
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab1/" class="nav-link p-0">
+                    Lab 1: Kubernetes Operators
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab2/" class="nav-link p-0">
+                    Lab 2: Create the Lab Operator Project
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy the Lab Operator
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc16/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc16/"><h6>JTC16 Kubernetes Security Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc16/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc16/lab1/" class="nav-link p-0">
+                    Lab 1: Network Policies
+                </a>
+        </li>
+        <li data-nav-id="/jtc16/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc16/lab2/" class="nav-link p-0">
+                    Lab 2: Security Tooling
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc17/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc17/"><h6>JTC17 Kubernetes Advanced Security</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc17/lab0/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab0/" class="nav-link p-0">
+                    Lab 0: Preparation
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab1/" class="nav-item my-1 active">
+                
+                 <a href="/jtc17/lab1/" class="nav-link p-0">
+                    Lab 1: RBAC - Users, Roles and RoleBindings
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab2/" class="nav-link p-0">
+                    Lab 2: Service Accounts
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab3/" class="nav-link p-0">
+                    Lab 3: RBAC Tooling
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab4/" class="nav-link p-0">
+                    Lab 4: Image Scanning
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc18/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc18/"><h6>JTC18 Kubernetes Advanced Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc18/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab1/" class="nav-link p-0">
+                    Lab 1: Liveness and Readiness Probes
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab2/" class="nav-link p-0">
+                    Lab 2: Init Containers
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab3/" class="nav-link p-0">
+                    Lab 3: Persistent Volumes
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab4/" class="nav-link p-0">
+                    Lab 4: Dynamic NFS provisioning
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab5/" class="nav-link p-0">
+                    Lab 5: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc19/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc19/"><h6>JTC19 CloudNative DevOps</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc19/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab1/" class="nav-link p-0">
+                    Lab 1: Tekton
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab5/" class="nav-link p-0">
+                    Lab 5: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#rbac-roles">RBAC Roles</a></li>
+    <li><a href="#rbac-elements">RBAC Elements</a></li>
+    <li><a href="#create-user-with-limited-namespace-access">Create user with limited namespace access</a>
+      <ul>
+        <li><a href="#create-the-rbactest-namespace">Create the rbactest namespace</a></li>
+        <li><a href="#create-the-user-credentials">Create the user credentials</a></li>
+        <li><a href="#create-the-certificate">Create the certificate</a></li>
+        <li><a href="#create-the-context">Create the context</a></li>
+        <li><a href="#create-the-role-for-viewing-deployments">Create the role for viewing deployments</a></li>
+        <li><a href="#bind-the-viewer-role-to-the-demo-user">Bind the viewer role to the demo user</a></li>
+      </ul>
+    </li>
+    <li><a href="#test-the-rbac-viewer-rule">Test the RBAC viewer rule</a>
+      <ul>
+        <li><a href="#create-the-role-for-managing-deployments">Create the role for managing deployments</a></li>
+        <li><a href="#bind-the-manager-role-to-the-demo-user">Bind the Manager role to the demo user</a></li>
+      </ul>
+    </li>
+    <li><a href="#test-the-rbac-manager-rule">Test the RBAC manager rule</a></li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>Lab 1: RBAC - Users, Roles and RoleBindings</h1>
+
+<p>RBAC policies are vital for the correct management of your cluster, as they allow you to specify which types of actions are permitted depending on the user and their role in your organization. Examples include:</p>
+<p>Secure your cluster by granting privileged operations (accessing secrets, for example) only to admin users.
+Force user authentication in your cluster.
+Limit resource creation (such as pods, persistent volumes, deployments) to specific namespaces. You can also use quotas to ensure that resource usage is limited and under control.
+Have a user only see resources in their authorized namespace. This allows you to isolate resources within your organization (for example, between departments).</p>
+<h2 id="rbac-roles">RBAC Roles</h2>
+<p>Rbac Roles are composed of</p>
+<ul>
+<li>
+<p><strong>RBAC API objects</strong></p>
+<ul>
+<li>Pods</li>
+<li>PersistentVolumes</li>
+<li>ConfigMaps</li>
+<li>Deployments</li>
+<li>Nodes</li>
+<li>Secrets</li>
+<li>Namespaces</li>
+</ul>
+</li>
+<li>
+<p><strong>Possible operations</strong> over these resources are:</p>
+<ul>
+<li>create</li>
+<li>get</li>
+<li>delete</li>
+<li>list</li>
+<li>update</li>
+<li>edit</li>
+<li>watch</li>
+<li>exec</li>
+</ul>
+</li>
+</ul>
+<h2 id="rbac-elements">RBAC Elements</h2>
+<ul>
+<li>
+<p><strong>Rules</strong>: A rule is a set of operations (verbs) that can be carried out on a group of resources which belong to different API Groups.</p>
+</li>
+<li>
+<p><strong>Roles and ClusterRoles</strong>: Both consist of rules. The difference between a Role and a ClusterRole is the scope: in a Role, the rules are applicable to a single namespace, whereas a ClusterRole is cluster-wide, so the rules are applicable to more than one namespace. ClusterRoles can define rules for cluster-scoped resources (such as nodes) as well. Both Roles and ClusterRoles are mapped as API Resources inside our cluster.</p>
+</li>
+<li>
+<p><strong>RoleBindings and ClusterRoleBindings</strong>: Just as the names imply, these bind subjects to roles (i.e. the operations a given user can perform). As for Roles and ClusterRoles, the difference lies in the scope: a RoleBinding will make the rules effective inside a namespace, whereas a ClusterRoleBinding will make the rules effective in all namespaces.</p>
+</li>
+<li>
+<p><strong>Subjects</strong>: These correspond to the entity that attempts an operation in the cluster. There are three types of subjects:</p>
+<ul>
+<li><strong>User Accounts</strong>: These are global, and meant for humans or processes living outside the cluster. There is no associated resource API Object in the Kubernetes cluster.</li>
+<li><strong>Service Accounts</strong>: This kind of account is namespaced and meant for intra-cluster processes running inside pods, which want to authenticate against the API.</li>
+<li><strong>Groups</strong>: This is used for referring to multiple accounts. There are some groups created by default such as cluster-admin (explained in later sections).</li>
+</ul>
+</li>
+</ul>
+<p>You can get more detailed information in the official Kubernetes documentation <a href="https://kubernetes.io/docs/admin/authorization/rbac/">here</a>.</p>
+<h2 id="create-user-with-limited-namespace-access">Create user with limited namespace access</h2>
+<p>In this example, we will create a user with limited namespace access.</p>
+<p>The following User Account will be created:</p>
+<ul>
+<li>Username: demo</li>
+<li>Group: demogroup</li>
+</ul>
+<p>We will add the necessary RBAC policies so this user can fully manage deployments (i.e. use <code>kubectl run</code> command) only inside the <code>rbactest</code> namespace. At the end, we will test the policies to make sure they work as expected.</p>
+<h3 id="create-the-rbactest-namespace">Create the rbactest namespace</h3>
+<ul>
+<li>
+<p>Execute the <code>kubectl create</code> command to create the namespace (as the admin user):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create namespace rbactest 
+</code></pre></div></li>
+</ul>
+<h3 id="create-the-user-credentials">Create the user credentials</h3>
+<p>Kubernetes does not have API Objects for User Accounts. Of the available ways to manage authentication (see <a href="https://kubernetes.io/docs/admin/authentication">Kubernetes official documentation</a> for a complete list), we will use OpenSSL certificates for their simplicity.</p>
+<h3 id="create-the-certificate">Create the certificate</h3>
+<ol>
+<li>
+<p>Create a private key for your user. In this example, we will name the file <code>demo.key</code>.</p>
+<p>Go to a temporary working directory in your terminal.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir rbacdemo
+cd rbacdemo
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">openssl genrsa -out demo.key <span style="color:#ae81ff">2048</span> 
+       
+&gt; Generating RSA private key, <span style="color:#ae81ff">2048</span> bit long modulus <span style="color:#f92672">(</span><span style="color:#ae81ff">2</span> primes<span style="color:#f92672">)</span>
+...
+</code></pre></div><p>The private key file <code>demo.key</code> has been created:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls
+       
+&gt; demo.key
+</code></pre></div></li>
+<li>
+<p>Create a certificate sign request <code>demo.csr</code> using the private key you just created (<code>demo.key</code> in this example). Make sure you specify your username and group in the <em>-subj</em> section (CN is for the username and O for the group). As previously mentioned, we will use <code>demo</code> as the name and <code>demogroup</code> as the group</p>
+</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  openssl req -new -key demo.key -out demo.csr -subj <span style="color:#e6db74">&#34;/CN=demo/O=demogroup&#34;</span> 
+</code></pre></div><pre><code>The certificate sign request `demo.csr` has been created:
+
+```bash
+ls
+    
+&gt; demo.csr  demo.key
+```
+</code></pre>
+<ol start="3">
+<li>We will use the Kubernetes cluster certificate authority (CA) for approving the request and generating the necessary certificate to access the cluster API.</li>
+</ol>
+<p>Its location usually is <code>/etc/kubernetes/pki/</code>.
+But in our case (for Minikube), it would be <code>~/.minikube/</code>.</p>
+<pre><code>![](../images/cloud.png) **Cloud/Standalone**
+
+&gt; If you are **NOT** using the training VM, you have to use your own certificates.
+</code></pre>
+<ol start="4">
+<li>
+<p>Generate the final certificate <code>demo.crt</code> by approving the certificate sign request, <code>demo.csr</code>, you made earlier. In this example, the certificate will be valid for 500 days:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">openssl x509 -req -in demo.csr -CA ~/.minikube/ca.crt -CAkey ~/.minikube/ca.key -CAcreateserial -out demo.crt -days <span style="color:#ae81ff">500</span> 
+       
+&gt; key -CAcreateserial -out demo.crt -days <span style="color:#ae81ff">500</span> 
+&gt; Signature ok
+&gt; subject<span style="color:#f92672">=</span>CN <span style="color:#f92672">=</span> demo, O <span style="color:#f92672">=</span> demogroup
+&gt; Getting CA Private Key
+   
+</code></pre></div><p>``</p>
+<p>The final certificate <code>demo.crt</code> has been created:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls
+       
+&gt; demo.crt  demo.csr  demo.key
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>In a real world example you would now save both <code>demo.crt</code> and <code>demo.key</code> in a safe location.</p>
+</li>
+</ol>
+<h3 id="create-the-context">Create the context</h3>
+<p>Add a new context with the new credentials for your Kubernetes cluster. This example is for a Minikube cluster but it should be similar for <a href="https://kubernetes.io/docs/setup/pick-right-solution/">others</a>:</p>
+<ol>
+<li>
+<p>Set credentials</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl config set-credentials demo --client-certificate<span style="color:#f92672">=</span>./demo.crt --client-key<span style="color:#f92672">=</span>./demo.key 
+      
+&gt; User <span style="color:#e6db74">&#34;demo&#34;</span> set.
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Create context</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl config set-context demo-context --cluster<span style="color:#f92672">=</span>minikube --namespace<span style="color:#f92672">=</span>rbactest --user<span style="color:#f92672">=</span>demo 
+       
+&gt; Context <span style="color:#e6db74">&#34;demo-context&#34;</span> created.
+</code></pre></div><p>``</p>
+<p><img src="../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
+<blockquote>
+<p>If you are <strong>NOT</strong> using the training VM, you have to use your own cluster name instead of <code>--cluster=minikube</code>
+You should be able to get it with <code>kubectl config current-context</code>.</p>
+</blockquote>
+</li>
+<li>
+<p>Check configuration</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl config view 
+       
+</code></pre></div><p>``</p>
+</li>
+</ol>
+<p>We can see that we now have a context <code>demo-context</code> and a user <code>demo</code> in our configuration that will be used to access the Kubernetes API via <code>kubectl</code>.</p>
+<p>You should get an access denied error when using the <code>kubectl</code> CLI with this configuration file. This is expected as we have not defined any permitted operations for this user.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl --context<span style="color:#f92672">=</span>demo-context get pods 
+    
+&gt; No resources found.
+&gt; Error from server <span style="color:#f92672">(</span>Forbidden<span style="color:#f92672">)</span>: pods is forbidden: User <span style="color:#e6db74">&#34;demo&#34;</span> cannot list resource <span style="color:#e6db74">&#34;pods&#34;</span> in API group <span style="color:#e6db74">&#34;&#34;</span> in the namespace <span style="color:#e6db74">&#34;rbactest&#34;</span>
+</code></pre></div><h3 id="create-the-role-for-viewing-deployments">Create the role for viewing deployments</h3>
+<p>We are creating the <code>Rule</code> that allows a user to execute several <code>Read Only</code> operations on Deployments, Pods and ReplicaSets, which belong to the <code>core</code> (expressed by “” in the <code>yaml</code> file), <code>apps</code>, and <code>extensions</code> API Groups:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">kind</span>: Role
+<span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1beta1
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: deployment-viewer
+  <span style="color:#66d9ef">namespace</span>: rbactest
+<span style="color:#66d9ef">rules</span>:
+- <span style="color:#66d9ef">apiGroups</span>: [<span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;extensions&#34;</span>, <span style="color:#e6db74">&#34;apps&#34;</span>]
+  <span style="color:#66d9ef">resources</span>: [<span style="color:#e6db74">&#34;deployments&#34;</span>, <span style="color:#e6db74">&#34;replicasets&#34;</span>, <span style="color:#e6db74">&#34;pods&#34;</span>]
+  <span style="color:#66d9ef">verbs</span>: [<span style="color:#e6db74">&#34;get&#34;</span>, <span style="color:#e6db74">&#34;list&#34;</span>] <span style="color:#75715e"># You can also use [&#34;*&#34;]</span>
+</code></pre></div><p>Create the <code>Role</code> in the cluster using:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ~/training/rbac/deployment-viewer.yaml 
+</code></pre></div><h3 id="bind-the-viewer-role-to-the-demo-user">Bind the viewer role to the demo user</h3>
+<p>In this step we are creating the <code>RuleBinding</code> that binds the <code>deployment-viewer</code> <code>Role</code> to the User Account <code>demo</code> inside the <code>rbactest</code> namespace:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">kind</span>: RoleBinding
+<span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1beta1
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: deployment-viewer-binding
+  <span style="color:#66d9ef">namespace</span>: rbactest
+<span style="color:#66d9ef">subjects</span>:
+- <span style="color:#66d9ef">kind</span>: User
+  <span style="color:#66d9ef">name</span>: demo
+  <span style="color:#66d9ef">apiGroup</span>: <span style="color:#e6db74">&#34;&#34;</span>
+<span style="color:#66d9ef">roleRef</span>:
+  <span style="color:#66d9ef">kind</span>: Role
+  <span style="color:#66d9ef">name</span>: deployment-viewer
+  <span style="color:#66d9ef">apiGroup</span>: <span style="color:#e6db74">&#34;&#34;</span>
+</code></pre></div><p>Create the Role in the cluster using:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ~/training/rbac/deployment-viewer-binding.yaml 
+</code></pre></div><h2 id="test-the-rbac-viewer-rule">Test the RBAC viewer rule</h2>
+<p>Now you should be able to execute the following command without any issues:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl --context<span style="color:#f92672">=</span>demo-context get pods 
+
+&gt; No resources found.
+</code></pre></div><p><code>No resources found.</code> simply means that we don&rsquo;t have any <code>Pods</code> deployed in this <code>Namespace</code>.</p>
+<p>If you run the same command for the default namespace with the <code>--namespace=default</code> argument, it will fail, as the <code>demo</code> user does not have access to this namespace.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl --context<span style="color:#f92672">=</span>demo-context get pods --namespace<span style="color:#f92672">=</span>default 
+
+&gt; No resources found.
+&gt; Error from server <span style="color:#f92672">(</span>Forbidden<span style="color:#f92672">)</span>: pods is forbidden: User <span style="color:#e6db74">&#34;demo&#34;</span> cannot list resource <span style="color:#e6db74">&#34;pods&#34;</span> in API group <span style="color:#e6db74">&#34;&#34;</span> in the namespace <span style="color:#e6db74">&#34;default&#34;</span>
+</code></pre></div><p>Also you still don&rsquo;t have the rights to create or delete <code>Deployments</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl --context<span style="color:#f92672">=</span>demo-context run --image alpine alpine                                                                                                                                                                                                                                                                                              
+
+&gt; Error from server <span style="color:#f92672">(</span>Forbidden<span style="color:#f92672">)</span>: deployments.apps is forbidden: User <span style="color:#e6db74">&#34;demo&#34;</span> cannot create resource <span style="color:#e6db74">&#34;deployments&#34;</span> in API group <span style="color:#e6db74">&#34;apps&#34;</span> in the namespace <span style="color:#e6db74">&#34;rbactest&#34;</span>
+</code></pre></div><p>Now you have created a user with limited Read Only permissions in your cluster.</p>
+<h3 id="create-the-role-for-managing-deployments">Create the role for managing deployments</h3>
+<p>We are creating the <code>Rule</code> that allows a user to execute several <code>Read and Write</code> operations on Deployments, Pods and ReplicaSets, which belong to the <code>core</code> (expressed by “” in the <code>yaml</code> file), <code>apps</code>, and <code>extensions</code> API Groups:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">kind</span>: Role
+<span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1beta1
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: deployment-manager
+  <span style="color:#66d9ef">namespace</span>: rbactest
+<span style="color:#66d9ef">rules</span>:
+- <span style="color:#66d9ef">apiGroups</span>: [<span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;extensions&#34;</span>, <span style="color:#e6db74">&#34;apps&#34;</span>]
+  <span style="color:#66d9ef">resources</span>: [<span style="color:#e6db74">&#34;deployments&#34;</span>, <span style="color:#e6db74">&#34;replicasets&#34;</span>, <span style="color:#e6db74">&#34;pods&#34;</span>]
+  <span style="color:#66d9ef">verbs</span>: [<span style="color:#e6db74">&#34;get&#34;</span>, <span style="color:#e6db74">&#34;list&#34;</span>, <span style="color:#e6db74">&#34;watch&#34;</span>, <span style="color:#e6db74">&#34;create&#34;</span>, <span style="color:#e6db74">&#34;update&#34;</span>, <span style="color:#e6db74">&#34;patch&#34;</span>, <span style="color:#e6db74">&#34;delete&#34;</span>] <span style="color:#75715e"># You can also use [&#34;*&#34;]</span>
+</code></pre></div><p>Create the <code>Role</code> in the cluster using:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ~/training/rbac/deployment-manager.yaml 
+</code></pre></div><h3 id="bind-the-manager-role-to-the-demo-user">Bind the Manager role to the demo user</h3>
+<p>In this step we are creating the <code>RuleBinding</code> that binds the <code>deployment-manager</code> <code>Role</code> to the User Account <code>demo</code> inside the <code>rbactest</code> namespace:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">kind</span>: RoleBinding
+<span style="color:#66d9ef">apiVersion</span>: rbac.authorization.k8s.io/v1beta1
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: deployment-manager-binding
+  <span style="color:#66d9ef">namespace</span>: rbactest
+<span style="color:#66d9ef">subjects</span>:
+- <span style="color:#66d9ef">kind</span>: User
+  <span style="color:#66d9ef">name</span>: demo
+  <span style="color:#66d9ef">apiGroup</span>: <span style="color:#e6db74">&#34;&#34;</span>
+<span style="color:#66d9ef">roleRef</span>:
+  <span style="color:#66d9ef">kind</span>: Role
+  <span style="color:#66d9ef">name</span>: deployment-manager
+  <span style="color:#66d9ef">apiGroup</span>: <span style="color:#e6db74">&#34;&#34;</span>
+</code></pre></div><p>Create the Role in the cluster using:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ~/training/rbac/deployment-manager-binding.yaml 
+</code></pre></div><h2 id="test-the-rbac-manager-rule">Test the RBAC manager rule</h2>
+<p>Now you should be able to execute the following commands without any issues:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl --context<span style="color:#f92672">=</span>demo-context run --image alpine alpine                                                                                                                                                                                                                                                                                              
+
+&gt; deployment.apps/alpine created
+</code></pre></div><p>Check that the alpine Pod is running</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl --context<span style="color:#f92672">=</span>demo-context get pods 
+
+&gt; NAME                      READY     STATUS      RESTARTS   AGE
+&gt; alpine-7f866557df-dkmks   0/1       Completed   <span style="color:#ae81ff">0</span>          6s
+</code></pre></div><p>However if you run the same command for the default namespace with the <code>--namespace=default</code> argument, it will still fail, as the <code>demo</code> user still does not have access to this namespace.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl --context<span style="color:#f92672">=</span>demo-context get pods --namespace<span style="color:#f92672">=</span>default 
+
+&gt; No resources found.
+&gt; Error from server <span style="color:#f92672">(</span>Forbidden<span style="color:#f92672">)</span>: pods is forbidden: User <span style="color:#e6db74">&#34;demo&#34;</span> cannot list resource <span style="color:#e6db74">&#34;pods&#34;</span> in API group <span style="color:#e6db74">&#34;&#34;</span> in the namespace <span style="color:#e6db74">&#34;default&#34;</span>
+</code></pre></div><p>Now you have created a user with limited permissions in your cluster but with full Management rights for Deployments in the <code>rbactest</code> namespace.</p>
+<blockquote>
+<h1 id="congratulations">Congratulations!!!</h1>
+<h1 id="this-concludes-lab-1-on-rbac-and-rolesrolebindings">This concludes Lab 1 on RBAC and Roles/RoleBindings.</h1>
+</blockquote>
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/jtc17/lab0/" title="Lab 0: Preparation"><i class="fas fa-chevron-left p-1"></i>Lab 0: Preparation</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/jtc17/lab2/" title="Lab 2: Service Accounts">Lab 2: Service Accounts<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="http://niklaushirt.github.io/lib/jquery.min.js"></script> 
+<script src="http://niklaushirt.github.io/lib/popper.min.js"></script> 
+
+<script src="http://niklaushirt.github.io/js/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "http:\/\/niklaushirt.github.io\/";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

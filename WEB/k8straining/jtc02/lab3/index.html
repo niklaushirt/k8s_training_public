@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="http://niklaushirt.github.io/jtc02/lab3/">
+
+    <title>
+        
+        Lab 3: Deploy your first application | Kubernetes Training
+        
+    </title>
+
+    
+    <link href="http://niklaushirt.github.io/css/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="http://niklaushirt.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                
+                Kubernetes Training
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/vantagedesign/ace-documentation1" >
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/jtc00/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc00/"><h6>Introduction</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc00/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc00/lab1/" class="nav-link p-0">
+                    Getting set up
+                </a>
+        </li>
+        <li data-nav-id="/jtc00/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc00/lab2/" class="nav-link p-0">
+                    Lab Information and Semantics
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc01/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc01/"><h6>JTC01 Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc01/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Docker
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab2/" class="nav-link p-0">
+                    Lab 2: Docker Basics
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab3/" class="nav-link p-0">
+                    Lab 3: Docker Internals
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc02/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc02/"><h6>JTC02 Kubernetes Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc02/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Kubernetes
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab2/" class="nav-link p-0">
+                    Lab 2: Deploy your first Pod
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab3/" class="nav-item my-1 active">
+                
+                 <a href="/jtc02/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy your first application
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab4/" class="nav-link p-0">
+                    Lab 4: Scale and Update Deployments
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab5/" class="nav-link p-0">
+                    Lab 5: Stateful Deployments
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab6/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab6/" class="nav-link p-0">
+                    Lab 6: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc10/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc10/"><h6>JTC10 Istio</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc10/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know ISTIO
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab2/" class="nav-link p-0">
+                    Lab 2: Installing Istio 
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy BookInfo application 
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab4/" class="nav-link p-0">
+                    Lab 4: Monitoring with Kiali
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab5/" class="nav-link p-0">
+                    Lab 5: Traffic flow management
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab6/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab6/" class="nav-link p-0">
+                    Lab 6: Telemetry data
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab7/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab7/" class="nav-link p-0">
+                    Lab 7: End-user authentication
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab8/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab8/" class="nav-link p-0">
+                    Lab 8: Traffic Mirroring
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab9/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab9/" class="nav-link p-0">
+                    Lab 9: Fault Injection
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab10/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab10/" class="nav-link p-0">
+                    Lab 10: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc14/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc14/"><h6>JTC14 Kubernetes Ansible Operators</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc14/lab0/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab0/" class="nav-link p-0">
+                    Lab 0: Prepare the Lab environment
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab1/" class="nav-link p-0">
+                    Lab 1: Kubernetes Operators
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab2/" class="nav-link p-0">
+                    Lab 2: Create the Lab Operator Project
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy the Lab Operator
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc16/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc16/"><h6>JTC16 Kubernetes Security Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc16/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc16/lab1/" class="nav-link p-0">
+                    Lab 1: Network Policies
+                </a>
+        </li>
+        <li data-nav-id="/jtc16/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc16/lab2/" class="nav-link p-0">
+                    Lab 2: Security Tooling
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc17/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc17/"><h6>JTC17 Kubernetes Advanced Security</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc17/lab0/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab0/" class="nav-link p-0">
+                    Lab 0: Preparation
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab1/" class="nav-link p-0">
+                    Lab 1: RBAC - Users, Roles and RoleBindings
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab2/" class="nav-link p-0">
+                    Lab 2: Service Accounts
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab3/" class="nav-link p-0">
+                    Lab 3: RBAC Tooling
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab4/" class="nav-link p-0">
+                    Lab 4: Image Scanning
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc18/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc18/"><h6>JTC18 Kubernetes Advanced Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc18/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab1/" class="nav-link p-0">
+                    Lab 1: Liveness and Readiness Probes
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab2/" class="nav-link p-0">
+                    Lab 2: Init Containers
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab3/" class="nav-link p-0">
+                    Lab 3: Persistent Volumes
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab4/" class="nav-link p-0">
+                    Lab 4: Dynamic NFS provisioning
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab5/" class="nav-link p-0">
+                    Lab 5: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc19/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc19/"><h6>JTC19 CloudNative DevOps</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc19/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab1/" class="nav-link p-0">
+                    Lab 1: Tekton
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab5/" class="nav-link p-0">
+                    Lab 5: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-frontend-example-application">The frontend example application</a></li>
+    <li><a href="#deploy-the-frontend-application">Deploy the frontend application</a></li>
+    <li><a href="#deploy-the-application-backend">Deploy the application backend</a></li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>Lab 3: Deploy your first application</h1>
+
+<p>Learn how to deploy an application to a Kubernetes cluster.</p>
+<p>Once your client is configured, you are ready to deploy your first application, <code>k8sdemo</code>.</p>
+<h2 id="the-frontend-example-application">The frontend example application</h2>
+<p>In this part of the lab we will deploy an application called <code>k8sdemo</code> that has already been built and uploaded to DockerHub under the name <code>niklaushirt/k8sdemo</code>.</p>
+<p>We will use the following yaml:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">kind</span>: Deployment
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: k8sdemo
+  <span style="color:#66d9ef">namespace</span>: default
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">1</span>
+  <span style="color:#66d9ef">template</span>:
+    <span style="color:#66d9ef">metadata</span>:
+      <span style="color:#66d9ef">labels</span>:
+        <span style="color:#66d9ef">app</span>: k8sdemo
+    <span style="color:#66d9ef">spec</span>:
+      <span style="color:#66d9ef">containers</span>:
+      - <span style="color:#66d9ef">name</span>: k8sdemo
+        <span style="color:#66d9ef">image</span>: niklaushirt/k8sdemo:<span style="color:#ae81ff">1.0.0</span>
+  	...
+          <span style="color:#66d9ef">env</span>:   
+          - <span style="color:#66d9ef">name</span>: PORT
+            <span style="color:#66d9ef">value </span>: <span style="color:#e6db74">&#34;3000&#34;</span>
+          - <span style="color:#66d9ef">name</span>: APPLICATION_NAME
+            <span style="color:#66d9ef">value</span>: k8sdemo
+          - <span style="color:#66d9ef">name</span>: BACKEND_URL
+            <span style="color:#66d9ef">value</span>: http://k8sdemo-backend-service.default.svc:<span style="color:#ae81ff">3000</span>/api
+
+</code></pre></div><p>It defines the Container image to deploy (with 1 instances/replicas) and an environment variable BACKEND_URL that points to the backend servcie we will be deploying in the next section.</p>
+<p>If you wish you can have a look at the complete yaml file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gedit ~/training/deployment/demoapp.yaml 
+</code></pre></div><h2 id="deploy-the-frontend-application">Deploy the frontend application</h2>
+<ol>
+<li>
+<p>Start by running <code>k8sdemo</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ~/training/deployment/demoapp.yaml
+</code></pre></div><p>``</p>
+<p>This action will take a bit of time. To check the status of the running application, you can use <code> kubectl get pods</code>.</p>
+<p>You should see output similar to the following:</p>
+</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> kubectl get pods -n default 
+ 
+ &gt; NAME                       READY     STATUS    RESTARTS   AGE
+ &gt; k8sdemo-7d46f69d68-bd2cw   0/1       Running   <span style="color:#ae81ff">0</span>          17s  
+</code></pre></div><ol start="3">
+<li>
+<p>Eventually, the status should show up as <code>1/1 Running</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> kubectl get pods -n default 
+    
+ &gt; NAME                          READY     STATUS              RESTARTS   AGE
+ &gt; k8sdemo-7d46f69d68-bd2cw      1/1       Running             <span style="color:#ae81ff">0</span>          5m
+</code></pre></div><p>The end result of the run command is to create a Deployment resource that manages the lifecycle of those pods.</p>
+</li>
+<li>
+<p>Once the status reads <code>Running</code>, we need to expose that deployment as a service so we can access it through the IP of the worker nodes.
+The <code>k8sdemo</code> application listens on port 3000.</p>
+<p>Run:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl expose deployment k8sdemo --name k8sdemo-service -n default --type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;NodePort&#34;</span> --port<span style="color:#f92672">=</span><span style="color:#ae81ff">3000</span>
+      
+&gt; service <span style="color:#e6db74">&#34;k8sdemo-service&#34;</span> exposed
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>To find the port used on that worker node, examine your new service:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> kubectl get service -n default k8sdemo-service
+    
+ &gt; NAME              TYPE       CLUSTER-IP      EXTERNAL-IP   PORT<span style="color:#f92672">(</span>S<span style="color:#f92672">)</span>          AGE
+&gt; k8sdemo-service   NodePort   10.109.30.227   &lt;none&gt;        3000:30931/TCP   11m
+</code></pre></div><p>``</p>
+</li>
+</ol>
+<p>We can see that our in this example<code>&lt;nodeport&gt;</code> is <code>31208</code>. We can see in the output the port mapping from 3000 inside  the pod exposed to the cluster on port 30931. This port in the 31000 range is automatically chosen, and <strong>will probably be different for you</strong>.</p>
+<ol>
+<li>
+<p><code>k8sdemo</code> is now running on your cluster, and exposed to the internet.</p>
+<p><img src="../images/vm.png" alt=""> <strong>Training VM</strong></p>
+<p>If you are using the training VM, you can open the webpage directly by typing:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">minikube service k8sdemo-service
+</code></pre></div><p>where k8sdemo-service is the name of the exposed kubernetes service.</p>
+<hr>
+<p><img src="../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
+<p>If you are <strong>NOT</strong> using the training VM, you can open the webpage by forwarding a local port to the service in your Cluster:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl port-forward --namespace default <span style="color:#66d9ef">$(</span>kubectl get po -n default -l app<span style="color:#f92672">=</span>k8sdemo | grep k8sdemo | <span style="color:#ae81ff">\a</span>wk <span style="color:#e6db74">&#39;{print $1;}&#39;</span><span style="color:#66d9ef">)</span> 3000:3000 &gt;&gt; /dev/null &amp;
+</code></pre></div><p>And then navigating to <a href="http://localhost:3000/">http://localhost:3000/</a> in your browser.</p>
+</li>
+<li>
+<p>Your <code>k8sdemo</code> should now be open in the your default browser.
+However it will show an error, because we have not yet deployed the backend.</p>
+<p><strong>Testing DEMO_API
+STATUS: ERROR
+Trying to reach backend &hellip;.</strong></p>
+</li>
+</ol>
+<h2 id="deploy-the-application-backend">Deploy the application backend</h2>
+<p>In this part of the lab we will deploy the application backend called <code>k8sdemo-backend</code> that has already been built and uploaded to DockerHub under the name <code>niklaushirt/k8sdemo-backend</code>.</p>
+<ol>
+<li>
+<p>Start by running <code>k8sdemo-backend</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ~/training/deployment/demoapp-backend.yaml
+</code></pre></div><p>``</p>
+<p>This action will take a bit of time. To check the status of the running application, you can use <code> kubectl get pods</code>.</p>
+<p>You should see output similar to the following:</p>
+</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> kubectl get pods -n default
+ 
+ &gt; NAME                              READY     STATUS    RESTARTS   AGE
+  &gt; k8sdemo-7d46f69d68-xcgcw          0/1       Running   <span style="color:#ae81ff">0</span>          13m
+  &gt; k8sdemo-backend-9c777544b-cp59q   0/1       Running   <span style="color:#ae81ff">0</span>          1m
+  &gt; k8sdemo-backend-9c777544b-jqjz9   0/1       Running   <span style="color:#ae81ff">0</span>          1m  
+</code></pre></div><p>Eventually, the status should show up as <code>1/1 Running</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> kubectl get pods -n default
+ 
+ &gt; NAME                              READY     STATUS    RESTARTS   AGE
+  &gt; k8sdemo-7d46f69d68-xcgcw          1/1       Running   <span style="color:#ae81ff">0</span>          13m
+  &gt; k8sdemo-backend-9c777544b-cp59q   1/1       Running   <span style="color:#ae81ff">0</span>          6m35s
+  &gt; k8sdemo-backend-9c777544b-jqjz9   1/1       Running   <span style="color:#ae81ff">0</span>          6m35s
+</code></pre></div><p>The end result of the run command is to create a Deployment resource that manages the lifecycle of those pods.</p>
+<ol start="3">
+<li>Once the status reads <code>Running</code>, we need to expose that deployment as a service so we can access it through the IP of the worker nodes.
+The <code>k8sdemo</code> application listens on port 3000.  Run:</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> kubectl expose deployment k8sdemo-backend --name k8sdemo-backend-service -n default --type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;NodePort&#34;</span> --port<span style="color:#f92672">=</span><span style="color:#ae81ff">3000</span>
+ 
+ &gt; service <span style="color:#e6db74">&#34;k8sdemo-service&#34;</span> exposed
+</code></pre></div><ol start="4">
+<li>
+<p>Now reload the webpage and verify, that it shows</p>
+<p><strong>Testing DEMO_API
+STATUS: OK
+&hellip;.</strong></p>
+</li>
+<li>
+<p>If you reload the webpage several times, you should see, tht the IP Address of the backend API Pod is changing between the two Pods that have been spun up.</p>
+</li>
+</ol>
+<hr>
+<p>**Congratulations!!! This concludes Lab 3 on deploying a web application to Kubernetes
+**
+We will be using this deployment in the following Labs.</p>
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/jtc02/lab2/" title="Lab 2: Deploy your first Pod"><i class="fas fa-chevron-left p-1"></i>Lab 2: Deploy your first Pod</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/jtc02/lab4/" title="Lab 4: Scale and Update Deployments">Lab 4: Scale and Update Deployments<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="http://niklaushirt.github.io/lib/jquery.min.js"></script> 
+<script src="http://niklaushirt.github.io/lib/popper.min.js"></script> 
+
+<script src="http://niklaushirt.github.io/js/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "http:\/\/niklaushirt.github.io\/";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

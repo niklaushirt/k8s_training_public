@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="http://niklaushirt.github.io/labpreparation/">
+
+    <title>
+        
+        Lab Preparation | Kubernetes Training
+        
+    </title>
+
+    
+    <link href="http://niklaushirt.github.io/css/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="http://niklaushirt.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                
+                Kubernetes Training
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/vantagedesign/ace-documentation1" >
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/labpreparation/" class="nav-item my-1 parent active
+        ">
+        
+        <a class="nav-link p-0" href="/labpreparation/"><h6>Lab Preparation</h6></a>
+    </li>
+    <li data-nav-id="/jtc01/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc01/"><h6>JTC01 Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc01/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Docker
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab2/" class="nav-link p-0">
+                    Lab 2: Docker Basics
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab3/" class="nav-link p-0">
+                    Lab 3: Docker Internals
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc02/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc02/"><h6>JTC02 Kubernetes Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc02/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab1/" class="nav-link p-0">
+                    Lab 1. Get to know Kubernetes
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab2/" class="nav-link p-0">
+                    Lab 2. Deploy your first Pod
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab3/" class="nav-link p-0">
+                    Lab 3. Deploy your first application
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab4/" class="nav-link p-0">
+                    Lab 4: Scale and Update Deployments
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab5/" class="nav-link p-0">
+                    Lab 5: Stateful Deployments
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab6/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab6/" class="nav-link p-0">
+                    Lab 6: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc10/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc10/"><h6>JTC10 Istio</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc10/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know ISTIO
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab2/" class="nav-link p-0">
+                    Lab 2: Installing Istio 
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy BookInfo application 
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab4/" class="nav-link p-0">
+                    Lab 4: Monitoring with Kiali
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab5/" class="nav-link p-0">
+                    Lab 5: Traffic flow management
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab6/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab6/" class="nav-link p-0">
+                    Lab 6: Telemetry data
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab7/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab7/" class="nav-link p-0">
+                    Lab 7: End-user authentication
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab8/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab8/" class="nav-link p-0">
+                    Lab 8: Traffic Mirroring
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab9/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab9/" class="nav-link p-0">
+                    Lab 9: Fault Injection
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab10/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab10/" class="nav-link p-0">
+                    Lab 10: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc14/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc14/"><h6>JTC14 Kubernetes Ansible Operators</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc14/lab0/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab0/" class="nav-link p-0">
+                    Lab 0: Prepare the Lab environment
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab1/" class="nav-link p-0">
+                    Lab 1: Kubernetes Operators
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab2/" class="nav-link p-0">
+                    Lab 2: Create the Lab Operator Project
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy the Lab Operator
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc16/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc16/"><h6>JTC16 Kubernetes Security Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc16/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc16/lab1/" class="nav-link p-0">
+                    Lab 1: Network Policies
+                </a>
+        </li>
+        <li data-nav-id="/jtc16/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc16/lab2/" class="nav-link p-0">
+                    Lab 2: Security Tooling
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc17/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc17/"><h6>JTC17 Kubernetes Advanced Security</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc17/lab0/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab0/" class="nav-link p-0">
+                    Lab 0: Preparation
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab1/" class="nav-link p-0">
+                    Lab 1: RBAC - Users, Roles and RoleBindings
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab2/" class="nav-link p-0">
+                    Lab 2: Service Accounts
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab3/" class="nav-link p-0">
+                    Lab 3: RBAC Tooling
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab4/" class="nav-link p-0">
+                    Lab 4: Image Scanning
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc18/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc18/"><h6>JTC18 Kubernetes Advanced Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc18/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab1/" class="nav-link p-0">
+                    Lab 1: Liveness and Readiness Probes
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab2/" class="nav-link p-0">
+                    Lab 2: Init Containers
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab3/" class="nav-link p-0">
+                    Lab 3: Persistent Volumes
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab4/" class="nav-link p-0">
+                    Lab 4: Dynamic NFS provisioning
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab5/" class="nav-link p-0">
+                    Lab 5: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc19/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc19/"><h6>JTC19 CloudNative DevOps</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc19/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab1/" class="nav-link p-0">
+                    Lab 1: Tekton
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab5/" class="nav-link p-0">
+                    Lab 5: Cleanup
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab2/" class="nav-link p-0">
+                    xxxx
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab3/" class="nav-link p-0">
+                    xxxx
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab4/" class="nav-link p-0">
+                    xxxx
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab6/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab6/" class="nav-link p-0">
+                    xxxx
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab7/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab7/" class="nav-link p-0">
+                    xxxx
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab8/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab8/" class="nav-link p-0">
+                    xxxx
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab9/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab9/" class="nav-link p-0">
+                    xxxx
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#nomenclatures">Nomenclatures</a>
+      <ul>
+        <li><a href="#shell-commands">Shell Commands</a></li>
+        <li><a href="#code-examples">Code Examples</a></li>
+        <li><a href="#training-vm-vs-cloudstandalone">Training VM vs Cloud/Standalone</a></li>
+      </ul>
+    </li>
+    <li><a href="#prepare-the-lab-environment">Prepare the Lab environment</a>
+      <ul>
+        <li><a href="#using-the-provided-lab-vm">Using the provided Lab VM</a></li>
+        <li><a href="#using-your-own-environment">Using your own environment</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>Lab Preparation</h1>
+
+<h2 id="nomenclatures">Nomenclatures</h2>
+<hr>
+<h3 id="shell-commands">Shell Commands</h3>
+<p>The commands that you are going to execute to progress the Labs will look like this:</p>
+<p>THIS IS AN EXAMPLE - DO NOT EXECUTE THIS!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">   kubectl create -f redis-slave-service.yaml
+	
+	&gt; Output Line <span style="color:#ae81ff">1</span>     
+	&gt; Output Line <span style="color:#ae81ff">2</span>
+	&gt; Output Line <span style="color:#ae81ff">3</span>
+	...
+	
+</code></pre></div><blockquote>
+<p><strong>IMPORTANT NOTE:</strong> The example output of a command is prefixed by &ldquo;&gt;&rdquo; in order to make it more distinguishable.</p>
+<p>So in the above example you would only enter/copy-paste <code>kubectl create -f redis-slave-service.yaml</code> and the output from the command is &ldquo;Output Line 1&rdquo; to &ldquo;Output Line 3&rdquo;</p>
+</blockquote>
+<hr>
+<h3 id="code-examples">Code Examples</h3>
+<p>Code examples are presented like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: lab.ibm.com/v1beta1
+<span style="color:#66d9ef">kind</span>: MyResource
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: example
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">size</span>: <span style="color:#ae81ff">3</span>
+  <span style="color:#66d9ef">image</span>: busybox
+</code></pre></div><p>This is only for illustration and is not being actively used in the Labs.</p>
+<h3 id="training-vm-vs-cloudstandalone">Training VM vs Cloud/Standalone</h3>
+<p>Whenever the instructions differ between the provided Training VM and a Cloud/Standalone installation it will be marked as follows:</p>
+<p>Instructions if you are using the training VM</p>
+<blockquote>
+<p><img src="./images/vm.png" alt=""> <strong>Training VM</strong></p>
+</blockquote>
+<p>Instructions if you are <strong>NOT</strong> using the training VM</p>
+<blockquote>
+<p><img src="./images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
+</blockquote>
+<p>Please use the instructions accordingly.</p>
+<h2 id="prepare-the-lab-environment">Prepare the Lab environment</h2>
+<h3 id="using-the-provided-lab-vm">Using the provided Lab VM</h3>
+<p>Using the provided Lab VM is the easiest way to get started with the Labs for the training:</p>
+<ul>
+<li>Download the Lab VM</li>
+<li>Install a Hypervisor on your PC (VMWare, VirtualBox, KVM, &hellip;)</li>
+<li>Start the VM</li>
+<li>Test that it works in your setting</li>
+</ul>
+<p>You can find detailed instructions here:
+<a href="https://github.com/niklaushirt/training">https://github.com/niklaushirt/training</a></p>
+<h3 id="using-your-own-environment">Using your own environment</h3>
+<p>These are two methods to perform the Labs without downloading and starting the VM.</p>
+<p><img src="./images/important.png" alt=""> This is <strong>untested</strong> and I cannot guarantee that all the Labs will be working 100%.</p>
+<h4 id="standalone-installation">Standalone installation</h4>
+<p>For installation on your local PC</p>
+<p><a href="https://github.com/niklaushirt/training/blob/master/standalone/README-STANDALONE.md">https://github.com/niklaushirt/training/blob/master/standalone/README-STANDALONE.md</a></p>
+<h4 id="cloud-installation">Cloud Installation</h4>
+<p>For using a Kubernetes cluster on the IBM Cloud</p>
+<p><a href="https://github.com/niklaushirt/training/blob/master/standalone/README-CLOUD.md">https://github.com/niklaushirt/training/blob/master/standalone/README-CLOUD.md</a></p>
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/" title="Lab information"><i class="fas fa-chevron-left p-1"></i>Lab information</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/jtc01/" title="JTC01 Docker">JTC01 Docker<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="http://niklaushirt.github.io/lib/jquery.min.js"></script> 
+<script src="http://niklaushirt.github.io/lib/popper.min.js"></script> 
+
+<script src="http://niklaushirt.github.io/js/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "http:\/\/niklaushirt.github.io\/";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

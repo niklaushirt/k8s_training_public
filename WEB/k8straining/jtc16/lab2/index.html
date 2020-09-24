@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="http://niklaushirt.github.io/jtc16/lab2/">
+
+    <title>
+        
+        Lab 2: Security Tooling | Kubernetes Training
+        
+    </title>
+
+    
+    <link href="http://niklaushirt.github.io/css/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="http://niklaushirt.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                
+                Kubernetes Training
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/vantagedesign/ace-documentation1" >
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/jtc00/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc00/"><h6>Introduction</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc00/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc00/lab1/" class="nav-link p-0">
+                    Getting set up
+                </a>
+        </li>
+        <li data-nav-id="/jtc00/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc00/lab2/" class="nav-link p-0">
+                    Lab Information and Semantics
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc01/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc01/"><h6>JTC01 Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc01/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Docker
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab2/" class="nav-link p-0">
+                    Lab 2: Docker Basics
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab3/" class="nav-link p-0">
+                    Lab 3: Docker Internals
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc02/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc02/"><h6>JTC02 Kubernetes Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc02/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Kubernetes
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab2/" class="nav-link p-0">
+                    Lab 2: Deploy your first Pod
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy your first application
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab4/" class="nav-link p-0">
+                    Lab 4: Scale and Update Deployments
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab5/" class="nav-link p-0">
+                    Lab 5: Stateful Deployments
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab6/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab6/" class="nav-link p-0">
+                    Lab 6: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc10/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc10/"><h6>JTC10 Istio</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc10/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know ISTIO
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab2/" class="nav-link p-0">
+                    Lab 2: Installing Istio 
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy BookInfo application 
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab4/" class="nav-link p-0">
+                    Lab 4: Monitoring with Kiali
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab5/" class="nav-link p-0">
+                    Lab 5: Traffic flow management
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab6/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab6/" class="nav-link p-0">
+                    Lab 6: Telemetry data
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab7/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab7/" class="nav-link p-0">
+                    Lab 7: End-user authentication
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab8/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab8/" class="nav-link p-0">
+                    Lab 8: Traffic Mirroring
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab9/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab9/" class="nav-link p-0">
+                    Lab 9: Fault Injection
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab10/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab10/" class="nav-link p-0">
+                    Lab 10: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc14/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc14/"><h6>JTC14 Kubernetes Ansible Operators</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc14/lab0/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab0/" class="nav-link p-0">
+                    Lab 0: Prepare the Lab environment
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab1/" class="nav-link p-0">
+                    Lab 1: Kubernetes Operators
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab2/" class="nav-link p-0">
+                    Lab 2: Create the Lab Operator Project
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy the Lab Operator
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc16/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc16/"><h6>JTC16 Kubernetes Security Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc16/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc16/lab1/" class="nav-link p-0">
+                    Lab 1: Network Policies
+                </a>
+        </li>
+        <li data-nav-id="/jtc16/lab2/" class="nav-item my-1 active">
+                
+                 <a href="/jtc16/lab2/" class="nav-link p-0">
+                    Lab 2: Security Tooling
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc17/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc17/"><h6>JTC17 Kubernetes Advanced Security</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc17/lab0/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab0/" class="nav-link p-0">
+                    Lab 0: Preparation
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab1/" class="nav-link p-0">
+                    Lab 1: RBAC - Users, Roles and RoleBindings
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab2/" class="nav-link p-0">
+                    Lab 2: Service Accounts
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab3/" class="nav-link p-0">
+                    Lab 3: RBAC Tooling
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab4/" class="nav-link p-0">
+                    Lab 4: Image Scanning
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc18/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc18/"><h6>JTC18 Kubernetes Advanced Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc18/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab1/" class="nav-link p-0">
+                    Lab 1: Liveness and Readiness Probes
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab2/" class="nav-link p-0">
+                    Lab 2: Init Containers
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab3/" class="nav-link p-0">
+                    Lab 3: Persistent Volumes
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab4/" class="nav-link p-0">
+                    Lab 4: Dynamic NFS provisioning
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab5/" class="nav-link p-0">
+                    Lab 5: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc19/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc19/"><h6>JTC19 CloudNative DevOps</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc19/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab1/" class="nav-link p-0">
+                    Lab 1: Tekton
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab5/" class="nav-link p-0">
+                    Lab 5: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#polaris">Polaris</a></li>
+    <li><a href="#kube-hunter">Kube Hunter</a></li>
+    <li><a href="#kubesec">kubesec</a></li>
+    <li><a href="#conftest">conftest</a></li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>Lab 2: Security Tooling</h1>
+
+<h2 id="polaris">Polaris</h2>
+<p>Polaris runs a variety of checks to ensure that Kubernetes pods and controllers are configured using best practices, helping you avoid problems in the future.</p>
+<p>You can get more details <a href="https://github.com/FairwindsOps/polaris">here</a>.</p>
+<p><img src="../images/polaris-logo.png" alt=""></p>
+<ol>
+<li>
+<p>Install Polaris Dashboard by running:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ~/training/tools/polaris.yaml
+   
+&gt; namespace/polaris created
+&gt; configmap/polaris created
+&gt; serviceaccount/polaris-dashboard created
+&gt; clusterrole.rbac.authorization.k8s.io/polaris-dashboard created
+&gt; clusterrolebinding.rbac.authorization.k8s.io/polaris-dashboard created
+&gt; service/polaris-dashboard created
+&gt; deployment.apps/polaris-dashboard created
+   
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Wait until the pod si running:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pods -n polaris
+   
+&gt; NAME                                 READY     STATUS    RESTARTS   AGE
+&gt; polaris-dashboard-69f5bc4b5d-8jz24   1/1       Running   <span style="color:#ae81ff">0</span>          66s
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Once the status reads <code>Running</code>, we need to expose the Dashboard as a service so we can access it:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl expose deployment polaris-dashboard -n polaris --name polaris-dashboard-service --type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;NodePort&#34;</span> --port<span style="color:#f92672">=</span><span style="color:#ae81ff">8080</span>
+   
+&gt; service/polaris-dashboard-service exposed
+</code></pre></div></li>
+<li>
+<p>The Polaris Dashboard is now running in your cluster, and exposed to the internet.
+You can open it by typing:</p>
+<p><img src="../images/vm.png" alt=""> <strong>Training VM</strong></p>
+<p>If you are using the training VM, you can open Polaris directly by typing:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">minikube service polaris-dashboard-service -n polaris
+</code></pre></div><hr>
+<p><img src="../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
+<p>If you are <strong>NOT</strong> using the training VM, you can open the webpage by forwarding a local port to the service in your Cluster.</p>
+<p>Execute this in a separate Terminal Window/Tab in order to be able to access the web page:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl port-forward --namespace polaris <span style="color:#66d9ef">$(</span>kubectl get po -n polaris | grep polaris-dashboard | <span style="color:#ae81ff">\a</span>wk <span style="color:#e6db74">&#39;{print $1;}&#39;</span><span style="color:#66d9ef">)</span> 8080:8080 
+</code></pre></div><p>And then navigating to <a href="http://localhost:8080/">http://localhost:8080/</a> in your browser.</p>
+</li>
+<li>
+<p>Look around the Dashboard to get familiar with the checks.</p>
+<p><img src="../images/sec1.png" alt=""></p>
+</li>
+<li>
+<p>Let&rsquo;s deploy a version of <code>k8sdemo</code> that has some more problems by running:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ~/training/deployment/demoapp-errors.yaml
+</code></pre></div><p>``</p>
+<p>This action will take a bit of time. To check the status of the running application, you can use <code> kubectl get pods</code>.</p>
+</li>
+<li>
+<p>Check out the dashboard for the <code>k8sdemo-nok</code> application and you will find that there are a lot more warnings for this deployment.</p>
+</li>
+</ol>
+<p><img src="../images/sec2.png" alt=""></p>
+<ol start="8">
+<li>
+<p>Clean-up by running:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl delete -f ~/training/deployment/demoapp-errors.yaml
+kubectl delete -f ~/training/tools/polaris.yaml
+</code></pre></div><p>``</p>
+</li>
+</ol>
+<p>Now on to the next tool&hellip;</p>
+<h2 id="kube-hunter">Kube Hunter</h2>
+<p>Kube-hunter hunts for security weaknesses in Kubernetes clusters. The tool was developed to increase awareness and visibility for security issues in Kubernetes environments.</p>
+<blockquote>
+<p><strong>IMPORTANT!!! You should NOT run kube-hunter on a Kubernetes cluster you don&rsquo;t own!</strong></p>
+</blockquote>
+<p>You can get more details <a href="https://github.com/aquasecurity/kube-hunter">here</a>.</p>
+<p><img src="../images/vm.png" alt=""> <strong>Training VM</strong></p>
+<blockquote>
+<p>If you are using the training VM, <code>kubehunter</code> has already been installed in your environment.</p>
+</blockquote>
+<p><img src="../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
+<blockquote>
+<p><img src="../images/important.png" alt=""> If you are <strong>NOT</strong> using the training VM, you have to install <code>kubehunter</code> as described here:
+<a href="https://github.com/aquasecurity/kube-hunter#deployment">https://github.com/aquasecurity/kube-hunter#deployment</a></p>
+</blockquote>
+<ol>
+<li>
+<p>Let&rsquo;s examine the list of passive test (non intrusive, aka that do not change the cluster state) that kube-hunter runs:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~/kube-hunter/kube-hunter.py --list
+   
+&gt; Passive Hunters:
+&gt; ----------------
+&gt; * Mount Hunter - /var/log
+&gt;   Hunt pods that have write access to host<span style="color:#960050;background-color:#1e0010">&#39;</span>s /var/log. in such <span style="color:#66d9ef">case</span>, the pod can traverse read files on the host machine
+&gt; 
+&gt; * Host Discovery when running as pod
+&gt;   Generates ip adresses to scan, based on cluster/scan type
+&gt; 
+&gt; * API Server Hunter
+&gt;   Checks <span style="color:#66d9ef">if</span> API server is accessible
+&gt; 
+&gt; * K8s CVE Hunter
+&gt;   Checks <span style="color:#66d9ef">if</span> Node is running a Kubernetes version vulnerable to specific important CVEs
+&gt; 
+&gt; * Proxy Discovery
+&gt;   Checks <span style="color:#66d9ef">for</span> the existence of a an open Proxy service
+&gt; 
+&gt; * Pod Capabilities Hunter
+&gt;   Checks <span style="color:#66d9ef">for</span> default enabled capabilities in a pod
+&gt; 
+&gt; * Kubectl CVE Hunter
+&gt;   Checks <span style="color:#66d9ef">if</span> the kubectl client is vulnerable to specific important CVEs
+...
+   
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Let&rsquo;s examine the list of passive test (non intrusive, aka that do not change the cluster state) that kube-hunter runs:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~/kube-hunter/kube-hunter.py --list --active
+   
+&gt; Passive Hunters:
+&gt; ----------------
+...
+   
+&gt; Active Hunters:
+&gt; ---------------
+&gt; * Kubelet System Logs Hunter
+&gt;   Retrieves commands from host<span style="color:#960050;background-color:#1e0010">&#39;</span>s system audit
+&gt; 
+&gt; * Etcd Remote Access
+&gt;   Checks <span style="color:#66d9ef">for</span> remote write access to etcd- will attempt to add a new key to the etcd DB
+&gt; 
+&gt; * Azure SPN Hunter
+&gt;   Gets the azure subscription file on the host by executing inside a container
+&gt; 
+&gt; * Kubelet Container Logs Hunter
+&gt;   Retrieves logs from a random container
+&gt; 
+&gt; * Kubelet Run Hunter
+&gt;   Executes uname inside of a random container
+&gt; 
+...
+   
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Get the Cluster IP (MY-CLUSTER-IP)</p>
+<p>Use the adequate method for this:</p>
+<p>Minikube in the training VM</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">minikube ip
+</code></pre></div><p>``
+or</p>
+<p>IBM Cloud Kubernetes Service</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ibmcloud ks worker ls --cluster mycluster-free
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Now let&rsquo;s run an active and passive test against our minikube cluster::</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~/kube-hunter/kube-hunter.py  --remote &lt;MY-CLUSTER-IP&gt; --active
+   
+&gt; ~ Started
+&gt; ~ Discovering Open Kubernetes Services...
+&gt; |
+&gt; | Etcd:
+&gt; |   type: open service
+&gt; |   service: Etcd
+&gt; |_  location: localhost:2379
+&gt; |
+&gt; | Kubelet API <span style="color:#f92672">(</span>readonly<span style="color:#f92672">)</span>:
+&gt; |   type: open service
+&gt; |   service: Kubelet API <span style="color:#f92672">(</span>readonly<span style="color:#f92672">)</span>
+&gt; |_  location: localhost:10255
+...
+</code></pre></div><p>``</p>
+</li>
+</ol>
+<p><strong>Findings</strong></p>
+<p>You should get no findings, meaning that the Minikube instance has been correctly configured.</p>
+<p>If you get vulnerabilities like the following, this might be due to the fact that <code>minikube</code> API by default allows for access with user <code>system:anonymous</code>.</p>
+<pre><code>+-----------------+----------------------+----------------------+----------------------+----------+
+| LOCATION        | CATEGORY             | VULNERABILITY        | DESCRIPTION          | EVIDENCE |
++-----------------+----------------------+----------------------+----------------------+----------+
+| localhost:10250 | Remote Code          | Anonymous            | The kubelet is       |          |
+|                 | Execution            | Authentication       | misconfigured,       |          |
+|                 |                      |                      | potentially allowing |          |
+|                 |                      |                      | secure access to all |          |
+|                 |                      |                      | requests on the      |          |
+|                 |                      |                      | kubelet, without the |          |
+|                 |                      |                      | need to authenticate |          |
++-----------------+----------------------+----------------------+----------------------+----------+
+
+</code></pre><p>This should (hopefully!) not be the case in your clusters and in this case could be remediated by launching <code>minikube</code> with the option <code>--extra-config=apiserver.anonymous-auth=false</code></p>
+<h2 id="kubesec">kubesec</h2>
+<p><a href="https://kubesec.io/">kubesec</a> is a utility that performs security risk analysis for Kubernetes resources and tells you what you should change in order to improve the security of those pods. It also gives you a score that you can use to create a minimum standard. The score incorporates a great number of Kubernetes best practices.</p>
+<p><img src="../images/vm.png" alt=""> <strong>Training VM</strong></p>
+<blockquote>
+<p>If you are using the training VM, <code>KubeSec</code> has already been installed in your environment.</p>
+</blockquote>
+<p><img src="../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
+<blockquote>
+<p><img src="../images/important.png" alt=""> If you are <strong>NOT</strong> using the training VM, you have to install <code>KubeSec</code> as described here:
+<a href="https://github.com/controlplaneio/kubesec/releases">https://github.com/controlplaneio/kubesec/releases</a></p>
+</blockquote>
+<ol start="2">
+<li>
+<p>Launch a test against the demo application</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubesec scan ~/training/deployment/demoapp.yaml
+</code></pre></div><p>``</p>
+<p>The output is in JSON format that can easily be integrated into a CI/CD process.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">[
+  {
+    <span style="color:#66d9ef">&#34;object&#34;: </span><span style="color:#e6db74">&#34;Deployment/k8sdemo.default&#34;</span>,
+    <span style="color:#66d9ef">&#34;valid&#34;: </span><span style="color:#66d9ef">true</span>,
+    <span style="color:#66d9ef">&#34;message&#34;: </span><span style="color:#e6db74">&#34;Passed with a score of 4 points&#34;</span>,
+    <span style="color:#66d9ef">&#34;score&#34;: </span><span style="color:#ae81ff">4</span>,
+    <span style="color:#66d9ef">&#34;scoring&#34;: </span>{
+      <span style="color:#66d9ef">&#34;advise&#34;: </span>[
+        {
+          <span style="color:#66d9ef">&#34;selector&#34;: </span><span style="color:#e6db74">&#34;.metadata .annotations .\&#34;container.apparmor.security.beta.kubernetes.io/nginx\&#34;&#34;</span>,
+          <span style="color:#66d9ef">&#34;reason&#34;: </span><span style="color:#e6db74">&#34;Well defined AppArmor policies may provide greater protection from unknown threats. WARNING: NOT PRODUCTION READY&#34;</span>,
+          <span style="color:#66d9ef">&#34;points&#34;: </span><span style="color:#ae81ff">3</span>
+        },
+        {
+          <span style="color:#66d9ef">&#34;selector&#34;: </span><span style="color:#e6db74">&#34;.spec .serviceAccountName&#34;</span>,
+          <span style="color:#66d9ef">&#34;reason&#34;: </span><span style="color:#e6db74">&#34;Service accounts restrict Kubernetes API access and should be configured with least privilege&#34;</span>,
+          <span style="color:#66d9ef">&#34;points&#34;: </span><span style="color:#ae81ff">3</span>
+        },
+        {
+          <span style="color:#66d9ef">&#34;selector&#34;: </span><span style="color:#e6db74">&#34;.metadata .annotations .\&#34;container.seccomp.security.alpha.kubernetes.io/pod\&#34;&#34;</span>,
+          <span style="color:#66d9ef">&#34;reason&#34;: </span><span style="color:#e6db74">&#34;Seccomp profiles set minimum privilege and secure against unknown threats&#34;</span>,
+          <span style="color:#66d9ef">&#34;points&#34;: </span><span style="color:#ae81ff">1</span>
+        },
+        {
+          <span style="color:#66d9ef">&#34;selector&#34;: </span><span style="color:#e6db74">&#34;containers[] .securityContext .capabilities .drop&#34;</span>,
+          <span style="color:#66d9ef">&#34;reason&#34;: </span><span style="color:#e6db74">&#34;Reducing kernel capabilities available to a container limits its attack surface&#34;</span>,
+          <span style="color:#66d9ef">&#34;points&#34;: </span><span style="color:#ae81ff">1</span>
+        },
+        {
+          <span style="color:#66d9ef">&#34;selector&#34;: </span><span style="color:#e6db74">&#34;containers[] .securityContext .capabilities .drop | index(\&#34;ALL\&#34;)&#34;</span>,
+          <span style="color:#66d9ef">&#34;reason&#34;: </span><span style="color:#e6db74">&#34;Drop all capabilities and add only those required to reduce syscall attack surface&#34;</span>,
+          <span style="color:#66d9ef">&#34;points&#34;: </span><span style="color:#ae81ff">1</span>
+        },
+        {
+          <span style="color:#66d9ef">&#34;selector&#34;: </span><span style="color:#e6db74">&#34;containers[] .securityContext .readOnlyRootFilesystem == true&#34;</span>,
+          <span style="color:#66d9ef">&#34;reason&#34;: </span><span style="color:#e6db74">&#34;An immutable root filesystem can prevent malicious binaries being added to PATH and increase attack cost&#34;</span>,
+          <span style="color:#66d9ef">&#34;points&#34;: </span><span style="color:#ae81ff">1</span>
+        },
+        {
+          <span style="color:#66d9ef">&#34;selector&#34;: </span><span style="color:#e6db74">&#34;containers[] .securityContext .runAsNonRoot == true&#34;</span>,
+          <span style="color:#66d9ef">&#34;reason&#34;: </span><span style="color:#e6db74">&#34;Force the running image to run as a non-root user to ensure least privilege&#34;</span>,
+          <span style="color:#66d9ef">&#34;points&#34;: </span><span style="color:#ae81ff">1</span>
+        },
+        {
+          <span style="color:#66d9ef">&#34;selector&#34;: </span><span style="color:#e6db74">&#34;containers[] .securityContext .runAsUser -gt 10000&#34;</span>,
+          <span style="color:#66d9ef">&#34;reason&#34;: </span><span style="color:#e6db74">&#34;Run as a high-UID user to avoid conflicts with the host&#39;s user table&#34;</span>,
+          <span style="color:#66d9ef">&#34;points&#34;: </span><span style="color:#ae81ff">1</span>
+        }
+      ]
+    }
+  }
+]
+   
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Launch a test against a really vulnerable app</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubesec scan ~/training/kubesec/critical.yaml 
+</code></pre></div><p>``</p>
+<p>The output is in JSON format that can easily be integrated into a CI/CD process.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">    [
+      {
+        <span style="color:#66d9ef">&#34;object&#34;: </span><span style="color:#e6db74">&#34;Pod/kubesec-test.default&#34;</span>,
+        <span style="color:#66d9ef">&#34;valid&#34;: </span><span style="color:#66d9ef">true</span>,
+        <span style="color:#66d9ef">&#34;message&#34;: </span><span style="color:#e6db74">&#34;Failed with a score of -37 points&#34;</span>,
+        <span style="color:#66d9ef">&#34;score&#34;: </span>-<span style="color:#ae81ff">37</span>,
+        <span style="color:#66d9ef">&#34;scoring&#34;: </span>{
+          <span style="color:#66d9ef">&#34;critical&#34;: </span>[
+            {
+              <span style="color:#66d9ef">&#34;selector&#34;: </span><span style="color:#e6db74">&#34;containers[] .securityContext .privileged == true&#34;</span>,
+              <span style="color:#66d9ef">&#34;reason&#34;: </span><span style="color:#e6db74">&#34;Privileged containers can allow almost completely unrestricted host access&#34;</span>,
+              <span style="color:#66d9ef">&#34;points&#34;: </span>-<span style="color:#ae81ff">30</span>
+            },
+            {
+              <span style="color:#66d9ef">&#34;selector&#34;: </span><span style="color:#e6db74">&#34;containers[] .securityContext .allowPrivilegeEscalation == true&#34;</span>,
+              <span style="color:#66d9ef">&#34;reason&#34;: </span><span style="color:#e6db74">&#34;&#34;</span>,
+              <span style="color:#66d9ef">&#34;points&#34;: </span>-<span style="color:#ae81ff">7</span>
+            }
+          ],
+          <span style="color:#66d9ef">&#34;advise&#34;: </span>[
+            {
+          ....
+</code></pre></div><p>``</p>
+</li>
+</ol>
+<p>kubesec gives us a simple tool to check the deployment manifests early on and integrate into a CI/CD process at build-time.
+KubeSec can run in different ways (commandline, Docker container and even as a Kubernetes admission hook) in order to facilitate that integration.</p>
+<h2 id="conftest">conftest</h2>
+<p><a href="https://github.com/instrumenta/conftest">conftest</a> is a utility to help you write tests against structured configuration data. For instance you could write tests for your Kubernetes configurations, or Tekton pipeline definitions, Terraform code, Serverless configs or any other structured data.</p>
+<p><img src="../images/vm.png" alt=""> <strong>Training VM</strong></p>
+<blockquote>
+<p>If you are using the training VM, <code>ConfTest </code> has already been installed in your environment.</p>
+</blockquote>
+<p><img src="../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
+<blockquote>
+<p><img src="../images/important.png" alt=""> If you are <strong>NOT</strong> using the training VM, you have to install <code>ConfTest </code> as described here:
+<a href="https://www.conftest.dev/install/">https://www.conftest.dev/install/</a></p>
+</blockquote>
+<ol start="2">
+<li>Launch a test against the demo application</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">conftest test -p ~/training/conftest/src/examples/kubernetes/policy ~/training/deployment/demoapp.yaml
+
+&gt; FAIL - /home/training/training/deployment/demoapp.yaml - Containers must not run as root in Deployment k8sdemo
+&gt; FAIL - /home/training/training/deployment/demoapp.yaml - Deployment k8sdemo must provide app/release labels <span style="color:#66d9ef">for</span> pod selectors
+&gt; FAIL - /home/training/training/deployment/demoapp.yaml - k8sdemo must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels 
+
+</code></pre></div><ol start="3">
+<li>Launch a test against all the files for the demo application</li>
+</ol>
+<p>The output format here is set to TAP (<a href="https://testanything.org/">Test Anything Protocol</a>)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">conftest test -p ~/training/conftest/src/examples/kubernetes/policy --output<span style="color:#f92672">=</span>tap ~/training/deployment/*.yaml
+
+&gt; 1..3
+&gt; not ok <span style="color:#ae81ff">1</span> - /home/training/training/deployment/demoapp-backend.yaml - Containers must not run as root in Deployment k8sdemo-backend
+&gt; not ok <span style="color:#ae81ff">2</span> - /home/training/training/deployment/demoapp-backend.yaml - Deployment k8sdemo-backend must provide app/release labels <span style="color:#66d9ef">for</span> pod selectors
+&gt; not ok <span style="color:#ae81ff">3</span> - /home/training/training/deployment/demoapp-backend.yaml - k8sdemo-backend must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels 
+&gt; 1..3
+&gt; not ok <span style="color:#ae81ff">1</span> - /home/training/training/deployment/demoapp-errors.yaml - Containers must not run as root in Deployment k8sdemo-nok
+&gt; not ok <span style="color:#ae81ff">2</span> - /home/training/training/deployment/demoapp-errors.yaml - Deployment k8sdemo-nok must provide app/release labels <span style="color:#66d9ef">for</span> pod selectors
+&gt; not ok <span style="color:#ae81ff">3</span> - /home/training/training/deployment/demoapp-errors.yaml - k8sdemo-nok must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels 
+&gt; 1..1
+&gt; <span style="color:#75715e"># Warnings</span>
+&gt; not ok <span style="color:#ae81ff">1</span> - /home/training/training/deployment/demoapp-service.yaml - Found service k8sdemo-service but services are not allowed
+&gt; 1..3
+&gt; not ok <span style="color:#ae81ff">1</span> - /home/training/training/deployment/demoapp.yaml - Containers must not run as root in Deployment k8sdemo
+&gt; not ok <span style="color:#ae81ff">2</span> - /home/training/training/deployment/demoapp.yaml - Deployment k8sdemo must provide app/release labels <span style="color:#66d9ef">for</span> pod selectors
+&gt; not ok <span style="color:#ae81ff">3</span> - /home/training/training/deployment/demoapp.yaml - k8sdemo must include Kubernetes recommended labels: https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels 
+&gt; 1..1
+&gt; <span style="color:#75715e"># Warnings</span>
+&gt; not ok <span style="color:#ae81ff">1</span> - /home/training/training/deployment/demoapp-backend-service.yaml - Found service k8sdemo-backend-service but services are not allowed
+
+
+</code></pre></div><ol start="3">
+<li>Launch a test against sample Dockerfile</li>
+</ol>
+<p>The output format here is set to JSON.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">conftest test -p ~/training/conftest/src/examples/docker/policy --output<span style="color:#f92672">=</span>json ~/training/conftest/src/examples/docker/Dockerfile 
+</code></pre></div><p>A blakclisted base image has been detected:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">[
+	{
+		<span style="color:#66d9ef">&#34;filename&#34;: </span><span style="color:#e6db74">&#34;/home/training/training/conftest/src/examples/docker/Dockerfile&#34;</span>,
+		<span style="color:#66d9ef">&#34;Warnings&#34;: </span>[],
+		<span style="color:#66d9ef">&#34;Failures&#34;: </span>[
+			<span style="color:#e6db74">&#34;blacklisted image found [\&#34;openjdk:8-jdk-alpine\&#34;]&#34;</span>
+		],
+		<span style="color:#66d9ef">&#34;Successes&#34;: </span>[]
+	}
+]
+</code></pre></div><blockquote>
+<h1 id="congratulations">Congratulations!!!</h1>
+<h1 id="this-concludes-lab-2-on-security-tooling">This concludes Lab 2 on Security Tooling.</h1>
+</blockquote>
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/jtc16/lab1/" title="Lab 1: Network Policies"><i class="fas fa-chevron-left p-1"></i>Lab 1: Network Policies</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/jtc17/" title="JTC17 Kubernetes Advanced Security">JTC17 Kubernetes Advanced Security<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="http://niklaushirt.github.io/lib/jquery.min.js"></script> 
+<script src="http://niklaushirt.github.io/lib/popper.min.js"></script> 
+
+<script src="http://niklaushirt.github.io/js/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "http:\/\/niklaushirt.github.io\/";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

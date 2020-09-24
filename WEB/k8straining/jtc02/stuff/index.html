@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="http://niklaushirt.github.io/jtc02/stuff/">
+
+    <title>
+        
+         | Kubernetes Training
+        
+    </title>
+
+    
+    <link href="http://niklaushirt.github.io/css/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="http://niklaushirt.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                
+                Kubernetes Training
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/vantagedesign/ace-documentation1" >
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/labpreparation/" class="nav-item my-1
+        ">
+        
+        <a class="nav-link p-0" href="/labpreparation/"><h6>Lab Preparation</h6></a>
+    </li>
+    <li data-nav-id="/jtc01/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc01/"><h6>JTC01 Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc01/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Docker
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab2/" class="nav-link p-0">
+                    Lab 2: Docker Basics
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab3/" class="nav-link p-0">
+                    Lab 3: Docker Internals
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc02/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc02/"><h6>JTC02 Kubernetes Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc02/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab1/" class="nav-link p-0">
+                    Lab 1. Get to know Kubernetes
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab2/" class="nav-link p-0">
+                    Lab 2. Deploy your first Pod
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab3/" class="nav-link p-0">
+                    Lab 3. Deploy your first application
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab4/" class="nav-link p-0">
+                    Lab 4: Scale and Update Deployments
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab5/" class="nav-link p-0">
+                    Lab 5: Stateful Deployments
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab6/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab6/" class="nav-link p-0">
+                    Lab 6: Cleanup
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/stuff/" class="nav-item my-1 active">
+                
+                 <a href="/jtc02/stuff/" class="nav-link p-0">
+                    
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc10/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc10/"><h6>JTC10 Istio</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc10/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know ISTIO
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab2/" class="nav-link p-0">
+                    Lab 2: Installing Istio 
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy BookInfo application 
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab4/" class="nav-link p-0">
+                    Lab 4: Monitoring with Kiali
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab5/" class="nav-link p-0">
+                    Lab 5: Traffic flow management
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab6/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab6/" class="nav-link p-0">
+                    Lab 6: Telemetry data
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab7/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab7/" class="nav-link p-0">
+                    Lab 7: End-user authentication
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab8/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab8/" class="nav-link p-0">
+                    Lab 8: Traffic Mirroring
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab9/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab9/" class="nav-link p-0">
+                    Lab 9: Fault Injection
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab10/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab10/" class="nav-link p-0">
+                    Lab 10: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc14/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc14/"><h6>JTC14 Kubernetes Ansible Operators</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc14/lab0/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab0/" class="nav-link p-0">
+                    Lab 0: Prepare the Lab environment
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab1/" class="nav-link p-0">
+                    Lab 1: Kubernetes Operators
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab2/" class="nav-link p-0">
+                    Lab 2: Create the Lab Operator Project
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy the Lab Operator
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc16/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc16/"><h6>JTC16 Kubernetes Security Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc16/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc16/lab1/" class="nav-link p-0">
+                    Lab 1: Network Policies
+                </a>
+        </li>
+        <li data-nav-id="/jtc16/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc16/lab2/" class="nav-link p-0">
+                    Lab 2: Security Tooling
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc17/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc17/"><h6>JTC17 Kubernetes Advanced Security</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc17/lab0/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab0/" class="nav-link p-0">
+                    Lab 0: Preparation
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab1/" class="nav-link p-0">
+                    Lab 1: RBAC - Users, Roles and RoleBindings
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab2/" class="nav-link p-0">
+                    Lab 2: Service Accounts
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab3/" class="nav-link p-0">
+                    Lab 3: RBAC Tooling
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab4/" class="nav-link p-0">
+                    Lab 4: Image Scanning
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc18/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc18/"><h6>JTC18 Kubernetes Advanced Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc18/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab1/" class="nav-link p-0">
+                    Lab 1: Liveness and Readiness Probes
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab2/" class="nav-link p-0">
+                    Lab 2: Init Containers
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab3/" class="nav-link p-0">
+                    Lab 3: Persistent Volumes
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab4/" class="nav-link p-0">
+                    Lab 4: Dynamic NFS provisioning
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab5/" class="nav-link p-0">
+                    Lab 5: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc19/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc19/"><h6>JTC19 CloudNative DevOps</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc19/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab1/" class="nav-link p-0">
+                    Lab 1: Tekton
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab5/" class="nav-link p-0">
+                    Lab 5: Cleanup
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab2/" class="nav-link p-0">
+                    xxxx
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab3/" class="nav-link p-0">
+                    xxxx
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab4/" class="nav-link p-0">
+                    xxxx
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab6/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab6/" class="nav-link p-0">
+                    xxxx
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab7/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab7/" class="nav-link p-0">
+                    xxxx
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab8/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab8/" class="nav-link p-0">
+                    xxxx
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab9/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab9/" class="nav-link p-0">
+                    xxxx
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#persistent-volumes">Persistent Volumes</a></li>
+    <li><a href="#create-the-stateful-deployment">Create the stateful deployment</a></li>
+    <li><a href="#access-the-mysql-database">Access the mysql database</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1></h1>
+
+<h1 id="lab-5-stateful-deployments">Lab 5: Stateful Deployments</h1>
+<p>As you know a <code>Pod</code> is mortal, meaning it can be destroyed by Kubernetes anytime, and with it it&rsquo;s local data, memory, etc. So  it&rsquo;s perfect for stateless applications. Of course, in the real world we need a way to store our data, and we need this data to be persistent in time.</p>
+<p>So let&rsquo;s have a look on how how can we deploy a stateful application with a persistent storage in Kubernetes?</p>
+<p>For this Lab we will deploy a mysql application.</p>
+<h2 id="persistent-volumes">Persistent Volumes</h2>
+<p>As stated above, the state of a <code>Pod</code> is destroyed with it, so it&rsquo;s lost. For a database we need to be able to  keep the  data between restarts of the <code>Pods</code>.</p>
+<p>That&rsquo;s where the <code>PersistentVolume</code> comes in.</p>
+<p>As we have seen, a <code>Pod</code> as something that requests CPU &amp; RAM.</p>
+<p>A <code>PersistentVolume</code> as something that provides a storage on disk. Kubernetes handles a lot of different kinds of volumes. From local disk storage to s3, over 25 as of this writing.</p>
+<p>First we create the <code>PersistentVolume</code> where our mysql data will be stored. It is a piece of  storage in the cluster that has been provisioned by a cluster  administrator. It is a resource in the cluster just like a node is a  resource of the cluster.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: PersistentVolume
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: mysql-pv-volume
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">capacity</span>:
+    <span style="color:#66d9ef">storage</span>: 1Gi
+  <span style="color:#66d9ef">accessModes</span>:
+    - ReadWriteOnce
+  <span style="color:#66d9ef">hostPath</span>:
+    <span style="color:#66d9ef">path</span>: <span style="color:#e6db74">&#34;/mnt/data&#34;</span>
+</code></pre></div><p>Let&rsquo;s review some parameters:</p>
+<ul>
+<li><code>capacity</code>: the capacity of the volume
+<ul>
+<li><code>storage</code>: the volume size - here <code>1Gb</code></li>
+</ul>
+</li>
+<li><code>accessModes</code>: how this volume will be accessed, here ReadWriteOnce
+<ul>
+<li><code>ReadWriteOnce</code>: the volume can be mounted as read-write by a single node</li>
+<li><code>ReadOnlyMany</code>: the volume can be mounted read-only by many nodes</li>
+<li><code>ReadWriteMany</code>: the volume can be mounted as read-write by many nodes</li>
+</ul>
+</li>
+<li><code>hostPath</code>: where the storage will be stored on the host, here <code>/mnt/data </code> (this is specific to the storage type)</li>
+</ul>
+<p>We will use <code>hostPath</code> for this example, it is a simple type of <code>Volume</code> but you should <strong>never</strong> use it in production environements!</p>
+<ol>
+<li>
+<p>Create the PersistentVolume</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ~/training/volumes/1-simple-mysql-pv.yaml
+   
+&gt; persistentvolume/mysql-pv-volume created
+</code></pre></div></li>
+</ol>
+<pre><code>  
+2. Check that the Volume has been created
+
+  ```bash
+  kubectl get pv
+  
+  &gt; NAME              CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE
+  &gt; mysql-pv-volume   1Gi        RWO            Retain           Available                                   4s
+  ```
+  
+  
+
+## PersistentVolumeClaims
+
+Now that we have a storage, we need to claim it, make it available for our `Pods`. So we need a `PersistentVolumeClaim`. It is a request for storage by a user. It is similar to a pod. Pods consume node resources and `PersistentVolumeClaim` consume `PersistentVolume` resources.
+
+A `PersistentVolumeClaim` as something that requests a storage on disk and makes it available for the `Pod` think of it as an abstraction over the hard drives of the Kubernetes nodes - a fancy name for local hard drive.
+
+The manifest for the `PersistentVolumeClaim`is quite similar to the `PersistentVolume`:
+
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+name: mysql-pv-claim
+spec:
+accessModes:
+  - ReadWriteOnce
+resources:
+  requests:
+    storage: 1Gi
+</code></pre><ol>
+<li>
+<p>Create the PersistentVolume</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ~/training/volumes/2-simple-mysql-pvc.yaml
+   
+&gt; persistentvolumeclaim/mysql-pv-claim created
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Check that the Volume has been created. Make sure that the STATUS reads Bound!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pvc
+   
+&gt; NAME             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+&gt; mysql-pv-claim   Bound    pvc-918d5a94-06c7-11ea-80af-080027c4f0ca   1Gi        RWO            standard       5s
+</code></pre></div><p>``</p>
+</li>
+</ol>
+<h2 id="create-the-stateful-deployment">Create the stateful deployment</h2>
+<p>Now let&rsquo;s create the stateful <code>deployment</code> for mysql.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
+<span style="color:#66d9ef">kind</span>: Deployment
+<span style="color:#66d9ef">metadata</span>:
+ <span style="color:#66d9ef">name</span>: mysql
+<span style="color:#66d9ef">spec</span>:
+ <span style="color:#66d9ef">selector</span>:
+  <span style="color:#66d9ef">matchLabels</span>:
+   <span style="color:#66d9ef">app</span>: mysql
+ <span style="color:#66d9ef">template</span>:
+  <span style="color:#66d9ef">metadata</span>:
+   <span style="color:#66d9ef">labels</span>:
+<span style="color:#66d9ef">​    app</span>: mysql
+  <span style="color:#66d9ef">spec</span>:
+   <span style="color:#66d9ef">containers</span>:
+<span style="color:#66d9ef">​  - image</span>: mysql:<span style="color:#ae81ff">5.6</span>
+<span style="color:#66d9ef">​     name</span>: mysql
+<span style="color:#66d9ef">​     env</span>:
+<span style="color:#66d9ef">​      - name</span>: MYSQL_ROOT_PASSWORD
+<span style="color:#66d9ef">​       value</span>: password
+<span style="color:#66d9ef">​     ports</span>:
+<span style="color:#66d9ef">​      - containerPort</span>: <span style="color:#ae81ff">3306</span>
+<span style="color:#66d9ef">​       name</span>: mysql
+<span style="color:#66d9ef">​     volumeMounts</span>:
+<span style="color:#66d9ef">​       - name</span>: mysql-persistent-storage
+<span style="color:#66d9ef">​       mountPath</span>: /var/lib/mysql
+   <span style="color:#66d9ef">volumes</span>:
+<span style="color:#66d9ef">​     - name</span>: mysql-persistent-storage
+<span style="color:#66d9ef">​     persistentVolumeClaim</span>:
+<span style="color:#66d9ef">​      claimName</span>: mysql-pv-claim
+</code></pre></div><p>We define several things here:</p>
+<ul>
+<li>
+<p><code>env</code>: the list of environment variables to pass to the container</p>
+<ul>
+<li><code>name</code>: the name of the env variable</li>
+<li><code>value</code>: the value of the env variable
+Here we pass the mysql root password to the container</li>
+</ul>
+</li>
+<li>
+<p><code>volumeMounts</code>: the volumes, that will be mapped into the container</p>
+<ul>
+<li><code>name</code>: the name of the volume to mount</li>
+<li><code>mountPath</code>: where in the container to mount the volume
+Here we map out the path where mysql stores its database files</li>
+</ul>
+</li>
+<li>
+<p><code>volumes</code>: the volumes to request access to</p>
+<ul>
+<li><code>name</code>: the name of the volume, same as <code>volumeMounts.name</code></li>
+<li><code>persistentVolumeClaim</code>: the PersistentVolumeClaim we want
+<ul>
+<li><code>claimName</code>: the name of the claim</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>
+<p>Create the <code>Deployment</code> (this creates the deployment as well as the service to access the mysql container)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f ~/training/volumes/3-simple-mysql-deployment.yaml
+   
+&gt; deployment.apps/mysql created
+&gt; service/mysql created
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Verify that the <code>Deployment</code> has been created and is running  (READY must be 1/1)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get deployment
+   
+&gt; NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+&gt; mysql   0/1     <span style="color:#ae81ff">1</span>            <span style="color:#ae81ff">0</span>           8s
+</code></pre></div><p>``</p>
+</li>
+</ol>
+<h2 id="access-the-mysql-database">Access the mysql database</h2>
+<ol>
+<li>
+<p>Now let&rsquo;s access the mysql container by running a mysql client in a temporary container:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl run -it --rm --image<span style="color:#f92672">=</span>mysql:5.6 --restart<span style="color:#f92672">=</span>Never mysql-client -- mysql -h mysql -ppassword
+   
+If you don<span style="color:#960050;background-color:#1e0010">&#39;</span>t see a command prompt, try pressing enter.
+   
+mysql&gt; 
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Create a new database in mysql:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql&gt; CREATE DATABASE testing;
+   
+&gt; Query OK, <span style="color:#ae81ff">1</span> row affected <span style="color:#f92672">(</span>0.01 sec<span style="color:#f92672">)</span>
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Check that it has been created</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql&gt; show databases;
+   
+&gt; +--------------------+
+&gt; | Database           |
+&gt; +--------------------+
+&gt; | information_schema |
+&gt; | mysql              |
+&gt; | performance_schema |
+&gt; | testing            |
+&gt; +--------------------+
+&gt; <span style="color:#ae81ff">4</span> rows in set <span style="color:#f92672">(</span>0.00 sec<span style="color:#f92672">)</span>
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Exit the mysql client</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql&gt; exit
+
+&gt; Bye
+&gt; pod <span style="color:#e6db74">&#34;mysql-client&#34;</span> deleted
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Get the list of Pods</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pods
+   
+&gt; NAME                     READY   STATUS    RESTARTS   AGE
+&gt; mysql-7b9b7999d8-v4r5l   1/1     Running   <span style="color:#ae81ff">0</span>          4m26s
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Delete the Pod (you&rsquo;ll have to use the name of your Pod, which is dynamic)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl delete pod mysql-7b9b7999d8-v4r5l
+   
+&gt; pod <span style="color:#e6db74">&#34;mysql-7b9b7999d8-v4r5l&#34;</span> deleted
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>A new Pod has been spun up</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pods
+  
+&gt; NAME                     READY   STATUS    RESTARTS   AGE
+&gt; mysql-7b9b7999d8-vqln7   1/1     Running   <span style="color:#ae81ff">0</span>          18s
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Recreate a mysql client</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl run -it --rm --image<span style="color:#f92672">=</span>mysql:5.6 --restart<span style="color:#f92672">=</span>Never mysql-client -- mysql -h mysql -ppassword
+   
+If you don<span style="color:#960050;background-color:#1e0010">&#39;</span>t see a command prompt, try pressing enter.
+   
+mysql&gt; 
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Verify that the database testing is still there because it has been persisted in the PV through the PVC.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql&gt; show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| testing            |
++--------------------+
+<span style="color:#ae81ff">4</span> rows in set <span style="color:#f92672">(</span>0.00 sec<span style="color:#f92672">)</span>
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Exit the mysql client</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql&gt; exit
+
+&gt; Bye
+&gt; pod <span style="color:#e6db74">&#34;mysql-client&#34;</span> deleted
+</code></pre></div><p>``</p>
+</li>
+</ol>
+<h2 id="conclusion">Conclusion</h2>
+<ul>
+<li>We have created a PersistentVolume that represents physical storage in the Kubernetes cluster.</li>
+<li>We have created a PersistentVolumeClaim that maps this volume like a virtual harddisk and makes it available to Pods</li>
+<li>We have created a mysql deployment that persists its data to the PersistentVolume</li>
+<li>We have connected to the mysql instance and created a new database within</li>
+<li>We have killed the mysql Pod, which would normally make it loose the data (the new database)</li>
+<li>We have reconnected to the mysql instance to verify that the newly created database is still present</li>
+</ul>
+<h1 id="congratulations-this-concludes-lab-5-on-stateful-deployments">Congratulations!!! This concludes Lab 5 on stateful Deployments</h1>
+<h4 id="hint-lab5_volumes">Hint Lab5_Volumes</h4>
+<p>No hint available</p>
+<h4 id="complete-lab5_volumes">Complete Lab5_Volumes</h4>
+<p>Confirm Lab5_Volumes complete</p>
+<h4 id="task-lab6_cleanup">Task Lab6_Cleanup</h4>
+<hr>
+<h1 id="clean-up">Clean-up</h1>
+<p>Delete the elements that we have deployed in order to go back to normal.</p>
+<ol>
+<li>
+<p>Delete the demo app and the mysql deployment</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl delete -f ~/training/deployment/demoapp.yaml
+kubectl delete -f ~/training/deployment/demoapp-service.yaml
+kubectl delete -f ~/training/deployment/demoapp-backend.yaml
+kubectl delete -f ~/training/deployment/demoapp-backend-service.yaml
+kubectl delete -f ~/training/volumes/3-simple-mysql-deployment.yaml
+</code></pre></div><p>``</p>
+</li>
+</ol>
+<h4 id="hint-lab6_cleanup">Hint Lab6_Cleanup</h4>
+<p>No hint available</p>
+<h4 id="complete-lab6_cleanup">Complete Lab6_Cleanup</h4>
+<p>Confirm Lab6_Cleanup complete</p>
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/jtc02/lab6/" title="Lab 6: Cleanup"><i class="fas fa-chevron-left p-1"></i>Lab 6: Cleanup</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/jtc10/" title="JTC10 Istio">JTC10 Istio<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="http://niklaushirt.github.io/lib/jquery.min.js"></script> 
+<script src="http://niklaushirt.github.io/lib/popper.min.js"></script> 
+
+<script src="http://niklaushirt.github.io/js/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "http:\/\/niklaushirt.github.io\/";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

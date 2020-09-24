@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Welcome to the Kubernetes Course on Kubernetes Training</title>
+    <link>http://niklaushirt.github.io/</link>
+    <description>Recent content in Welcome to the Kubernetes Course on Kubernetes Training</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 23 Sep 2020 09:12:06 +0200</lastBuildDate>
+    
+	<atom:link href="http://niklaushirt.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Getting set up</title>
+      <link>http://niklaushirt.github.io/jtc00/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc00/lab1/</guid>
+      <description>Prerequisites for the Lab Before we dive into the Labs, you need to be able to run the provided Lab VM. It contains a Minikube cluster and all the configurations for the subsequent labs.
+ Internet Access PC with at least:  4 Core CPU 8GB of RAM / 16GB recommended (16GB needed for the Istio Lab) 40GB of free Disk Space    Part 1 - Install Hypervisor Before we dive into the Labs, you need to be able to run the provided Lab VM.</description>
+    </item>
+    
+    <item>
+      <title>Lab 1: Get to know ISTIO</title>
+      <link>http://niklaushirt.github.io/jtc10/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc10/lab1/</guid>
+      <description>Microservices and containers changed application design and deployment patterns, but along with them brought challenges like service discovery, routing, failure handling, and visibility to microservices. &amp;ldquo;Service mesh&amp;rdquo; architecture was born to handle these features. Applications are getting decoupled internally as microservices, and the responsibility of maintaining coupling between these microservices is passed to the service mesh.
+Istio, a joint collaboration between IBM, Google and Lyft provides an easy way to create a service mesh that will manage many of these complex tasks automatically, without the need to modify the microservices themselves.</description>
+    </item>
+    
+    <item>
+      <title>Lab 2: Installing Istio </title>
+      <link>http://niklaushirt.github.io/jtc10/lab2/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc10/lab2/</guid>
+      <description>In this module, you download and install Istio.
+  Execute the following command to get the latest ISTIO source:
+cd #Linux (Lab VM) wget https://github.com/istio/istio/releases/download/1.6.4/istio-1.6.4-linux-amd64.tar.gz tar xfvz istio-1.6.4-linux-amd64.tar.gz #Mac wget https://github.com/istio/istio/releases/download/1.6.4/istio-1.6.4-osx.tar.gz tar xfvz istio-1.6.4-osx.tar.gz #Windows Download https://github.com/istio/istio/releases/download/1.6.4/istio-1.6.4-win.zip   Add the istioctl client to your executables.
+export PATH=./istio-1.6.4/bin:$PATH   Install Istio into the cluster:
+istioctl install --set profile=demo &amp;gt; Detected that your cluster does not support third party JWT authentication.</description>
+    </item>
+    
+    <item>
+      <title>Lab 3: Deploy BookInfo application </title>
+      <link>http://niklaushirt.github.io/jtc10/lab3/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc10/lab3/</guid>
+      <description>In this part, we will be using the sample BookInfo Application that comes as default with Istio code base. As mentioned above, the application that is composed of four microservices, written in different languages for each of its microservices namely Python, Java, Ruby, and Node.js. The default application doesn&amp;rsquo;t use a database and all the microservices store their data in the local file system.
+Envoys are deployed as sidecars on each microservice.</description>
+    </item>
+    
+    <item>
+      <title>Lab 4: Monitoring with Kiali</title>
+      <link>http://niklaushirt.github.io/jtc10/lab4/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc10/lab4/</guid>
+      <description>Kiali is an open-source project that installs on top of Istio to visualize your service mesh. It provides deeper insight into how your microservices interact with one another, and provides features such as circuit breakers and request rates for your services
+  In order to create some more sustained traffic, execute the following command:
+kubectl apply -f ~/training/istio/createTraffic.yaml ``
+This starts a Pod that makes requests to the productpage.</description>
+    </item>
+    
+    <item>
+      <title>Lab 5: Traffic flow management</title>
+      <link>http://niklaushirt.github.io/jtc10/lab5/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc10/lab5/</guid>
+      <description>Using rules to manage traffic The core component used for traffic management in Istio is Pilot, which manages and configures all the Envoy proxy instances deployed in a particular Istio service mesh. It lets you specify what rules you want to use to route traffic between Envoy proxies, which run as sidecars to each service in the mesh. Each service consists of any number of instances running on pods, containers, VMs etc.</description>
+    </item>
+    
+    <item>
+      <title>Lab 6: Telemetry data</title>
+      <link>http://niklaushirt.github.io/jtc10/lab6/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc10/lab6/</guid>
+      <description>Challenges with microservices We all know that microservice architecture is the perfect fit for cloud native applications and it increases the delivery velocities greatly. Envision you have many microservices that are delivered by multiple teams, how do you observe the the overall platform and each of the service to find out exactly what is going on with each of the services? When something goes wrong, how do you know which service or which communication among the few services are causing the problem?</description>
+    </item>
+    
+    <item>
+      <title>Lab 7: End-user authentication</title>
+      <link>http://niklaushirt.github.io/jtc10/lab7/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc10/lab7/</guid>
+      <description>Istio provides two types of authentication:
+  Peer authentication: used for service-to-service authentication to verify the client making the connection. Istio offers mutual TLS for transport authentication, which can be enabled without requiring service code changes.
+ Provides each service with a strong identity representing its role to enable interoperability across clusters and clouds. Secures service-to-service communication. Provides a key management system to automate key and certificate generation, distribution, and rotation.</description>
+    </item>
+    
+    <item>
+      <title>Lab 8: Traffic Mirroring</title>
+      <link>http://niklaushirt.github.io/jtc10/lab8/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc10/lab8/</guid>
+      <description>Traffic mirroring, also called shadowing, is a powerful concept that provides a risk-free method of testing your releases in the production environment without impacting your end users.
+Instead of using traditional pre-production environments which used to be a replica of production, mirroring can provide synthetic traffic to mimic the live environment.
+Traffic monitoring works in the following way:
+ You deploy a new version of your component (v2) The existing version (v1) works loke before but sends an asynchronous copy to the new version The new version (v2) processes the incoming traffic but does not respond to the user (fire-and-forget) The Dev and Ops teams can monitor the new version in order to identify potential problems before starting the rollout  Let&amp;rsquo;s start the Lab.</description>
+    </item>
+    
+    <item>
+      <title>Lab 9: Fault Injection</title>
+      <link>http://niklaushirt.github.io/jtc10/lab9/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc10/lab9/</guid>
+      <description>To test microservices for resiliency, Istio allows us to inject delays and errors between services.
+Let&amp;rsquo;s start the Lab.
+  Let&amp;rsquo;s create a VirtualService that creates 50% of 501 errors when the details service is called.
+apiVersion: networking.istio.io/v1alpha3 kind: VirtualService metadata: name: details spec: hosts: - details http: - fault: abort: httpStatus: 500 percentage: value: 50 route: - destination: host: details subset: v1 ... ``
+Run the following:
+kubectl apply -f ~/training/istio/samples/bookinfo/networking/fault-injection-details-v1.</description>
+    </item>
+    
+    <item>
+      <title>Lab Information and Semantics</title>
+      <link>http://niklaushirt.github.io/jtc00/lab2/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc00/lab2/</guid>
+      <description>Nomenclatures  Shell Commands The commands that you are going to execute to progress the Labs will look like this:
+THIS IS AN EXAMPLE - DO NOT EXECUTE THIS!
+kubectl create -f redis-slave-service.yaml # THIS IS AN EXAMPLE - DO NOT EXECUTE THIS! &amp;gt; Output Line 1 &amp;gt; Output Line 2 &amp;gt; Output Line 3 ...  IMPORTANT NOTE: The example output of a command is prefixed by &amp;ldquo;&amp;gt;&amp;rdquo; in order to make it more distinguishable.</description>
+    </item>
+    
+    <item>
+      <title>Lab 10: Cleanup</title>
+      <link>http://niklaushirt.github.io/jtc10/lab10/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc10/lab10/</guid>
+      <description>To delete the BookInfo app and its route-rules:  ~/training/istio/samples/bookinfo/platform/kube/cleanup.sh
+  To delete Istio from your cluster
+  kubectl delete -f ~/training/istio/createTraffic.yaml kubectl delete -f ~/training/istio/samples/bookinfo/platform/kube/bookinfo.yaml kubectl delete -f ~/training/istio/samples/bookinfo/networking/bookinfo-gateway.yaml kubectl delete -f ~/training/istio/samples/bookinfo/networking/destination-rule-reviews.yaml kubectl delete -f ~/training/istio/samples/bookinfo/networking/virtual-service-reviews-80-20.yaml istioctl manifest generate --set profile=demo | kubectl delete -f - kubectl delete ns istio-system Congratulations!!! This concludes the Istio Lab</description>
+    </item>
+    
+    <item>
+      <title>Lab 0: Preparation</title>
+      <link>http://niklaushirt.github.io/jtc17/lab0/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc17/lab0/</guid>
+      <description>Open a Terminal window by clicking on the Termnial icon in the left sidebar - we will use this extensively later as well
+  Start the demo application
+kubectl create -f ~/training/deployment/demoapp.yaml kubectl create -f ~/training/deployment/demoapp-service.yaml kubectl create -f ~/training/deployment/demoapp-backend.yaml kubectl create -f ~/training/deployment/demoapp-backend-service.yaml ``
+  Wait for the demo application to be available (the status must be 1/1)
+kubectl get pods &amp;gt; NAME READY STATUS RESTARTS AGE &amp;gt; k8sdemo-backend-5b779f567f-2rbgj 1/1 Running 0 21s &amp;gt; k8sdemo-backend-5b779f567f-p6j76 1/1 Running 0 21s &amp;gt; k8sdemo-bd6bbd548-jcb6r 1/1 Running 0 21s ``</description>
+    </item>
+    
+    <item>
+      <title>Lab 0: Prepare the Lab environment</title>
+      <link>http://niklaushirt.github.io/jtc14/lab0/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc14/lab0/</guid>
+      <description>Prerequisites Using the provided Lab VM Using the provided Lab VM is the easiest way to get started with the Labs for the training:
+ Download the Lab VM Install a Hypervisor on your PC (VMWare, VirtualBox, KVM, &amp;hellip;) Start the VM Test that it works in your setting  You can find detailed instructions here: https://github.com/niklaushirt/training
+Install the Operator SDK
+RELEASE_VERSION=v0.19.0 curl -LO https://github.com/operator-framework/operator-sdk/releases/download/${RELEASE_VERSION}/operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu chmod +x operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu sudo mv operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu /usr/local/bin/operator-sdk Using your own environment These are two methods to perform the Labs without downloading and starting the VM.</description>
+    </item>
+    
+    <item>
+      <title>Lab 1: Get to know Docker</title>
+      <link>http://niklaushirt.github.io/jtc01/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc01/lab1/</guid>
+      <description>Docker is an open platform for developing, shipping, and running applications.
+Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. With Docker, you can manage your infrastructure in the same ways you manage your applications. By taking advantage of Docker’s methodologies for shipping, testing, and deploying code quickly, you can significantly reduce the delay between writing code and running it in production.
+Docker provides the ability to package and run an application in a loosely isolated environment called a container.</description>
+    </item>
+    
+    <item>
+      <title>Lab 1: Get to know Kubernetes</title>
+      <link>http://niklaushirt.github.io/jtc02/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc02/lab1/</guid>
+      <description>Kubernetes was developed by Google as part of the Borg project and handed off to the open source community in 2015. Kubernetes combines more than 15 years of Google research in running a containerized infrastructure with production work loads, open source contributions, and Docker container management tools to provide an isolated and secure app platform that is portable, extensible, and self-healing in case of failovers.
+Kubernetes is a solution that automates the orchestration of Container workloads.</description>
+    </item>
+    
+    <item>
+      <title>Lab 1: Kubernetes Operators</title>
+      <link>http://niklaushirt.github.io/jtc14/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc14/lab1/</guid>
+      <description>In this Lab you will learn about Kubernetes Operator basics and create your first Ansible based Operator.
+The Operator Framework is an open source toolkit to manage Kubernetes native applications, called Operators, in an effective, automated, and scalable way.
+  Operators are a design pattern made public in a 2016 CoreOS blog post.
+  The goal of an Operator is to put operational knowledge into software. Previously this knowledge only resided in the minds of administrators, various combinations of shell scripts or automation software like Ansible.</description>
+    </item>
+    
+    <item>
+      <title>Lab 1: Liveness and Readiness Probes</title>
+      <link>http://niklaushirt.github.io/jtc18/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc18/lab1/</guid>
+      <description>Introduction If you want to turn your Kubernetes deployments into auto healing wonders you only have to add a few lines of YAML.
+The right combination of liveness and readiness probes used with Kubernetes deployments can:
+ Enable zero downtime deploys Prevent deployment of broken images Ensure that failed containers are automatically restarted  Liveness Probes Liveness probes will attempt to restart a container if it fails and starts to respond to the probe.</description>
+    </item>
+    
+    <item>
+      <title>Lab 1: Network Policies</title>
+      <link>http://niklaushirt.github.io/jtc16/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc16/lab1/</guid>
+      <description>Kubernetes network policies specify how pods can communicate with other pods and with external endpoints. By default, no network policies are set up. If you have unique security requirements, you can create your own network policies.
+The following network traffic is allowed by default:
+ A pod accepts external traffic from any IP address to its NodePort or LoadBalancer service or its Ingress resource. A pod accepts internal traffic from any other pod in the same cluster.</description>
+    </item>
+    
+    <item>
+      <title>Lab 1: RBAC - Users, Roles and RoleBindings</title>
+      <link>http://niklaushirt.github.io/jtc17/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc17/lab1/</guid>
+      <description>RBAC policies are vital for the correct management of your cluster, as they allow you to specify which types of actions are permitted depending on the user and their role in your organization. Examples include:
+Secure your cluster by granting privileged operations (accessing secrets, for example) only to admin users. Force user authentication in your cluster. Limit resource creation (such as pods, persistent volumes, deployments) to specific namespaces. You can also use quotas to ensure that resource usage is limited and under control.</description>
+    </item>
+    
+    <item>
+      <title>Lab 1: Tekton</title>
+      <link>http://niklaushirt.github.io/jtc19/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc19/lab1/</guid>
+      <description>kubectl apply -f ~/training/devops/tekton/install/tekton.yaml kubectl apply -n tekton-pipelines -f ~/training/devops/tekton/install/tekton-dashboard.yaml kubectl apply -n tekton-pipelines -f ~/training/devops/tekton/install/triggers.yaml minikube service -n tekton-pipelines tekton-dashboard kubectl apply -n tekton-pipelines -f ~/training/devops/tekton/pipeline/tekton-init.yaml kubectl create -n tekton-pipelines secret docker-registry regcred --docker-server=docker.io --docker-username=niklaushirt --docker-password=cool97 --docker-email=niklaushirt@gmail.com kubectl create ns training-pipeline kubectl create -n training-pipeline secret docker-registry regcred --docker-server=docker.io --docker-username=niklaushirt --docker-password=cool97 --docker-email=niklaushirt@gmail.com kubectl create -n training-pipeline secret docker-registry regcred --docker-server=docker.io --docker-username=niklaushirt --docker-password=cool97 --docker-email=niklaushirt@gmail.com kubectl create ns training-dev kubectl create ns training-test kubectl create ns training-prod kubectl apply -n training-pipeline -f ~/training/devops/tekton/pipeline/tekton-init.</description>
+    </item>
+    
+    <item>
+      <title>Lab 2: Create the Lab Operator Project</title>
+      <link>http://niklaushirt.github.io/jtc14/lab2/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc14/lab2/</guid>
+      <description>Create the Lab Operator Project In this part of the lab we will create a demo Ansible operator and deploy it to our Cluster.
+  Create the ansible-operator-frontend directory
+cd mkdir ansible-operator cd ~/ansible-operator ``
+  Create the ansible-operator-frontend Project
+operator-sdk new ansible-operator-frontend --type=ansible --api-version=ansiblelab.ibm.com/v1beta1 --kind=MyAnsibleLabDemo &amp;gt; INFO[0000] Creating new Ansible operator &amp;#39;ansible-operator-frontend&amp;#39;. &amp;gt; INFO[0000] Created deploy/service_account.yaml &amp;gt; INFO[0000] Created deploy/role.yaml &amp;gt; INFO[0000] Created deploy/role_binding.yaml &amp;gt; INFO[0000] Created deploy/crds/lab_v1beta1_MyAnsibleLabDemo_crd.</description>
+    </item>
+    
+    <item>
+      <title>Lab 2: Deploy your first Pod</title>
+      <link>http://niklaushirt.github.io/jtc02/lab2/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc02/lab2/</guid>
+      <description>Introduction You will learn what a pod is, deploy your first container, configure Kubernetes, and interact with Kubernetes in the command line.
+The base elements of Kubernetes are pods. Kubernetes will choose how and where to run them. You can also see a Pod as an object that requests some CPU and RAM. Kubernetes will take those requirements and decide where to run them.
+APod can be killed and restarted whenever the system has/wants to.</description>
+    </item>
+    
+    <item>
+      <title>Lab 2: Docker Basics</title>
+      <link>http://niklaushirt.github.io/jtc01/lab2/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc01/lab2/</guid>
+      <description>Create your first Image Let&amp;rsquo;s create our first image (the k8sdemo-backend image) from this Dockerfile:
+FROM node:8-stretch # Change working directory WORKDIR &amp;#34;/app&amp;#34; # Update packages and install dependency packages for services RUN apt-get update \ &amp;amp;&amp;amp; apt-get dist-upgrade -y \ &amp;amp;&amp;amp; apt-get clean \ &amp;amp;&amp;amp; echo &amp;#39;Finished installing dependencies&amp;#39; # Install npm production packages COPY package.json /app/ RUN cd /app; npm install --production COPY . /app ENV NODE_ENV production ENV BACKEND_MESSAGE HelloWorld ENV PORT 3000 EXPOSE 3000 CMD [&amp;#34;npm&amp;#34;, &amp;#34;start&amp;#34;] cd ~/training/demo-app/k8sdemo_backend docker build -t k8sdemo-backend:lab .</description>
+    </item>
+    
+    <item>
+      <title>Lab 2: Init Containers</title>
+      <link>http://niklaushirt.github.io/jtc18/lab2/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc18/lab2/</guid>
+      <description>Init containers are specialized containers that run before or after app containers in a Pod. They can contain utilities or setup scripts not present in an app image.
+Init containers are exactly like regular containers, except:
+  Init containers always run to completion.
+  Each init container must complete successfully before the next one starts.
+  If you specify multiple init containers for a Pod, Kubelet runs each init container sequentially.</description>
+    </item>
+    
+    <item>
+      <title>Lab 2: Security Tooling</title>
+      <link>http://niklaushirt.github.io/jtc16/lab2/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc16/lab2/</guid>
+      <description>Polaris Polaris runs a variety of checks to ensure that Kubernetes pods and controllers are configured using best practices, helping you avoid problems in the future.
+You can get more details here.
+  Install Polaris Dashboard by running:
+kubectl apply -f ~/training/tools/polaris.yaml &amp;gt; namespace/polaris created &amp;gt; configmap/polaris created &amp;gt; serviceaccount/polaris-dashboard created &amp;gt; clusterrole.rbac.authorization.k8s.io/polaris-dashboard created &amp;gt; clusterrolebinding.rbac.authorization.k8s.io/polaris-dashboard created &amp;gt; service/polaris-dashboard created &amp;gt; deployment.apps/polaris-dashboard created ``
+  Wait until the pod si running:</description>
+    </item>
+    
+    <item>
+      <title>Lab 2: Service Accounts</title>
+      <link>http://niklaushirt.github.io/jtc17/lab2/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc17/lab2/</guid>
+      <description>Create a ServiceAccount for a Deployment In this chapter we will start this Pod with a limited ServiceAccount.
+Create the resources To create the ServiceAccount:
+apiVersion: v1 kind: ServiceAccount metadata: name: service-account-1 labels: app: tools-rbac Run the following command:
+kubectl apply -f ~/training/rbac/service-accounts.yaml &amp;gt; serviceaccount &amp;#34;service-account-1&amp;#34; Now we will create a Deployment that runs under the ServiceAccount that we have just created. The Pod contains the kubectl executable, so that we can test the access rights from withing this Pod.</description>
+    </item>
+    
+    <item>
+      <title>Lab 3: Deploy the Lab Operator</title>
+      <link>http://niklaushirt.github.io/jtc14/lab3/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc14/lab3/</guid>
+      <description>Deploy the Custom Resource   Deploy the ansible-operator-frontend Custom Resource
+kubectl create -f ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml &amp;gt; MyAnsibleLabDemo.ansiblelab.ibm.com/example-MyAnsibleLabDemo created ``
+From the resource that we defined earlier:
+apiVersion: ansiblelab.ibm.com/v1beta1 kind: MyAnsibleLabDemo metadata: name: example-MyAnsibleLabDemo spec: # Add fields here size: 3 demo: image: niklaushirt/k8sdemo:1.0.0 ``
+  Check that the CustomResource is running
+kubectl get pods &amp;gt; NAME READY STATUS RESTARTS AGE &amp;gt; ansible-operator-frontend-fd78bcf5-zxgws 2/2 Running 0 3m11s &amp;gt; k8sdemo-7fc8554dff-2krkz 1/1 Running 0 45s ``</description>
+    </item>
+    
+    <item>
+      <title>Lab 3: Deploy your first application</title>
+      <link>http://niklaushirt.github.io/jtc02/lab3/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc02/lab3/</guid>
+      <description>Learn how to deploy an application to a Kubernetes cluster.
+Once your client is configured, you are ready to deploy your first application, k8sdemo.
+The frontend example application In this part of the lab we will deploy an application called k8sdemo that has already been built and uploaded to DockerHub under the name niklaushirt/k8sdemo.
+We will use the following yaml:
+kind: Deployment metadata: name: k8sdemo namespace: default spec: replicas: 1 template: metadata: labels: app: k8sdemo spec: containers: - name: k8sdemo image: niklaushirt/k8sdemo:1.</description>
+    </item>
+    
+    <item>
+      <title>Lab 3: Docker Internals</title>
+      <link>http://niklaushirt.github.io/jtc01/lab3/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc01/lab3/</guid>
+      <description>Now let&amp;rsquo;s have a more in depth look at the running containers.
+Docker process inspection Docker top gives you the running processes inside a container. We can see that we have the node server running inside the container.
+docker top k8sdemo &amp;gt; UID PID PPID C STIME TTY TIME CMD &amp;gt; www 35532 35512 0 10:48 ? 00:00:00 npm &amp;gt; www 35606 35532 0 10:48 ? 00:00:00 sh -c node .</description>
+    </item>
+    
+    <item>
+      <title>Lab 3: Persistent Volumes</title>
+      <link>http://niklaushirt.github.io/jtc18/lab3/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc18/lab3/</guid>
+      <description>Introduction As you know a Pod is mortal, meaning it can be destroyed by Kubernetes anytime, and with it it&amp;rsquo;s local data, memory, etc. So it&amp;rsquo;s perfect for stateless applications. Of course, in the real world we need a way to store our data, and we need this data to be persistent in time. You have alread had a first contact with PersistentVolumes in JTC02, but now let&amp;rsquo;s have a closer look on how how can we dynamically create PersistentVolumes and deploy a Wordpress/MySQL Application with dynamic persistent storage.</description>
+    </item>
+    
+    <item>
+      <title>Lab 3: RBAC Tooling</title>
+      <link>http://niklaushirt.github.io/jtc17/lab3/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc17/lab3/</guid>
+      <description>Rakkess Have you ever wondered what access rights you have on a provided kubernetes cluster? For single resources you can use kubectl auth can-i list deployments, but maybe you are looking for a complete overview? This is what rakkess is for. It lists access rights for the current user and all server resources.
+You can get more details here.
+  Install Rakkess
+curl -LO https://github.com/corneliusweig/rakkess/releases/download/v0.4.4/rakkess-amd64-linux.tar.gz \  &amp;amp;&amp;amp; tar xf rakkess-amd64-linux.</description>
+    </item>
+    
+    <item>
+      <title>Lab 4: Cleanup</title>
+      <link>http://niklaushirt.github.io/jtc01/lab4/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc01/lab4/</guid>
+      <description>To conclude this Lab we have to clean up the containers that we have created
+  Terminate the frontend
+docker kill k8sdemo &amp;gt; k8sdemo `
+  And Terminate the backend
+docker kill k8sdemo-backend &amp;gt; k8sdemo-backend ``
+  Verify that the two containers have been terminated
+docker ps | grep k8sdemo ``
+This command must return no result.
+  ** Congratulations!!! This concludes the Labs on Docker **</description>
+    </item>
+    
+    <item>
+      <title>Lab 4: Cleanup</title>
+      <link>http://niklaushirt.github.io/jtc14/lab4/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc14/lab4/</guid>
+      <description>Cleanup Delete the ansible-operator-frontend Resources
+kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_myansiblelabdemos_crd.yaml kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/service_account.yaml kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/role.yaml kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/role_binding.yaml kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml kubectl delete -f ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml kubectl delete service -n default k8sdemoansible-service **Congratulations!!! This concludes Lab 2 on Kubernetes Ansible Operators **</description>
+    </item>
+    
+    <item>
+      <title>Lab 4: Dynamic NFS provisioning</title>
+      <link>http://niklaushirt.github.io/jtc18/lab4/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc18/lab4/</guid>
+      <description>In this Lab we will install, configure and test a dynamic NFS provisioner.
+This is the easiest way of implementing dynamic provisioning into a cluster.
+There are many more solutions:
+ Rook/Ceph GlusterFS &amp;hellip;  Prepare Minikube to run dynamic NFS provisioning   Install the NFS server into the VM
+sudo apt install nfs-kernel-server -y &amp;gt; Reading package lists... Done &amp;gt; Building dependency tree &amp;gt; Reading state information... Done .</description>
+    </item>
+    
+    <item>
+      <title>Lab 4: Image Scanning</title>
+      <link>http://niklaushirt.github.io/jtc17/lab4/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc17/lab4/</guid>
+      <description>Deploy Clair In this chapter we will deploy the Clair image scanner and scan an example image.
+Clair is an open source project for the static analysis of vulnerabilities in application containers (currently including appc and docker).
+ In regular intervals, Clair ingests vulnerability metadata from a configured set of sources and stores it in the database. Clients use the Clair API to index their container images; this creates a list of features present in the image and stores them in the database.</description>
+    </item>
+    
+    <item>
+      <title>Lab 4: Scale and Update Deployments</title>
+      <link>http://niklaushirt.github.io/jtc02/lab4/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc02/lab4/</guid>
+      <description>In this lab, you&amp;rsquo;ll learn how to update the number of instances a deployment has and how to modify the API backend.
+ For this lab, you need a running deployment of the k8sdemo application from the previous lab. If you deleted it, recreate it.
+ Scale apps with replicas A replica is a copy of a pod that contains a running service. By having multiple replicas of a pod, you can ensure your deployment has the available resources to handle increasing load on your application.</description>
+    </item>
+    
+    <item>
+      <title>Lab 5: Cleanup</title>
+      <link>http://niklaushirt.github.io/jtc18/lab5/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc18/lab5/</guid>
+      <description>Delete the elements that we have deployed in order to go back to normal.
+  Delete the demo app and the mysql deployment
+kubectl delete -f ~/training/deployment/demoapp.yaml kubectl delete -f ~/training/deployment/demoapp-service.yaml kubectl delete -f ~/training/deployment/demoapp-backend.yaml kubectl delete -f ~/training/deployment/demoapp-backend-service.yaml kubectl delete -f ~/training/volumes/3-simple-mysql-deployment.yaml ``
+  </description>
+    </item>
+    
+    <item>
+      <title>Lab 5: Cleanup</title>
+      <link>http://niklaushirt.github.io/jtc19/lab5/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc19/lab5/</guid>
+      <description>Delete the elements that we have deployed in order to go back to normal.
+  Delete the demo app and the mysql deployment
+kubectl delete -f ~/training/deployment/demoapp.yaml kubectl delete -f ~/training/deployment/demoapp-service.yaml kubectl delete -f ~/training/deployment/demoapp-backend.yaml kubectl delete -f ~/training/deployment/demoapp-backend-service.yaml kubectl delete -f ~/training/volumes/3-simple-mysql-deployment.yaml ``
+  </description>
+    </item>
+    
+    <item>
+      <title>Lab 5: Stateful Deployments</title>
+      <link>http://niklaushirt.github.io/jtc02/lab5/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc02/lab5/</guid>
+      <description>As you know a Pod is mortal, meaning it can be destroyed by Kubernetes anytime, and with it it&amp;rsquo;s local data, memory, etc. So it&amp;rsquo;s perfect for stateless applications. Of course, in the real world we need a way to store our data, and we need this data to be persistent in time.
+So let&amp;rsquo;s have a look on how how can we deploy a stateful application with a persistent storage in Kubernetes?</description>
+    </item>
+    
+    <item>
+      <title>Lab 6: Cleanup</title>
+      <link>http://niklaushirt.github.io/jtc02/lab6/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc02/lab6/</guid>
+      <description>Delete the elements that we have deployed in order to go back to normal.
+  Delete the demo app and the mysql deployment
+kubectl delete -f ~/training/deployment/demoapp.yaml kubectl delete -f ~/training/deployment/demoapp-service.yaml kubectl delete -f ~/training/deployment/demoapp-backend.yaml kubectl delete -f ~/training/deployment/demoapp-backend-service.yaml kubectl delete -f ~/training/volumes/3-simple-mysql-deployment.yaml ``
+  </description>
+    </item>
+    
+    <item>
+      <title>xxxx</title>
+      <link>http://niklaushirt.github.io/lab/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/lab/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://niklaushirt.github.io/images/estet/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://niklaushirt.github.io/images/estet/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

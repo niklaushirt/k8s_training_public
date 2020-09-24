@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JTC18 Kubernetes Advanced Labs on Kubernetes Training</title>
+    <link>http://niklaushirt.github.io/jtc18/</link>
+    <description>Recent content in JTC18 Kubernetes Advanced Labs on Kubernetes Training</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 23 Sep 2020 09:12:06 +0200</lastBuildDate>
+    
+	<atom:link href="http://niklaushirt.github.io/jtc18/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lab 1: Liveness and Readiness Probes</title>
+      <link>http://niklaushirt.github.io/jtc18/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc18/lab1/</guid>
+      <description>Introduction If you want to turn your Kubernetes deployments into auto healing wonders you only have to add a few lines of YAML.
+The right combination of liveness and readiness probes used with Kubernetes deployments can:
+ Enable zero downtime deploys Prevent deployment of broken images Ensure that failed containers are automatically restarted  Liveness Probes Liveness probes will attempt to restart a container if it fails and starts to respond to the probe.</description>
+    </item>
+    
+    <item>
+      <title>Lab 2: Init Containers</title>
+      <link>http://niklaushirt.github.io/jtc18/lab2/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc18/lab2/</guid>
+      <description>Init containers are specialized containers that run before or after app containers in a Pod. They can contain utilities or setup scripts not present in an app image.
+Init containers are exactly like regular containers, except:
+  Init containers always run to completion.
+  Each init container must complete successfully before the next one starts.
+  If you specify multiple init containers for a Pod, Kubelet runs each init container sequentially.</description>
+    </item>
+    
+    <item>
+      <title>Lab 3: Persistent Volumes</title>
+      <link>http://niklaushirt.github.io/jtc18/lab3/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc18/lab3/</guid>
+      <description>Introduction As you know a Pod is mortal, meaning it can be destroyed by Kubernetes anytime, and with it it&amp;rsquo;s local data, memory, etc. So it&amp;rsquo;s perfect for stateless applications. Of course, in the real world we need a way to store our data, and we need this data to be persistent in time. You have alread had a first contact with PersistentVolumes in JTC02, but now let&amp;rsquo;s have a closer look on how how can we dynamically create PersistentVolumes and deploy a Wordpress/MySQL Application with dynamic persistent storage.</description>
+    </item>
+    
+    <item>
+      <title>Lab 4: Dynamic NFS provisioning</title>
+      <link>http://niklaushirt.github.io/jtc18/lab4/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc18/lab4/</guid>
+      <description>In this Lab we will install, configure and test a dynamic NFS provisioner.
+This is the easiest way of implementing dynamic provisioning into a cluster.
+There are many more solutions:
+ Rook/Ceph GlusterFS &amp;hellip;  Prepare Minikube to run dynamic NFS provisioning   Install the NFS server into the VM
+sudo apt install nfs-kernel-server -y &amp;gt; Reading package lists... Done &amp;gt; Building dependency tree &amp;gt; Reading state information... Done .</description>
+    </item>
+    
+    <item>
+      <title>Lab 5: Cleanup</title>
+      <link>http://niklaushirt.github.io/jtc18/lab5/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc18/lab5/</guid>
+      <description>Delete the elements that we have deployed in order to go back to normal.
+  Delete the demo app and the mysql deployment
+kubectl delete -f ~/training/deployment/demoapp.yaml kubectl delete -f ~/training/deployment/demoapp-service.yaml kubectl delete -f ~/training/deployment/demoapp-backend.yaml kubectl delete -f ~/training/deployment/demoapp-backend-service.yaml kubectl delete -f ~/training/volumes/3-simple-mysql-deployment.yaml ``
+  </description>
+    </item>
+    
+  </channel>
+</rss>

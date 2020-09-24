@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JTC01 Docker on Kubernetes Training</title>
+    <link>http://niklaushirt.github.io/jtc01/</link>
+    <description>Recent content in JTC01 Docker on Kubernetes Training</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 23 Sep 2020 09:12:06 +0200</lastBuildDate>
+    
+	<atom:link href="http://niklaushirt.github.io/jtc01/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lab 1: Get to know Docker</title>
+      <link>http://niklaushirt.github.io/jtc01/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc01/lab1/</guid>
+      <description>Docker is an open platform for developing, shipping, and running applications.
+Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. With Docker, you can manage your infrastructure in the same ways you manage your applications. By taking advantage of Docker’s methodologies for shipping, testing, and deploying code quickly, you can significantly reduce the delay between writing code and running it in production.
+Docker provides the ability to package and run an application in a loosely isolated environment called a container.</description>
+    </item>
+    
+    <item>
+      <title>Lab 2: Docker Basics</title>
+      <link>http://niklaushirt.github.io/jtc01/lab2/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc01/lab2/</guid>
+      <description>Create your first Image Let&amp;rsquo;s create our first image (the k8sdemo-backend image) from this Dockerfile:
+FROM node:8-stretch # Change working directory WORKDIR &amp;#34;/app&amp;#34; # Update packages and install dependency packages for services RUN apt-get update \ &amp;amp;&amp;amp; apt-get dist-upgrade -y \ &amp;amp;&amp;amp; apt-get clean \ &amp;amp;&amp;amp; echo &amp;#39;Finished installing dependencies&amp;#39; # Install npm production packages COPY package.json /app/ RUN cd /app; npm install --production COPY . /app ENV NODE_ENV production ENV BACKEND_MESSAGE HelloWorld ENV PORT 3000 EXPOSE 3000 CMD [&amp;#34;npm&amp;#34;, &amp;#34;start&amp;#34;] cd ~/training/demo-app/k8sdemo_backend docker build -t k8sdemo-backend:lab .</description>
+    </item>
+    
+    <item>
+      <title>Lab 3: Docker Internals</title>
+      <link>http://niklaushirt.github.io/jtc01/lab3/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc01/lab3/</guid>
+      <description>Now let&amp;rsquo;s have a more in depth look at the running containers.
+Docker process inspection Docker top gives you the running processes inside a container. We can see that we have the node server running inside the container.
+docker top k8sdemo &amp;gt; UID PID PPID C STIME TTY TIME CMD &amp;gt; www 35532 35512 0 10:48 ? 00:00:00 npm &amp;gt; www 35606 35532 0 10:48 ? 00:00:00 sh -c node .</description>
+    </item>
+    
+    <item>
+      <title>Lab 4: Cleanup</title>
+      <link>http://niklaushirt.github.io/jtc01/lab4/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc01/lab4/</guid>
+      <description>To conclude this Lab we have to clean up the containers that we have created
+  Terminate the frontend
+docker kill k8sdemo &amp;gt; k8sdemo `
+  And Terminate the backend
+docker kill k8sdemo-backend &amp;gt; k8sdemo-backend ``
+  Verify that the two containers have been terminated
+docker ps | grep k8sdemo ``
+This command must return no result.
+  ** Congratulations!!! This concludes the Labs on Docker **</description>
+    </item>
+    
+  </channel>
+</rss>

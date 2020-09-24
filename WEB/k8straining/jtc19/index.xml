@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JTC19 CloudNative DevOps on Kubernetes Training</title>
+    <link>http://niklaushirt.github.io/jtc19/</link>
+    <description>Recent content in JTC19 CloudNative DevOps on Kubernetes Training</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 23 Sep 2020 09:12:06 +0200</lastBuildDate>
+    
+	<atom:link href="http://niklaushirt.github.io/jtc19/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lab 1: Tekton</title>
+      <link>http://niklaushirt.github.io/jtc19/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc19/lab1/</guid>
+      <description>kubectl apply -f ~/training/devops/tekton/install/tekton.yaml kubectl apply -n tekton-pipelines -f ~/training/devops/tekton/install/tekton-dashboard.yaml kubectl apply -n tekton-pipelines -f ~/training/devops/tekton/install/triggers.yaml minikube service -n tekton-pipelines tekton-dashboard kubectl apply -n tekton-pipelines -f ~/training/devops/tekton/pipeline/tekton-init.yaml kubectl create -n tekton-pipelines secret docker-registry regcred --docker-server=docker.io --docker-username=niklaushirt --docker-password=cool97 --docker-email=niklaushirt@gmail.com kubectl create ns training-pipeline kubectl create -n training-pipeline secret docker-registry regcred --docker-server=docker.io --docker-username=niklaushirt --docker-password=cool97 --docker-email=niklaushirt@gmail.com kubectl create -n training-pipeline secret docker-registry regcred --docker-server=docker.io --docker-username=niklaushirt --docker-password=cool97 --docker-email=niklaushirt@gmail.com kubectl create ns training-dev kubectl create ns training-test kubectl create ns training-prod kubectl apply -n training-pipeline -f ~/training/devops/tekton/pipeline/tekton-init.</description>
+    </item>
+    
+    <item>
+      <title>Lab 5: Cleanup</title>
+      <link>http://niklaushirt.github.io/jtc19/lab5/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc19/lab5/</guid>
+      <description>Delete the elements that we have deployed in order to go back to normal.
+  Delete the demo app and the mysql deployment
+kubectl delete -f ~/training/deployment/demoapp.yaml kubectl delete -f ~/training/deployment/demoapp-service.yaml kubectl delete -f ~/training/deployment/demoapp-backend.yaml kubectl delete -f ~/training/deployment/demoapp-backend-service.yaml kubectl delete -f ~/training/volumes/3-simple-mysql-deployment.yaml ``
+  </description>
+    </item>
+    
+  </channel>
+</rss>

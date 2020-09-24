@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="http://niklaushirt.github.io/jtc18/lab3/">
+
+    <title>
+        
+        Lab 3: Persistent Volumes | Kubernetes Training
+        
+    </title>
+
+    
+    <link href="http://niklaushirt.github.io/css/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="http://niklaushirt.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                
+                Kubernetes Training
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/vantagedesign/ace-documentation1" >
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/jtc00/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc00/"><h6>Introduction</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc00/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc00/lab1/" class="nav-link p-0">
+                    Getting set up
+                </a>
+        </li>
+        <li data-nav-id="/jtc00/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc00/lab2/" class="nav-link p-0">
+                    Lab Information and Semantics
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc01/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc01/"><h6>JTC01 Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc01/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Docker
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab2/" class="nav-link p-0">
+                    Lab 2: Docker Basics
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab3/" class="nav-link p-0">
+                    Lab 3: Docker Internals
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc02/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc02/"><h6>JTC02 Kubernetes Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc02/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Kubernetes
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab2/" class="nav-link p-0">
+                    Lab 2: Deploy your first Pod
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy your first application
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab4/" class="nav-link p-0">
+                    Lab 4: Scale and Update Deployments
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab5/" class="nav-link p-0">
+                    Lab 5: Stateful Deployments
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab6/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab6/" class="nav-link p-0">
+                    Lab 6: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc10/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc10/"><h6>JTC10 Istio</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc10/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know ISTIO
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab2/" class="nav-link p-0">
+                    Lab 2: Installing Istio 
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy BookInfo application 
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab4/" class="nav-link p-0">
+                    Lab 4: Monitoring with Kiali
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab5/" class="nav-link p-0">
+                    Lab 5: Traffic flow management
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab6/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab6/" class="nav-link p-0">
+                    Lab 6: Telemetry data
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab7/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab7/" class="nav-link p-0">
+                    Lab 7: End-user authentication
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab8/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab8/" class="nav-link p-0">
+                    Lab 8: Traffic Mirroring
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab9/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab9/" class="nav-link p-0">
+                    Lab 9: Fault Injection
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab10/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab10/" class="nav-link p-0">
+                    Lab 10: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc14/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc14/"><h6>JTC14 Kubernetes Ansible Operators</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc14/lab0/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab0/" class="nav-link p-0">
+                    Lab 0: Prepare the Lab environment
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab1/" class="nav-link p-0">
+                    Lab 1: Kubernetes Operators
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab2/" class="nav-link p-0">
+                    Lab 2: Create the Lab Operator Project
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy the Lab Operator
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc16/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc16/"><h6>JTC16 Kubernetes Security Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc16/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc16/lab1/" class="nav-link p-0">
+                    Lab 1: Network Policies
+                </a>
+        </li>
+        <li data-nav-id="/jtc16/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc16/lab2/" class="nav-link p-0">
+                    Lab 2: Security Tooling
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc17/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc17/"><h6>JTC17 Kubernetes Advanced Security</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc17/lab0/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab0/" class="nav-link p-0">
+                    Lab 0: Preparation
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab1/" class="nav-link p-0">
+                    Lab 1: RBAC - Users, Roles and RoleBindings
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab2/" class="nav-link p-0">
+                    Lab 2: Service Accounts
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab3/" class="nav-link p-0">
+                    Lab 3: RBAC Tooling
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab4/" class="nav-link p-0">
+                    Lab 4: Image Scanning
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc18/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc18/"><h6>JTC18 Kubernetes Advanced Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc18/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab1/" class="nav-link p-0">
+                    Lab 1: Liveness and Readiness Probes
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab2/" class="nav-link p-0">
+                    Lab 2: Init Containers
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab3/" class="nav-item my-1 active">
+                
+                 <a href="/jtc18/lab3/" class="nav-link p-0">
+                    Lab 3: Persistent Volumes
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab4/" class="nav-link p-0">
+                    Lab 4: Dynamic NFS provisioning
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab5/" class="nav-link p-0">
+                    Lab 5: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc19/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc19/"><h6>JTC19 CloudNative DevOps</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc19/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab1/" class="nav-link p-0">
+                    Lab 1: Tekton
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab5/" class="nav-link p-0">
+                    Lab 5: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#introduction">Introduction</a>
+      <ul>
+        <li><a href="#persistent-volumes---refresher">Persistent Volumes - Refresher</a></li>
+        <li><a href="#persistentvolumeclaims---refresher">PersistentVolumeClaims - Refresher</a></li>
+      </ul>
+    </li>
+    <li><a href="#create-a-persistent-volume-claim">Create a Persistent Volume Claim</a></li>
+    <li><a href="#dynamic-minikube-default-provisioner">Dynamic Minikube default provisioner</a></li>
+    <li><a href="#create-a-storageclass">Create a StorageClass</a></li>
+    <li><a href="#create-db-with-persistence">Create DB with Persistence</a></li>
+    <li><a href="#application-with-persistence">Application with Persistence</a></li>
+    <li><a href="#check-persisted-files">Check persisted files</a></li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>Lab 3: Persistent Volumes</h1>
+
+<h2 id="introduction">Introduction</h2>
+<p>As you know a <code>Pod</code> is mortal, meaning it can be destroyed by Kubernetes anytime, and with it it&rsquo;s local data, memory, etc. So  it&rsquo;s perfect for stateless applications. Of course, in the real world we need a way to store our data, and we need this data to be persistent in time.
+You have alread had a first contact with PersistentVolumes in JTC02, but now let&rsquo;s have a closer look on how how can we dynamically create PersistentVolumes and deploy a Wordpress/MySQL Application with dynamic persistent storage.</p>
+<p><img src="../images/pvc1.png" alt="PVC"></p>
+<h3 id="persistent-volumes---refresher">Persistent Volumes - Refresher</h3>
+<p>As stated above, the state of a <code>Pod</code> is destroyed with it, so it&rsquo;s lost. For a database we need to be able to  keep the  data between restarts of the <code>Pods</code>.</p>
+<p>That&rsquo;s where the <code>PersistentVolume</code> comes in.</p>
+<p>As we have seen, a <code>Pod</code> as something that requests CPU &amp; RAM.</p>
+<p>A <code>PersistentVolume</code> as something that provides a storage on disk. Kubernetes handles a lot of different kinds of volumes. From local disk storage to s3, over 25 as of this writing.</p>
+<p>First we create the <code>PersistentVolume</code> where our data will be stored. It is a piece of storage in the cluster that has been provisioned by a cluster administrator or a dynamic provisioner. It is a resource in the cluster just like a node is a resource of the cluster.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: PersistentVolume
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: mysql-pv-volume
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">capacity</span>:
+    <span style="color:#66d9ef">storage</span>: 1Gi
+  <span style="color:#66d9ef">accessModes</span>:
+    - ReadWriteOnce
+  <span style="color:#66d9ef">hostPath</span>:
+    <span style="color:#66d9ef">path</span>: <span style="color:#e6db74">&#34;/mnt/data&#34;</span>
+</code></pre></div><p>Let&rsquo;s review some parameters:</p>
+<ul>
+<li><code>capacity</code>: the capacity of the volume
+<ul>
+<li><code>storage</code>: the volume size - here <code>1Gb</code></li>
+</ul>
+</li>
+<li><code>accessModes</code>: how this volume will be accessed, here ReadWriteOnce
+<ul>
+<li><code>ReadWriteOnce</code>: the volume can be mounted as read-write by a single node</li>
+<li><code>ReadOnlyMany</code>: the volume can be mounted read-only by many nodes</li>
+<li><code>ReadWriteMany</code>: the volume can be mounted as read-write by many nodes</li>
+</ul>
+</li>
+<li><code>hostPath</code>: where the storage will be stored on the host, here <code>/mnt/data </code> (this is specific to the storage type)</li>
+</ul>
+<p><code>hostPath</code> is a simple type of <code>Volume</code> but you should <strong>never</strong> use it in production environements because it is unable to move between Nodes!</p>
+<h3 id="persistentvolumeclaims---refresher">PersistentVolumeClaims - Refresher</h3>
+<p>Now that we have a storage, we need to claim it, make it available for our <code>Pods</code>. So we need a <code>PersistentVolumeClaim</code>. It is a request for storage by a user. It is similar to a pod. Pods consume node resources and <code>PersistentVolumeClaim</code> consume <code>PersistentVolume</code> resources.</p>
+<p>A <code>PersistentVolumeClaim</code> as something that requests a storage on disk and makes it available for the <code>Pod</code> think of it as an abstraction over the hard drives of the Kubernetes nodes - a fancy name for local hard drive.</p>
+<h2 id="create-a-persistent-volume-claim">Create a Persistent Volume Claim</h2>
+<p>In this example we are going to create a PersistentVolumeClaim (PVC) that consumes the Block StorageClass.</p>
+<ol>
+<li>
+<p>Create the PVC</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: PersistentVolumeClaim
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: simple-test-pvc
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">accessModes</span>:
+    - ReadWriteMany 
+  <span style="color:#66d9ef">resources</span>:
+    <span style="color:#66d9ef">requests</span>:
+      <span style="color:#66d9ef">storage</span>: 50Mi
+</code></pre></div><p>``</p>
+<p>Create it by running:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ~/training/volumes/simple-pvc.yaml
+   
+&gt; persistentvolumeclaim/simple-test-pvc created
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Check the PersistentVolumeClaim</p>
+<p>The STATUS must be <code>Bound</code>, which means that there has been a PersistentVolume created dynamically</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pvc
+   
+&gt; NAME            STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS      AGE
+&gt; simple-test-pvc   Bound    pvc-ff3c6664-9d71-42e1-b403-277b3fcd532f   50Mi       RWX            standard           2s
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Check the PersistentVolume</p>
+<p>The PersistentVolume has been created dynamically</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pv
+   
+&gt; NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                   STORAGECLASS      REASON   AGE
+&gt; pvc-ff3c6664-9d71-42e1-b403-277b3fcd532f   50Mi       RWX            Delete           Bound    default/simple-test-pvc   standard                    48s
+
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Cleanup: Delete the PersistentVolumeClaim</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> kubectl delete pvc ~/training/volumes/simple-pvc.yaml
+	
+ &gt; persistentvolumeclaim <span style="color:#e6db74">&#34;ceph-test-pvc&#34;</span> deleted
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Check the PersistentVolume</p>
+<p>The PersistentVolume has been deleted automatically as well</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pv
+   
+&gt; No resources found in default namespace.
+</code></pre></div><p>``</p>
+</li>
+</ol>
+<h2 id="dynamic-minikube-default-provisioner">Dynamic Minikube default provisioner</h2>
+<p>StorageClasses are at the heart of dynamic provisioning. By asking declaratively for a type of storage, your Dynamic Provisioner can decide how to fulfill that storage at runtime. This is what allows your application to run exactly the same on minikube as it would on other clouds or Container Management platforms.</p>
+<p>Minikube works with dynamic provisioning <strong>out of the box.</strong> And that the way it works is by defining a <strong>provisioner.</strong>
+In the example before we have seen that we can create a PersistentVolumeClaim without specifying a StorageClass. In this case the default StorageClass is chosen and the PersistentVolume is being created automatically.</p>
+<ol>
+<li>
+<p>List the available StorageClasses</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get sc
+       
+&gt; NAME                         PROVISIONER                RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+&gt; standard <span style="color:#f92672">(</span>default<span style="color:#f92672">)</span>           k8s.io/minikube-hostpath   Delete          Immediate           false                  7d20h
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Get the YAML manifets for Minikubes standard StorageClass</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get sc standard -o yaml
+</code></pre></div><p>``</p>
+<p>The output looks something like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: storage.k8s.io/v1
+<span style="color:#66d9ef">kind</span>: StorageClass
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">annotations</span>:
+    <span style="color:#66d9ef">storageclass.kubernetes.io/is-default-class</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+ ...
+  <span style="color:#66d9ef">name</span>: standard
+ ...
+<span style="color:#66d9ef">provisioner</span>: k8s.io/minikube-hostpath
+<span style="color:#66d9ef">reclaimPolicy</span>: Delete
+<span style="color:#66d9ef">volumeBindingMode</span>: Immediate
+</code></pre></div><p>``</p>
+<p>The important elements are:</p>
+<ul>
+<li><strong>name</strong> : The name of the StorageClass</li>
+<li><strong>is-default-class</strong>: Tells the provisionor to use this class if nothing is specified</li>
+<li><strong>provisioner</strong>: Minikube includes a minikube-hostpath provisioner</li>
+</ul>
+</li>
+<li>
+<p>Patch the StorageClass to not be defaulted anymore</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl patch storageclass standard -p <span style="color:#e6db74">&#39;{&#34;metadata&#34;: {&#34;annotations&#34;:{&#34;storageclass.kubernetes.io/is-default-class&#34;:&#34;false&#34;}}}&#39;</span>
+   
+&gt; storageclass.storage.k8s.io/standard patched
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Let&rsquo;s try again to create the PVC</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ~/training/volumes/simple-pvc.yaml
+   
+&gt; persistentvolumeclaim/simple-test-pvc created
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Check the PersistentVolumeClaim</p>
+<p>The STATUS will be stuck at <code>Pending</code>, because Kubernetes can not determine the StorageClass to use.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pvc
+   
+&gt; NAME            STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS      AGE
+&gt; simple-test-pvc   Pending                                                                                           7s
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Cleanup: Delete the PersistentVolumeClaim</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl delete pvc ~/training/volumes/simple-pvc.yaml
+   
+&gt; persistentvolumeclaim <span style="color:#e6db74">&#34;ceph-test-pvc&#34;</span> deleted
+</code></pre></div><p>``</p>
+</li>
+</ol>
+<h2 id="create-a-storageclass">Create a StorageClass</h2>
+<p>In this example we are going to create a custom StorageClass called <code>my-storage-class</code> by using the Minikube dynamic provisioner.</p>
+<ol>
+<li>
+<p>Create the StorageClass</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">kind</span>: StorageClass
+<span style="color:#66d9ef">apiVersion</span>: storage.k8s.io/v1
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: my-storage-class
+  <span style="color:#66d9ef">annotations</span>:
+    <span style="color:#66d9ef">storageclass.beta.kubernetes.io/is-default-class</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">addonmanager.kubernetes.io/mode</span>: Reconcile
+<span style="color:#66d9ef">provisioner</span>: k8s.io/minikube-hostpath
+</code></pre></div><p>``</p>
+<p>Create it by running:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ~/training/volumes/storage-class.yaml
+   
+&gt; storageclass.storage.k8s.io/my-storage-class created
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>List the StorageClasses</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get sc
+   
+&gt; NAME                         PROVISIONER                RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+&gt; my-storage-class <span style="color:#f92672">(</span>default<span style="color:#f92672">)</span>   k8s.io/minikube-hostpath   Delete          Immediate           false                  43s
+&gt; standard                     k8s.io/minikube-hostpath   Delete          Immediate           false                  7d21h
+
+</code></pre></div><p>``</p>
+</li>
+</ol>
+<p>We can see that the new StorageClass has been made the default, thanks to the annotation in the YAML manifest.</p>
+<h2 id="create-db-with-persistence">Create DB with Persistence</h2>
+<p>Now let&rsquo;s create a more complex application that consumes our new StorageClass.
+For this we use a MySQL/Wordpress Demo modified from the Rook/Ceph Git repository.</p>
+<p>First we create the MySQL Deployment.</p>
+<ol>
+<li>
+<p>Create the MySQL Database</p>
+<p>The manifest that we are going to apply looks like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: PersistentVolumeClaim
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: mysql-pv-claim
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">app</span>: wordpress
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">storageClassName</span>: my-storage-class
+  <span style="color:#66d9ef">accessModes</span>:
+  - ReadWriteOnce
+  <span style="color:#66d9ef">resources</span>:
+    <span style="color:#66d9ef">requests</span>:
+      <span style="color:#66d9ef">storage</span>: 20Gi
+---
+<span style="color:#66d9ef">apiVersion</span>: apps/v1
+<span style="color:#66d9ef">kind</span>: Deployment
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: wordpress-mysql
+...
+<span style="color:#66d9ef">spec</span>:
+  ...
+  <span style="color:#66d9ef">template</span>:
+    ...
+    <span style="color:#66d9ef">spec</span>:
+      ...
+      <span style="color:#66d9ef">containers</span>:
+      - <span style="color:#66d9ef">image</span>: mysql:<span style="color:#ae81ff">5.6</span>
+      ...
+        <span style="color:#66d9ef">volumeMounts</span>:
+        - <span style="color:#66d9ef">name</span>: mysql-persistent-storage
+          <span style="color:#66d9ef">mountPath</span>: /var/lib/mysql
+      <span style="color:#66d9ef">volumes</span>:
+      - <span style="color:#66d9ef">name</span>: mysql-persistent-storage
+        <span style="color:#66d9ef">persistentVolumeClaim</span>:
+          <span style="color:#66d9ef">claimName</span>: mysql-pv-claim
+</code></pre></div><p>``
+This creates a PersistentVolumeClaim called <code>mysql-pv-claim</code> that is being mapped into the MySQL Pod at <code>/var/lib/mysql</code>.</p>
+<p>Create it by running:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ~/training/volumes/mysql.yaml 
+   
+&gt; service/wordpress-mysql created
+&gt; persistentvolumeclaim/mysql-pv-claim created
+&gt; deployment.apps/wordpress-mysql created
+
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Check the PersistentVolumeClaim</p>
+<p>The STATUS must be <code>Bound</code>, which means that there has been a PersistentVolume created dynamically</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pvc
+   
+&gt; NAME            STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS      AGE
+&gt; mysql-pv-claim    Bound     pvc-bccef708-10dc-4c02-992b-556179af3613   20Gi       RWO            standard           42m
+</code></pre></div><p>``</p>
+</li>
+</ol>
+<h2 id="application-with-persistence">Application with Persistence</h2>
+<p>Now let&rsquo;s create the Wordpress Deployment.</p>
+<ol>
+<li>
+<p>Create the MySQL Database</p>
+<p>The manifest that we are going to apply looks like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: PersistentVolumeClaim
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: wp-pv-claim
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">app</span>: wordpress
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">storageClassName</span>: my-storage-class
+  <span style="color:#66d9ef">accessModes</span>:
+  - ReadWriteOnce
+  <span style="color:#66d9ef">resources</span>:
+    <span style="color:#66d9ef">requests</span>:
+      <span style="color:#66d9ef">storage</span>: 20Gi
+---
+<span style="color:#66d9ef">apiVersion</span>: apps/v1
+<span style="color:#66d9ef">kind</span>: Deployment
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: wordpress
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">app</span>: wordpress
+    <span style="color:#66d9ef">tier</span>: frontend
+<span style="color:#66d9ef">spec</span>:
+...
+  <span style="color:#66d9ef">template</span>:
+  ...
+    <span style="color:#66d9ef">spec</span>:
+      <span style="color:#66d9ef">containers</span>:
+      - <span style="color:#66d9ef">image</span>: wordpress:<span style="color:#ae81ff">4.6.1</span>-apache
+        <span style="color:#66d9ef">name</span>: wordpress
+        <span style="color:#66d9ef">volumeMounts</span>:
+        - <span style="color:#66d9ef">name</span>: wordpress-persistent-storage
+          <span style="color:#66d9ef">mountPath</span>: /var/www/html
+      <span style="color:#66d9ef">volumes</span>:
+      - <span style="color:#66d9ef">name</span>: wordpress-persistent-storage
+        <span style="color:#66d9ef">persistentVolumeClaim</span>:
+          <span style="color:#66d9ef">claimName</span>: wp-pv-claim
+</code></pre></div><p>``
+This creates a PersistentVolumeClaim called <code>wp-pv-claim</code> that is being mapped into the Wordpress Pod at <code>/var/www/html</code>.</p>
+<p>Create it by running:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl create -f ~/training/volumes/wordpress.yaml 
+   
+&gt; service/wordpress created
+&gt; persistentvolumeclaim/wp-pv-claim created
+&gt; deployment.apps/wordpress created
+
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Check the PersistentVolumeClaim</p>
+<p>The STATUS must be <code>Bound</code> on both PersistentVolumeClaims.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pvc
+   
+&gt; NAME            STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS      AGE
+&gt; mysql-pv-claim    Bound     pvc-bccef708-10dc-4c02-992b-556179af3613   20Gi       RWO            standard           42m
+&gt; wp-pv-claim       Bound     pvc-004f32e0-4a2c-447a-ae27-f7cd63ea9689   20Gi       RWO            standard           41m
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>You can now open Workdpress and play around a bit</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">minikube service wordpress
+</code></pre></div><p>``</p>
+</li>
+</ol>
+<h2 id="check-persisted-files">Check persisted files</h2>
+<p>Let&rsquo;s have a look on how and where the data is being persisted.</p>
+<ol>
+<li>
+<p>Examine the PersistentVolumes</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pv -o yaml
+</code></pre></div><p>``</p>
+<p>You&rsquo;ll get something like this for the two PVs:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">...
+- <span style="color:#66d9ef">apiVersion</span>: v1
+  <span style="color:#66d9ef">kind</span>: PersistentVolume
+  <span style="color:#66d9ef">metadata</span>:
+ ...
+  <span style="color:#66d9ef">spec</span>:
+    <span style="color:#66d9ef">accessModes</span>:
+    - ReadWriteOnce
+    <span style="color:#66d9ef">capacity</span>:
+      <span style="color:#66d9ef">storage</span>: 20Gi
+    <span style="color:#66d9ef">claimRef</span>:
+      <span style="color:#66d9ef">apiVersion</span>: v1
+      <span style="color:#66d9ef">kind</span>: PersistentVolumeClaim
+      <span style="color:#66d9ef">name</span>: mysql-pv-claim
+      <span style="color:#66d9ef">namespace</span>: default
+      <span style="color:#66d9ef">resourceVersion</span>: <span style="color:#e6db74">&#34;112147&#34;</span>
+      <span style="color:#66d9ef">uid</span>: bccef708-10dc-4c02-992b-556179af3613
+    <span style="color:#66d9ef">hostPath</span>:
+      <span style="color:#66d9ef">path</span>: /tmp/hostpath-provisioner/pvc-bccef708-10dc-4c02-992b-556179af3613
+      <span style="color:#66d9ef">type</span>: <span style="color:#e6db74">&#34;&#34;</span>
+    <span style="color:#66d9ef">persistentVolumeReclaimPolicy</span>: Delete
+    <span style="color:#66d9ef">storageClassName</span>: standard
+    <span style="color:#66d9ef">volumeMode</span>: Filesystem
+...
+</code></pre></div><p>``</p>
+<p>The interesting part is the hostPath (/tmp/hostpath-provisioner/pvc-bccef708-10dc-4c02-992b-556179af3613). This is where the data for this PersistentVolume is stored.</p>
+</li>
+<li>
+<p>Copy the path.</p>
+</li>
+<li>
+<p>SSH into Minikube</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">minikube ssh
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Go to the storage location</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /tmp/hostpath-provisioner/pvc-bccef708-10dc-4c02-992b-556179af3613
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Have a look at the files (can be MySQL or Workdpress, depending on the PV that you selected)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls
+   
+&gt; auto.cnf  ib_logfile0  ib_logfile1  ibdata1  mysql  performance_schema  wordpress
+
+</code></pre></div><p>``</p>
+</li>
+</ol>
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/jtc18/lab2/" title="Lab 2: Init Containers"><i class="fas fa-chevron-left p-1"></i>Lab 2: Init Containers</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/jtc18/lab4/" title="Lab 4: Dynamic NFS provisioning">Lab 4: Dynamic NFS provisioning<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="http://niklaushirt.github.io/lib/jquery.min.js"></script> 
+<script src="http://niklaushirt.github.io/lib/popper.min.js"></script> 
+
+<script src="http://niklaushirt.github.io/js/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "http:\/\/niklaushirt.github.io\/";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

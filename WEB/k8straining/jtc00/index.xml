@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Introduction on Kubernetes Training</title>
+    <link>http://niklaushirt.github.io/jtc00/</link>
+    <description>Recent content in Introduction on Kubernetes Training</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 23 Sep 2020 09:12:06 +0200</lastBuildDate>
+    
+	<atom:link href="http://niklaushirt.github.io/jtc00/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Getting set up</title>
+      <link>http://niklaushirt.github.io/jtc00/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc00/lab1/</guid>
+      <description>Prerequisites for the Lab Before we dive into the Labs, you need to be able to run the provided Lab VM. It contains a Minikube cluster and all the configurations for the subsequent labs.
+ Internet Access PC with at least:  4 Core CPU 8GB of RAM / 16GB recommended (16GB needed for the Istio Lab) 40GB of free Disk Space    Part 1 - Install Hypervisor Before we dive into the Labs, you need to be able to run the provided Lab VM.</description>
+    </item>
+    
+    <item>
+      <title>Lab Information and Semantics</title>
+      <link>http://niklaushirt.github.io/jtc00/lab2/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc00/lab2/</guid>
+      <description>Nomenclatures  Shell Commands The commands that you are going to execute to progress the Labs will look like this:
+THIS IS AN EXAMPLE - DO NOT EXECUTE THIS!
+kubectl create -f redis-slave-service.yaml # THIS IS AN EXAMPLE - DO NOT EXECUTE THIS! &amp;gt; Output Line 1 &amp;gt; Output Line 2 &amp;gt; Output Line 3 ...  IMPORTANT NOTE: The example output of a command is prefixed by &amp;ldquo;&amp;gt;&amp;rdquo; in order to make it more distinguishable.</description>
+    </item>
+    
+  </channel>
+</rss>

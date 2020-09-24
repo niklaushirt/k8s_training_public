@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="http://niklaushirt.github.io/jtc14/lab2/">
+
+    <title>
+        
+        Lab 2: Create the Lab Operator Project | Kubernetes Training
+        
+    </title>
+
+    
+    <link href="http://niklaushirt.github.io/css/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="http://niklaushirt.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                
+                Kubernetes Training
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/vantagedesign/ace-documentation1" >
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/jtc00/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc00/"><h6>Introduction</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc00/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc00/lab1/" class="nav-link p-0">
+                    Getting set up
+                </a>
+        </li>
+        <li data-nav-id="/jtc00/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc00/lab2/" class="nav-link p-0">
+                    Lab Information and Semantics
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc01/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc01/"><h6>JTC01 Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc01/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Docker
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab2/" class="nav-link p-0">
+                    Lab 2: Docker Basics
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab3/" class="nav-link p-0">
+                    Lab 3: Docker Internals
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc02/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc02/"><h6>JTC02 Kubernetes Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc02/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Kubernetes
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab2/" class="nav-link p-0">
+                    Lab 2: Deploy your first Pod
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy your first application
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab4/" class="nav-link p-0">
+                    Lab 4: Scale and Update Deployments
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab5/" class="nav-link p-0">
+                    Lab 5: Stateful Deployments
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab6/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab6/" class="nav-link p-0">
+                    Lab 6: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc10/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc10/"><h6>JTC10 Istio</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc10/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know ISTIO
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab2/" class="nav-link p-0">
+                    Lab 2: Installing Istio 
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy BookInfo application 
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab4/" class="nav-link p-0">
+                    Lab 4: Monitoring with Kiali
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab5/" class="nav-link p-0">
+                    Lab 5: Traffic flow management
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab6/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab6/" class="nav-link p-0">
+                    Lab 6: Telemetry data
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab7/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab7/" class="nav-link p-0">
+                    Lab 7: End-user authentication
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab8/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab8/" class="nav-link p-0">
+                    Lab 8: Traffic Mirroring
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab9/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab9/" class="nav-link p-0">
+                    Lab 9: Fault Injection
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab10/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab10/" class="nav-link p-0">
+                    Lab 10: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc14/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc14/"><h6>JTC14 Kubernetes Ansible Operators</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc14/lab0/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab0/" class="nav-link p-0">
+                    Lab 0: Prepare the Lab environment
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab1/" class="nav-link p-0">
+                    Lab 1: Kubernetes Operators
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab2/" class="nav-item my-1 active">
+                
+                 <a href="/jtc14/lab2/" class="nav-link p-0">
+                    Lab 2: Create the Lab Operator Project
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy the Lab Operator
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc16/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc16/"><h6>JTC16 Kubernetes Security Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc16/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc16/lab1/" class="nav-link p-0">
+                    Lab 1: Network Policies
+                </a>
+        </li>
+        <li data-nav-id="/jtc16/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc16/lab2/" class="nav-link p-0">
+                    Lab 2: Security Tooling
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc17/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc17/"><h6>JTC17 Kubernetes Advanced Security</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc17/lab0/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab0/" class="nav-link p-0">
+                    Lab 0: Preparation
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab1/" class="nav-link p-0">
+                    Lab 1: RBAC - Users, Roles and RoleBindings
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab2/" class="nav-link p-0">
+                    Lab 2: Service Accounts
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab3/" class="nav-link p-0">
+                    Lab 3: RBAC Tooling
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab4/" class="nav-link p-0">
+                    Lab 4: Image Scanning
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc18/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc18/"><h6>JTC18 Kubernetes Advanced Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc18/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab1/" class="nav-link p-0">
+                    Lab 1: Liveness and Readiness Probes
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab2/" class="nav-link p-0">
+                    Lab 2: Init Containers
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab3/" class="nav-link p-0">
+                    Lab 3: Persistent Volumes
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab4/" class="nav-link p-0">
+                    Lab 4: Dynamic NFS provisioning
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab5/" class="nav-link p-0">
+                    Lab 5: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc19/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc19/"><h6>JTC19 CloudNative DevOps</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc19/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab1/" class="nav-link p-0">
+                    Lab 1: Tekton
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab5/" class="nav-link p-0">
+                    Lab 5: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#create-the-lab-operator-project">Create the Lab Operator Project</a></li>
+    <li><a href="#create-the-lab-operator-api">Create the Lab Operator API</a></li>
+    <li><a href="#create-the-lab-operator-controller">Create the Lab Operator Controller</a>
+      <ul>
+        <li><a href="#1-define-the-lab-operator-controller">1) Define the Lab Operator Controller</a></li>
+        <li><a href="#2-build-the-lab-operator-controller">2) Build the Lab Operator Controller</a></li>
+        <li><a href="#2-deploy-the-lab-operator">2) Deploy the Lab Operator</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>Lab 2: Create the Lab Operator Project</h1>
+
+<h2 id="create-the-lab-operator-project">Create the Lab Operator Project</h2>
+<p>In this part of the lab we will create a demo Ansible operator and deploy it to our Cluster.</p>
+<ol>
+<li>
+<p>Create the <code>ansible-operator-frontend</code> directory</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd
+mkdir ansible-operator
+cd ~/ansible-operator 
+       
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Create  the <code>ansible-operator-frontend</code> Project</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">operator-sdk new ansible-operator-frontend --type<span style="color:#f92672">=</span>ansible --api-version<span style="color:#f92672">=</span>ansiblelab.ibm.com/v1beta1 --kind<span style="color:#f92672">=</span>MyAnsibleLabDemo 
+   
+&gt; INFO<span style="color:#f92672">[</span>0000<span style="color:#f92672">]</span> Creating new Ansible operator <span style="color:#e6db74">&#39;ansible-operator-frontend&#39;</span>. 
+&gt; INFO<span style="color:#f92672">[</span>0000<span style="color:#f92672">]</span> Created deploy/service_account.yaml          
+&gt; INFO<span style="color:#f92672">[</span>0000<span style="color:#f92672">]</span> Created deploy/role.yaml                     
+&gt; INFO<span style="color:#f92672">[</span>0000<span style="color:#f92672">]</span> Created deploy/role_binding.yaml             
+&gt; INFO<span style="color:#f92672">[</span>0000<span style="color:#f92672">]</span> Created deploy/crds/lab_v1beta1_MyAnsibleLabDemo_crd.yaml       
+...
+   
+</code></pre></div><p>``</p>
+<blockquote>
+<p>You can ignore the errors concerning git</p>
+</blockquote>
+</li>
+<li>
+<p>Change to the <code>ansible-operator-frontend</code> directory</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd ~/ansible-operator/ansible-operator-frontend
+       
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>The basic file structure for the Ansible Operator has been created</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ll
+   
+&gt; total <span style="color:#ae81ff">36</span>
+&gt; drwxr-x--- <span style="color:#ae81ff">7</span> training training <span style="color:#ae81ff">4096</span> Jul  <span style="color:#ae81ff">1</span> 17:29 ./
+&gt; drwxrwxr-x <span style="color:#ae81ff">3</span> training training <span style="color:#ae81ff">4096</span> Jul  <span style="color:#ae81ff">1</span> 17:29 ../
+&gt; drwxr-x--- <span style="color:#ae81ff">3</span> training training <span style="color:#ae81ff">4096</span> Jul  <span style="color:#ae81ff">1</span> 17:29 build/
+&gt; drwxr-x--- <span style="color:#ae81ff">3</span> training training <span style="color:#ae81ff">4096</span> Jul  <span style="color:#ae81ff">1</span> 17:29 deploy/
+&gt; drwxrwxr-x <span style="color:#ae81ff">7</span> training training <span style="color:#ae81ff">4096</span> Jul  <span style="color:#ae81ff">1</span> 17:29 .git/
+&gt; drwxr-x--- <span style="color:#ae81ff">5</span> training training <span style="color:#ae81ff">4096</span> Jul  <span style="color:#ae81ff">1</span> 17:29 molecule/
+&gt; drwxr-x--- <span style="color:#ae81ff">3</span> training training <span style="color:#ae81ff">4096</span> Jul  <span style="color:#ae81ff">1</span> 17:29 roles/
+&gt; -rw-r--r-- <span style="color:#ae81ff">1</span> training training  <span style="color:#ae81ff">140</span> Jul  <span style="color:#ae81ff">1</span> 17:29 .travis.yml
+&gt; -rw-r--r-- <span style="color:#ae81ff">1</span> training training  <span style="color:#ae81ff">121</span> Jul  <span style="color:#ae81ff">1</span> 17:29 watches.yaml
+</code></pre></div><p>``</p>
+</li>
+</ol>
+<h2 id="create-the-lab-operator-api">Create the Lab Operator API</h2>
+<p>With the above, the API has already been created (unlike for GO operators) and added to the new Custom Resource (CR), with APIVersion <code>ansiblelab.ibm.com/v1beta1</code> and Kind <code>MyAnsibleLabDemo</code>.</p>
+<ol>
+<li>
+<p>Add the <code>deployment.image</code> field to the Custom Resource</p>
+<p><img src="../images/vm.png" alt=""> <strong>Training VM</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gedit ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml &amp;
+
+</code></pre></div><p>``</p>
+<p><img src="../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nano ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_v1beta1_myansiblelabdemo_cr.yaml
+</code></pre></div><p>``</p>
+<p>Add the last two lines from the following at the end of the file and save to make it look the same</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: ansiblelab.ibm.com/v1beta1
+<span style="color:#66d9ef">kind</span>: MyAnsibleLabDemo
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: example-MyAnsibleLabDemo
+<span style="color:#66d9ef">spec</span>:
+  --&gt; Add fields here
+  <span style="color:#66d9ef">size</span>: <span style="color:#ae81ff">3</span>
+  <span style="color:#66d9ef">demo</span>:
+    <span style="color:#66d9ef">image</span>: niklaushirt/k8sdemo:<span style="color:#ae81ff">1.0.0</span>
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Save and quit</p>
+</li>
+</ol>
+<p>**We have now finished setting up the API and CRDs
+**</p>
+<h2 id="create-the-lab-operator-controller">Create the Lab Operator Controller</h2>
+<p>By default, an Ansible role executes the tasks defined at <code>roles/tasks/main.yml</code>.
+For defining our deployment we will use the k8s module of Ansible.</p>
+<h3 id="1-define-the-lab-operator-controller">1) Define the Lab Operator Controller</h3>
+<ol>
+<li>
+<p>Edit the <code>ansible-operator-frontend</code> Controller</p>
+<p><img src="../images/vm.png" alt=""> <strong>Training VM</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gedit ~/ansible-operator/ansible-operator-frontend/roles/myansiblelabdemo/tasks/main.yml &amp;
+</code></pre></div><p>``</p>
+<p><img src="../images/cloud.png" alt=""> <strong>Cloud/Standalone</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">nano ~/ansible-operator/ansible-operator-frontend/roles/myansiblelabdemo/tasks/main.yml	<span style="color:#e6db74">```</span>
+
+</code></pre></div></li>
+<li>
+<p>Replace the content with the following:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">name</span>: Create the k8sdemo deployment
+  <span style="color:#66d9ef">community.kubernetes.k8s</span>:
+    <span style="color:#66d9ef">definition</span>:
+      <span style="color:#66d9ef">apiVersion</span>: apps/v1
+      <span style="color:#66d9ef">kind</span>: Deployment
+      <span style="color:#66d9ef">metadata</span>:
+        <span style="color:#66d9ef">name</span>: k8sdemo
+        <span style="color:#66d9ef">namespace</span>: default
+      <span style="color:#66d9ef">labels</span>:
+        <span style="color:#66d9ef">app</span>: k8sdemo
+      <span style="color:#66d9ef">spec</span>:
+        <span style="color:#66d9ef">selector</span>:
+         <span style="color:#66d9ef">matchLabels</span>:
+           <span style="color:#66d9ef">app</span>: k8sdemo
+        <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">template</span>:
+          <span style="color:#66d9ef">metadata</span>:
+            <span style="color:#66d9ef">labels</span>:
+              <span style="color:#66d9ef">app</span>: k8sdemo
+          <span style="color:#66d9ef">spec</span>:
+            <span style="color:#66d9ef">containers</span>:
+            - <span style="color:#66d9ef">name</span>: k8sdemo
+              <span style="color:#66d9ef">image</span>: <span style="color:#e6db74">&#34;{{demo.image}}&#34;</span>
+              <span style="color:#66d9ef">imagePullPolicy</span>: IfNotPresent 
+              <span style="color:#66d9ef">ports</span>:
+              - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">3000</span>
+              <span style="color:#66d9ef">env</span>:
+                - <span style="color:#66d9ef">name</span>: PORT
+                  <span style="color:#66d9ef">value </span>: <span style="color:#e6db74">&#34;3000&#34;</span>
+                - <span style="color:#66d9ef">name</span>: APPLICATION_NAME
+                  <span style="color:#66d9ef">value</span>: k8sdemo
+                - <span style="color:#66d9ef">name</span>: BACKEND_URL
+                  <span style="color:#66d9ef">value</span>: http://k8sdemo-backend-service.default.svc:<span style="color:#ae81ff">3000</span>/api
+   
+- <span style="color:#66d9ef">name</span>: Create the k8sdemo service
+  <span style="color:#66d9ef">community.kubernetes.k8s</span>:
+    <span style="color:#66d9ef">definition</span>:
+      <span style="color:#66d9ef">apiVersion</span>: v1
+      <span style="color:#66d9ef">kind</span>: Service
+      <span style="color:#66d9ef">metadata</span>:
+        <span style="color:#66d9ef">name</span>: k8sdemo-service
+        <span style="color:#66d9ef">namespace</span>: default
+      <span style="color:#66d9ef">spec</span>:
+        <span style="color:#66d9ef">selector</span>:
+          <span style="color:#66d9ef">app</span>: k8sdemo
+        <span style="color:#66d9ef">ports</span>:
+          - <span style="color:#66d9ef">protocol</span>: TCP
+            <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">3000</span>
+            <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">3000</span>
+            <span style="color:#66d9ef">nodePort</span>: <span style="color:#ae81ff">32123</span>
+        <span style="color:#66d9ef">type</span>: NodePort  
+   
+</code></pre></div><p>``</p>
+</li>
+</ol>
+<blockquote>
+<p>This will ensure that the Pod will be created with the Image information defined in 	the Custom Resource (CR) definition (&quot;{{deployment.image}}&quot;). This picks up the value 	defined in the CR.</p>
+</blockquote>
+<ol start="4">
+<li>Save and Quit</li>
+</ol>
+<hr>
+<h3 id="2-build-the-lab-operator-controller">2) Build the Lab Operator Controller</h3>
+<ol>
+<li>
+<p>Now let&rsquo;s build the Operator container</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">operator-sdk build localhost:5000/ansible-operator-frontend:ansible
+     
+&gt; INFO<span style="color:#f92672">[</span>0000<span style="color:#f92672">]</span> Building OCI image localhost:5000/ansible-operator-frontend:ansible
+&gt; Sending build context to Docker daemon  49.15kB
+&gt; Step 1/3 : FROM quay.io/operator-framework/ansible-operator:v0.10.0
+&gt;  ---&gt; 168416e214f1
+&gt; Step 2/3 : COPY watches.yaml <span style="color:#e6db74">${</span>HOME<span style="color:#e6db74">}</span>/watches.yaml
+&gt;  ---&gt; Using cache
+&gt;  ---&gt; 43f81409e05d
+&gt; Step 3/3 : COPY roles/ <span style="color:#e6db74">${</span>HOME<span style="color:#e6db74">}</span>/roles/
+&gt;  ---&gt; 0ad354c77a7a
+&gt; Successfully built 0ad354c77a7a
+&gt; Successfully tagged localhost:5000/ansible-operator-frontend:ansible
+&gt; INFO<span style="color:#f92672">[</span>0001<span style="color:#f92672">]</span> Operator build complete.  
+</code></pre></div><p>``</p>
+<p>Where <code>localhost:5000/ansible-operator-frontend:ansible</code> is the name of the Docker image to be created.</p>
+</li>
+<li>
+<p>And push the Operator container to the local registry</p>
+<p><img src="../images/vm.png" alt=""> <strong>Training VM</strong></p>
+<p>First execute this in a separate Terminal Window/Tab in order to be able to access the private registry:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"></code></pre></div></li>
+</ol>
+<p>kubectl port-forward &ndash;namespace kube-system $(kubectl get po -n kube-system | grep kube-registry-v0 | \awk &lsquo;{print $1;}') 5000:5000</p>
+<pre><code>&gt; Forwarding from 127.0.0.1:5000 -&gt; 5000
+&gt; Forwarding from [::1]:5000 -&gt; 5000
+</code></pre>
+<pre><code>
+ ![](../images/cloud.png) **Cloud/Standalone**
+ 
+ ![](../images/important.png) **Cloud/Standalone** This does probably not work if you are using a standalone or cloud environment.
+ You can ignore this as we will be using a version already provided on Docker hub.
+
+
+
+
+5. And then push the image:
+
+ ![](../images/vm.png) **Training VM**
+ 
+ ```bash
+ docker push localhost:5000/ansible-operator-frontend:ansible
+ ```
+
+ ![](../images/cloud.png) **Cloud/Standalone**
+ 
+ ![](../images/important.png) **Cloud/Standalone** This does probably not work if you are using a standalone or cloud environment.
+ You can ignore this as we will be using a version already provided on Docker hub.
+
+
+
+
+### 3) Prepare the Deployment for the Lab Operator Controller
+
+
+The deployment manifest for the Operator (that was generated automatically) looks like this:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+name: ansible-operator-frontend
+spec:
+replicas: 1
+selector:
+ matchLabels:
+   name: ansible-operator-frontend
+template:
+ metadata:
+   labels:
+     name: ansible-operator-frontend
+ spec:
+   serviceAccountName: ansible-operator-frontend
+   containers:
+     - name: ansible
+       command:
+       - /usr/local/bin/ao-logs
+       - /tmp/ansible-operator/runner
+       - stdout
+       --&gt; Replace this with the built image name
+       image: &quot;{{ REPLACE_IMAGE }}&quot;
+       imagePullPolicy: &quot;{{ pull_policy|default('Always') }}&quot;
+       volumeMounts:
+       - mountPath: /tmp/ansible-operator/runner
+         name: runner
+         readOnly: true
+     - name: operator
+       --&gt; Replace this with the built image name
+       image: &quot;{{ REPLACE_IMAGE }}&quot;
+       imagePullPolicy: &quot;{{ pull_policy|default('Always') }}&quot;
+       volumeMounts:
+       - mountPath: /tmp/ansible-operator/runner
+         name: runner
+       env:
+         - name: WATCH_NAMESPACE
+           valueFrom:
+             fieldRef:
+               fieldPath: metadata.namespace
+         - name: POD_NAME
+           valueFrom:
+             fieldRef:
+               fieldPath: metadata.name
+         - name: OPERATOR_NAME
+           value: &quot;ansible-operator-frontend&quot;
+   volumes:
+     - name: runner
+       emptyDir: {}
+
+
+</code></pre><p>Modify the YAML to use the image that we have pushed to the registry in the Operator deployment</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml.bak
+	
+sed -i <span style="color:#e6db74">&#39;s|REPLACE_IMAGE|niklaushirt/ansible-operator-frontend:ansible|g&#39;</span> ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml
+sed -i <span style="color:#e6db74">&#39;s|{{ pull_policy.* }}|Always|g&#39;</span> ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml
+
+On Mac please use:
+sed -i <span style="color:#e6db74">&#39;&#39;</span> <span style="color:#e6db74">&#39;s|REPLACE_IMAGE|niklaushirt/ansible-operator-frontend:ansible|g&#39;</span> ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml
+sed -i <span style="color:#e6db74">&#39;&#39;</span> <span style="color:#e6db74">&#39;s|{{ pull_policy.* }}|Always|g&#39;</span> ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml
+
+more ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml
+
+</code></pre></div><blockquote>
+<p>To the attentive observer, we&rsquo;re using the prepared image from the docker hub, due to some routing issues for Kubernetes to pull the image internally - thanks minikube.
+The Training VM also uses a slightly older</p>
+</blockquote>
+<h3 id="2-deploy-the-lab-operator">2) Deploy the Lab Operator</h3>
+<ol>
+<li>
+<p>Deploy  the <code>ansible-operator-frontend</code> Custom Resource Definition</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f  ~/ansible-operator/ansible-operator-frontend/deploy/crds/ansiblelab.ibm.com_myansiblelabdemos_crd.yaml
+&gt; customresourcedefinition.apiextensions.k8s.io/MyAnsibleLabDemos.ansiblelab.ibm.com created
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Create  the <code>ansible-operator-frontend</code> Service Account</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f  ~/ansible-operator/ansible-operator-frontend/deploy/service_account.yaml
+kubectl apply -f  ~/ansible-operator/ansible-operator-frontend/deploy/role.yaml
+kubectl apply -f  ~/ansible-operator/ansible-operator-frontend/deploy/role_binding.yaml
+   
+&gt; serviceaccount/ansible-operator-frontend created
+&gt; role.rbac.authorization.k8s.io/ansible-operator-frontend created
+&gt; rolebinding.rbac.authorization.k8s.io/ansible-operator-frontend created
+
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Create  the <code>ansible-operator-frontend</code> Operator</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl apply -f  ~/ansible-operator/ansible-operator-frontend/deploy/operator.yaml
+   
+&gt; deployment.apps/ansible-operator-frontend created
+
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Check and wait for the Operator to be running</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl get pods
+   
+&gt; NAME                                       READY   STATUS    RESTARTS   AGE
+&gt; ansible-operator-frontend-fd78bcf5-zxgws   1/1     Running   <span style="color:#ae81ff">0</span>          43m
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Get the log of the Operator Pod (use the Pod name from the previous step)</p>
+</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> kubectl logs -c operator ansible-operator-frontend-fd78bcf5-zxgws
+ 
+  &gt; <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;info&#34;</span>,<span style="color:#e6db74">&#34;ts&#34;</span>:1593618304.1191652,<span style="color:#e6db74">&#34;logger&#34;</span>:<span style="color:#e6db74">&#34;cmd&#34;</span>,<span style="color:#e6db74">&#34;msg&#34;</span>:<span style="color:#e6db74">&#34;Go Version: go1.12.5&#34;</span><span style="color:#f92672">}</span>
+  &gt; <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;info&#34;</span>,<span style="color:#e6db74">&#34;ts&#34;</span>:1593618304.1194193,<span style="color:#e6db74">&#34;logger&#34;</span>:<span style="color:#e6db74">&#34;cmd&#34;</span>,<span style="color:#e6db74">&#34;msg&#34;</span>:<span style="color:#e6db74">&#34;Go OS/Arch: linux/amd64&#34;</span><span style="color:#f92672">}</span>
+  &gt; <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;info&#34;</span>,<span style="color:#e6db74">&#34;ts&#34;</span>:1593618304.1194592,<span style="color:#e6db74">&#34;logger&#34;</span>:<span style="color:#e6db74">&#34;cmd&#34;</span>,<span style="color:#e6db74">&#34;msg&#34;</span>:<span style="color:#e6db74">&#34;Version of operator-sdk: v0.8.0&#34;</span><span style="color:#f92672">}</span>
+  &gt; <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;info&#34;</span>,<span style="color:#e6db74">&#34;ts&#34;</span>:1593618304.1194792,<span style="color:#e6db74">&#34;logger&#34;</span>:<span style="color:#e6db74">&#34;cmd&#34;</span>,<span style="color:#e6db74">&#34;msg&#34;</span>:<span style="color:#e6db74">&#34;Watching namespace.&#34;</span>,<span style="color:#e6db74">&#34;Namespace&#34;</span>:<span style="color:#e6db74">&#34;default&#34;</span><span style="color:#f92672">}</span>
+  &gt; <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;info&#34;</span>,<span style="color:#e6db74">&#34;ts&#34;</span>:1593618304.1632428,<span style="color:#e6db74">&#34;logger&#34;</span>:<span style="color:#e6db74">&#34;leader&#34;</span>,<span style="color:#e6db74">&#34;msg&#34;</span>:<span style="color:#e6db74">&#34;Trying to become the leader.&#34;</span><span style="color:#f92672">}</span>
+  
+  &gt; <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;info&#34;</span>,<span style="color:#e6db74">&#34;ts&#34;</span>:1593618338.328806,<span style="color:#e6db74">&#34;logger&#34;</span>:<span style="color:#e6db74">&#34;leader&#34;</span>,<span style="color:#e6db74">&#34;msg&#34;</span>:<span style="color:#e6db74">&#34;Became the leader.&#34;</span><span style="color:#f92672">}</span>
+  &gt; <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;info&#34;</span>,<span style="color:#e6db74">&#34;ts&#34;</span>:1593618338.3861306,<span style="color:#e6db74">&#34;logger&#34;</span>:<span style="color:#e6db74">&#34;proxy&#34;</span>,<span style="color:#e6db74">&#34;msg&#34;</span>:<span style="color:#e6db74">&#34;Starting to serve&#34;</span>,<span style="color:#e6db74">&#34;Address&#34;</span>:<span style="color:#e6db74">&#34;127.0.0.1:8888&#34;</span><span style="color:#f92672">}</span>
+  &gt; <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;info&#34;</span>,<span style="color:#e6db74">&#34;ts&#34;</span>:1593618338.386716,<span style="color:#e6db74">&#34;logger&#34;</span>:<span style="color:#e6db74">&#34;manager&#34;</span>,<span style="color:#e6db74">&#34;msg&#34;</span>:<span style="color:#e6db74">&#34;Using default value for workers 1&#34;</span><span style="color:#f92672">}</span>
+  &gt; <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;info&#34;</span>,<span style="color:#e6db74">&#34;ts&#34;</span>:1593618338.3867893,<span style="color:#e6db74">&#34;logger&#34;</span>:<span style="color:#e6db74">&#34;ansible-controller&#34;</span>,<span style="color:#e6db74">&#34;msg&#34;</span>:<span style="color:#e6db74">&#34;Watching resource&#34;</span>,<span style="color:#e6db74">&#34;Options.Group&#34;</span>:<span style="color:#e6db74">&#34;ansiblelab.ibm.com&#34;</span>,<span style="color:#e6db74">&#34;Options.Version&#34;</span>:<span style="color:#e6db74">&#34;v1beta1&#34;</span>,<span style="color:#e6db74">&#34;Options.Kind&#34;</span>:<span style="color:#e6db74">&#34;MyAnsibleLabDemo&#34;</span><span style="color:#f92672">}</span>
+  &gt; <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;info&#34;</span>,<span style="color:#e6db74">&#34;ts&#34;</span>:1593618338.387424,<span style="color:#e6db74">&#34;logger&#34;</span>:<span style="color:#e6db74">&#34;kubebuilder.controller&#34;</span>,<span style="color:#e6db74">&#34;msg&#34;</span>:<span style="color:#e6db74">&#34;Starting EventSource&#34;</span>,<span style="color:#e6db74">&#34;controller&#34;</span>:<span style="color:#e6db74">&#34;myansiblelabdemo-controller&#34;</span>,<span style="color:#e6db74">&#34;source&#34;</span>:<span style="color:#e6db74">&#34;kind source: ansiblelab.ibm.com/v1beta1, Kind=MyAnsibleLabDemo&#34;</span><span style="color:#f92672">}</span>
+  &gt; <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;info&#34;</span>,<span style="color:#e6db74">&#34;ts&#34;</span>:1593618338.487868,<span style="color:#e6db74">&#34;logger&#34;</span>:<span style="color:#e6db74">&#34;kubebuilder.controller&#34;</span>,<span style="color:#e6db74">&#34;msg&#34;</span>:<span style="color:#e6db74">&#34;Starting Controller&#34;</span>,<span style="color:#e6db74">&#34;controller&#34;</span>:<span style="color:#e6db74">&#34;myansiblelabdemo-controller&#34;</span><span style="color:#f92672">}</span>
+  &gt; <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;level&#34;</span>:<span style="color:#e6db74">&#34;info&#34;</span>,<span style="color:#e6db74">&#34;ts&#34;</span>:1593618338.5881243,<span style="color:#e6db74">&#34;logger&#34;</span>:<span style="color:#e6db74">&#34;kubebuilder.controller&#34;</span>,<span style="color:#e6db74">&#34;msg&#34;</span>:<span style="color:#e6db74">&#34;Starting workers&#34;</span>,<span style="color:#e6db74">&#34;controller&#34;</span>:<span style="color:#e6db74">&#34;myansiblelabdemo-controller&#34;</span>,<span style="color:#e6db74">&#34;worker count&#34;</span>:1<span style="color:#f92672">}</span>
+
+</code></pre></div><p>This means that the Operator is working and ready.</p>
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/jtc14/lab1/" title="Lab 1: Kubernetes Operators"><i class="fas fa-chevron-left p-1"></i>Lab 1: Kubernetes Operators</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/jtc14/lab3/" title="Lab 3: Deploy the Lab Operator">Lab 3: Deploy the Lab Operator<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="http://niklaushirt.github.io/lib/jquery.min.js"></script> 
+<script src="http://niklaushirt.github.io/lib/popper.min.js"></script> 
+
+<script src="http://niklaushirt.github.io/js/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "http:\/\/niklaushirt.github.io\/";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>

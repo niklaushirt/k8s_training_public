@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JTC02 Kubernetes Labs on Kubernetes Training</title>
+    <link>http://niklaushirt.github.io/jtc02/</link>
+    <description>Recent content in JTC02 Kubernetes Labs on Kubernetes Training</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 23 Sep 2020 09:12:06 +0200</lastBuildDate>
+    
+	<atom:link href="http://niklaushirt.github.io/jtc02/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lab 1: Get to know Kubernetes</title>
+      <link>http://niklaushirt.github.io/jtc02/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc02/lab1/</guid>
+      <description>Kubernetes was developed by Google as part of the Borg project and handed off to the open source community in 2015. Kubernetes combines more than 15 years of Google research in running a containerized infrastructure with production work loads, open source contributions, and Docker container management tools to provide an isolated and secure app platform that is portable, extensible, and self-healing in case of failovers.
+Kubernetes is a solution that automates the orchestration of Container workloads.</description>
+    </item>
+    
+    <item>
+      <title>Lab 2: Deploy your first Pod</title>
+      <link>http://niklaushirt.github.io/jtc02/lab2/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc02/lab2/</guid>
+      <description>Introduction You will learn what a pod is, deploy your first container, configure Kubernetes, and interact with Kubernetes in the command line.
+The base elements of Kubernetes are pods. Kubernetes will choose how and where to run them. You can also see a Pod as an object that requests some CPU and RAM. Kubernetes will take those requirements and decide where to run them.
+APod can be killed and restarted whenever the system has/wants to.</description>
+    </item>
+    
+    <item>
+      <title>Lab 3: Deploy your first application</title>
+      <link>http://niklaushirt.github.io/jtc02/lab3/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc02/lab3/</guid>
+      <description>Learn how to deploy an application to a Kubernetes cluster.
+Once your client is configured, you are ready to deploy your first application, k8sdemo.
+The frontend example application In this part of the lab we will deploy an application called k8sdemo that has already been built and uploaded to DockerHub under the name niklaushirt/k8sdemo.
+We will use the following yaml:
+kind: Deployment metadata: name: k8sdemo namespace: default spec: replicas: 1 template: metadata: labels: app: k8sdemo spec: containers: - name: k8sdemo image: niklaushirt/k8sdemo:1.</description>
+    </item>
+    
+    <item>
+      <title>Lab 4: Scale and Update Deployments</title>
+      <link>http://niklaushirt.github.io/jtc02/lab4/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc02/lab4/</guid>
+      <description>In this lab, you&amp;rsquo;ll learn how to update the number of instances a deployment has and how to modify the API backend.
+ For this lab, you need a running deployment of the k8sdemo application from the previous lab. If you deleted it, recreate it.
+ Scale apps with replicas A replica is a copy of a pod that contains a running service. By having multiple replicas of a pod, you can ensure your deployment has the available resources to handle increasing load on your application.</description>
+    </item>
+    
+    <item>
+      <title>Lab 5: Stateful Deployments</title>
+      <link>http://niklaushirt.github.io/jtc02/lab5/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc02/lab5/</guid>
+      <description>As you know a Pod is mortal, meaning it can be destroyed by Kubernetes anytime, and with it it&amp;rsquo;s local data, memory, etc. So it&amp;rsquo;s perfect for stateless applications. Of course, in the real world we need a way to store our data, and we need this data to be persistent in time.
+So let&amp;rsquo;s have a look on how how can we deploy a stateful application with a persistent storage in Kubernetes?</description>
+    </item>
+    
+    <item>
+      <title>Lab 6: Cleanup</title>
+      <link>http://niklaushirt.github.io/jtc02/lab6/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc02/lab6/</guid>
+      <description>Delete the elements that we have deployed in order to go back to normal.
+  Delete the demo app and the mysql deployment
+kubectl delete -f ~/training/deployment/demoapp.yaml kubectl delete -f ~/training/deployment/demoapp-service.yaml kubectl delete -f ~/training/deployment/demoapp-backend.yaml kubectl delete -f ~/training/deployment/demoapp-backend-service.yaml kubectl delete -f ~/training/volumes/3-simple-mysql-deployment.yaml ``
+  </description>
+    </item>
+    
+  </channel>
+</rss>

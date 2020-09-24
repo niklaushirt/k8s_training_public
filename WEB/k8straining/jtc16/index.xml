@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JTC16 Kubernetes Security Labs on Kubernetes Training</title>
+    <link>http://niklaushirt.github.io/jtc16/</link>
+    <description>Recent content in JTC16 Kubernetes Security Labs on Kubernetes Training</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 23 Sep 2020 09:12:06 +0200</lastBuildDate>
+    
+	<atom:link href="http://niklaushirt.github.io/jtc16/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lab 1: Network Policies</title>
+      <link>http://niklaushirt.github.io/jtc16/lab1/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc16/lab1/</guid>
+      <description>Kubernetes network policies specify how pods can communicate with other pods and with external endpoints. By default, no network policies are set up. If you have unique security requirements, you can create your own network policies.
+The following network traffic is allowed by default:
+ A pod accepts external traffic from any IP address to its NodePort or LoadBalancer service or its Ingress resource. A pod accepts internal traffic from any other pod in the same cluster.</description>
+    </item>
+    
+    <item>
+      <title>Lab 2: Security Tooling</title>
+      <link>http://niklaushirt.github.io/jtc16/lab2/</link>
+      <pubDate>Wed, 23 Sep 2020 09:12:06 +0200</pubDate>
+      
+      <guid>http://niklaushirt.github.io/jtc16/lab2/</guid>
+      <description>Polaris Polaris runs a variety of checks to ensure that Kubernetes pods and controllers are configured using best practices, helping you avoid problems in the future.
+You can get more details here.
+  Install Polaris Dashboard by running:
+kubectl apply -f ~/training/tools/polaris.yaml &amp;gt; namespace/polaris created &amp;gt; configmap/polaris created &amp;gt; serviceaccount/polaris-dashboard created &amp;gt; clusterrole.rbac.authorization.k8s.io/polaris-dashboard created &amp;gt; clusterrolebinding.rbac.authorization.k8s.io/polaris-dashboard created &amp;gt; service/polaris-dashboard created &amp;gt; deployment.apps/polaris-dashboard created ``
+  Wait until the pod si running:</description>
+    </item>
+    
+  </channel>
+</rss>

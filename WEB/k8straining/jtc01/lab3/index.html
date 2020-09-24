@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="canonical" href="http://niklaushirt.github.io/jtc01/lab3/">
+
+    <title>
+        
+        Lab 3: Docker Internals | Kubernetes Training
+        
+    </title>
+
+    
+    <link href="http://niklaushirt.github.io/css/fontawesome.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="http://niklaushirt.github.io/css/ace.min.css">
+
+    
+    
+        
+    
+
+</head>
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top" id="navbarMain">
+    <div class="container">
+        <div>
+            <a class="navbar-brand" href="/">
+                
+                Kubernetes Training
+            </a>
+        </div>
+        
+            <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#navbarMainCollapse" aria-controls="navbarMainCollapse" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMainCollapse">
+              <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://github.com/vantagedesign/ace-documentation1" >
+                                  <i class='fab fa-github'></i>
+                                </a>
+                            </li>
+              </ul>
+            </div>
+    </div>
+</nav>
+<div class="container-fluid">
+            <div class="row">
+
+                <div class="docs-sidenav order-0 col-12 col-md-3 col-lg-2 col-xl-2 position-sticky border-right"><nav class="navbar navbar-expand-md navbar-light pl-0">
+    <button class="navbar-toggler navbar-toggler-right collapsed" type="button" data-toggle="collapse" data-target="#sidenav-left-collapse" aria-controls="sidenav-left-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+     <div class="collapse navbar-collapse align-items-start flex-column" id="sidenav-left-collapse">
+            <form class="form-inline my-2 my-lg-0 searchbox">
+                <input class="form-control mr-sm-2 w-100" data-search-input id="search-by" type="text" placeholder="Search">
+            </form>
+         <ul class="navbar-nav flex-column pt-3">
+    <li data-nav-id="/jtc00/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc00/"><h6>Introduction</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc00/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc00/lab1/" class="nav-link p-0">
+                    Getting set up
+                </a>
+        </li>
+        <li data-nav-id="/jtc00/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc00/lab2/" class="nav-link p-0">
+                    Lab Information and Semantics
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc01/" class="nav-item my-1 parent haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc01/"><h6>JTC01 Docker</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc01/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Docker
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab2/" class="nav-link p-0">
+                    Lab 2: Docker Basics
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab3/" class="nav-item my-1 active">
+                
+                 <a href="/jtc01/lab3/" class="nav-link p-0">
+                    Lab 3: Docker Internals
+                </a>
+        </li>
+        <li data-nav-id="/jtc01/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc01/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc02/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc02/"><h6>JTC02 Kubernetes Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc02/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know Kubernetes
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab2/" class="nav-link p-0">
+                    Lab 2: Deploy your first Pod
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy your first application
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab4/" class="nav-link p-0">
+                    Lab 4: Scale and Update Deployments
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab5/" class="nav-link p-0">
+                    Lab 5: Stateful Deployments
+                </a>
+        </li>
+        <li data-nav-id="/jtc02/lab6/" class="nav-item my-1">
+                
+                 <a href="/jtc02/lab6/" class="nav-link p-0">
+                    Lab 6: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc10/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc10/"><h6>JTC10 Istio</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc10/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab1/" class="nav-link p-0">
+                    Lab 1: Get to know ISTIO
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab2/" class="nav-link p-0">
+                    Lab 2: Installing Istio 
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy BookInfo application 
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab4/" class="nav-link p-0">
+                    Lab 4: Monitoring with Kiali
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab5/" class="nav-link p-0">
+                    Lab 5: Traffic flow management
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab6/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab6/" class="nav-link p-0">
+                    Lab 6: Telemetry data
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab7/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab7/" class="nav-link p-0">
+                    Lab 7: End-user authentication
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab8/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab8/" class="nav-link p-0">
+                    Lab 8: Traffic Mirroring
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab9/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab9/" class="nav-link p-0">
+                    Lab 9: Fault Injection
+                </a>
+        </li>
+        <li data-nav-id="/jtc10/lab10/" class="nav-item my-1">
+                
+                 <a href="/jtc10/lab10/" class="nav-link p-0">
+                    Lab 10: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc14/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc14/"><h6>JTC14 Kubernetes Ansible Operators</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc14/lab0/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab0/" class="nav-link p-0">
+                    Lab 0: Prepare the Lab environment
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab1/" class="nav-link p-0">
+                    Lab 1: Kubernetes Operators
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab2/" class="nav-link p-0">
+                    Lab 2: Create the Lab Operator Project
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab3/" class="nav-link p-0">
+                    Lab 3: Deploy the Lab Operator
+                </a>
+        </li>
+        <li data-nav-id="/jtc14/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc14/lab4/" class="nav-link p-0">
+                    Lab 4: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc16/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc16/"><h6>JTC16 Kubernetes Security Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc16/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc16/lab1/" class="nav-link p-0">
+                    Lab 1: Network Policies
+                </a>
+        </li>
+        <li data-nav-id="/jtc16/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc16/lab2/" class="nav-link p-0">
+                    Lab 2: Security Tooling
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc17/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc17/"><h6>JTC17 Kubernetes Advanced Security</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc17/lab0/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab0/" class="nav-link p-0">
+                    Lab 0: Preparation
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab1/" class="nav-link p-0">
+                    Lab 1: RBAC - Users, Roles and RoleBindings
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab2/" class="nav-link p-0">
+                    Lab 2: Service Accounts
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab3/" class="nav-link p-0">
+                    Lab 3: RBAC Tooling
+                </a>
+        </li>
+        <li data-nav-id="/jtc17/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc17/lab4/" class="nav-link p-0">
+                    Lab 4: Image Scanning
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc18/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc18/"><h6>JTC18 Kubernetes Advanced Labs</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc18/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab1/" class="nav-link p-0">
+                    Lab 1: Liveness and Readiness Probes
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab2/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab2/" class="nav-link p-0">
+                    Lab 2: Init Containers
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab3/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab3/" class="nav-link p-0">
+                    Lab 3: Persistent Volumes
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab4/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab4/" class="nav-link p-0">
+                    Lab 4: Dynamic NFS provisioning
+                </a>
+        </li>
+        <li data-nav-id="/jtc18/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc18/lab5/" class="nav-link p-0">
+                    Lab 5: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+    <li data-nav-id="/jtc19/" class="nav-item my-1 haschildren
+        ">
+        
+        <a class="nav-link p-0" href="/jtc19/"><h6>JTC19 CloudNative DevOps</h6></a>
+        <ul class="list-unstyled ml-2">
+        <li data-nav-id="/jtc19/lab1/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab1/" class="nav-link p-0">
+                    Lab 1: Tekton
+                </a>
+        </li>
+        <li data-nav-id="/jtc19/lab5/" class="nav-item my-1">
+                
+                 <a href="/jtc19/lab5/" class="nav-link p-0">
+                    Lab 5: Cleanup
+                </a>
+        </li>
+        </ul>
+    </li>
+        </ul>
+    </div>
+</nav>
+
+
+</div>
+                <div class="docs-toc large order-lg-2 order-md-0 order-xs-1 col-12 col-lg-2 col-xl-2 position-sticky border-left"><div class="docs-toc">
+	<nav id="TableOfContents">
+  <ul>
+    <li><a href="#docker-process-inspection">Docker process inspection</a></li>
+    <li><a href="#docker-logs">Docker logs</a></li>
+    <li><a href="#docker-processes">Docker processes</a></li>
+    <li><a href="#docker-exec">Docker exec</a></li>
+  </ul>
+</nav>
+</div>
+</div>
+                <div class="main col-12 order-1 col-md-9 col-lg-10 col-xl-8 py-3">
+                
+
+<h1>Lab 3: Docker Internals</h1>
+
+<p>Now let&rsquo;s have a more in depth look at the running containers.</p>
+<h2 id="docker-process-inspection">Docker process inspection</h2>
+<p>Docker <code>top</code> gives you the running processes inside a container. We can see that we have the node server running inside the container.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker top k8sdemo
+
+&gt; UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+&gt; www                 <span style="color:#ae81ff">35532</span>               <span style="color:#ae81ff">35512</span>               <span style="color:#ae81ff">0</span>                   10:48               ?                   00:00:00            npm
+&gt; www                 <span style="color:#ae81ff">35606</span>               <span style="color:#ae81ff">35532</span>               <span style="color:#ae81ff">0</span>                   10:48               ?                   00:00:00            sh -c node ./bin/www
+&gt; www                 <span style="color:#ae81ff">35607</span>               <span style="color:#ae81ff">35606</span>               <span style="color:#ae81ff">0</span>                   10:48               ?                   00:00:00            node ./bin/www
+
+</code></pre></div><p>Docker <code>inspect</code> outputs the detailed configuration of the running container.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker inspect k8sdemo
+
+&gt; <span style="color:#f92672">[</span>
+&gt;     <span style="color:#f92672">{</span>
+&gt;         <span style="color:#e6db74">&#34;Id&#34;</span>: <span style="color:#e6db74">&#34;48f5cd2708b27da27b0edcc1aaa3b6308249e6de94d45c0b123bf5fc7f2efbbf&#34;</span>,
+&gt;         <span style="color:#e6db74">&#34;Created&#34;</span>: <span style="color:#e6db74">&#34;2020-05-19T08:48:03.867340977Z&#34;</span>,
+&gt;         <span style="color:#e6db74">&#34;Path&#34;</span>: <span style="color:#e6db74">&#34;docker-entrypoint.sh&#34;</span>,
+&gt;         <span style="color:#e6db74">&#34;Args&#34;</span>: <span style="color:#f92672">[</span>
+&gt;             <span style="color:#e6db74">&#34;npm&#34;</span>,
+&gt;             <span style="color:#e6db74">&#34;start&#34;</span>
+&gt;         <span style="color:#f92672">]</span>,
+&gt;         <span style="color:#e6db74">&#34;State&#34;</span>: <span style="color:#f92672">{</span>
+&gt;             <span style="color:#e6db74">&#34;Status&#34;</span>: <span style="color:#e6db74">&#34;running&#34;</span>,
+&gt;  ...
+
+</code></pre></div><h2 id="docker-logs">Docker logs</h2>
+<p>In order to access the logs of the container (especially if it runs in the background with the <code>-d</code> option) you can use docker <code>logs</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker logs k8sdemo
+
+&gt; test@0.0.0 start /app
+&gt; node ./bin/www
+
+</code></pre></div><h2 id="docker-processes">Docker processes</h2>
+<p>As we have seen, running a Docker container starts an isolated process on the host system.
+So we are able to see those processed running in the VM. One for the frontend and one for the backend.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ps -Alf | grep <span style="color:#e6db74">&#34;sh -c node&#34;</span>
+
+&gt; <span style="color:#ae81ff">4</span> S root        <span style="color:#ae81ff">9474</span>    <span style="color:#ae81ff">9411</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">80</span>   <span style="color:#ae81ff">0</span> -  <span style="color:#ae81ff">1070</span> -      10:00 ?        00:00:00 sh -c node ./bin/www
+&gt; <span style="color:#ae81ff">4</span> S root       <span style="color:#ae81ff">12020</span>   <span style="color:#ae81ff">11960</span>  <span style="color:#ae81ff">0</span>  <span style="color:#ae81ff">80</span>   <span style="color:#ae81ff">0</span> -  <span style="color:#ae81ff">1070</span> -      10:04 ?        00:00:00 sh -c node ./bin/www
+</code></pre></div><p>The pstree command shows the process in the complete process tree.
+If you execute the following command you can see that the processes from our demo application are running under the containerd process, which is the container runtime used by Docker for this lab.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pstree | grep node
+
+&gt;        |-containerd-+-containerd-shim-+-portainer---10*<span style="color:#f92672">[{</span>portainer<span style="color:#f92672">}]</span>
+&gt;
+&gt;  ...
+&gt;
+&gt;        |            |-containerd-shim-+-npm-+-sh---node---9*<span style="color:#f92672">[{</span>node<span style="color:#f92672">}]</span>
+&gt;        |            |                 <span style="color:#e6db74">`</span>-9*<span style="color:#f92672">[{</span>containerd-shim<span style="color:#f92672">}]</span>
+&gt;        |            |-containerd-shim-+-npm-+-sh---node---5*<span style="color:#f92672">[{</span>node<span style="color:#f92672">}]</span>
+&gt;        |            |                 <span style="color:#e6db74">`</span>-9*<span style="color:#f92672">[{</span>containerd-shim<span style="color:#f92672">}]</span>
+&gt;        |            <span style="color:#e6db74">`</span>-17*<span style="color:#f92672">[{</span>containerd<span style="color:#f92672">}]</span>
+
+</code></pre></div><h2 id="docker-exec">Docker exec</h2>
+<p>Docker <code>exec</code> allows to run commands inside already running containers. This is very useful for debugging.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker exec -it k8sdemo /bin/bash
+</code></pre></div><p>You get a prompt inside the container.
+Now you can explore the content of the running container.</p>
+<ol>
+<li>
+<p>List the files in the home directory</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root@9bffd6c12fb0:/app# ls -al
+   
+&gt; total <span style="color:#ae81ff">84</span>
+&gt; drwxr-xr-x <span style="color:#ae81ff">1</span> root root  <span style="color:#ae81ff">4096</span> May <span style="color:#ae81ff">14</span> 07:25 .
+&gt; drwxr-xr-x <span style="color:#ae81ff">1</span> root root  <span style="color:#ae81ff">4096</span> May <span style="color:#ae81ff">19</span> 08:04 ..
+&gt; -rw-rw-r-- <span style="color:#ae81ff">1</span> root root  <span style="color:#ae81ff">6148</span> May <span style="color:#ae81ff">14</span> 06:55 .DS_Store
+&gt; -rw-rw-r-- <span style="color:#ae81ff">1</span> root root   <span style="color:#ae81ff">496</span> May <span style="color:#ae81ff">14</span> 06:55 Dockerfile
+&gt; -rw-rw-r-- <span style="color:#ae81ff">1</span> root root    <span style="color:#ae81ff">78</span> May <span style="color:#ae81ff">14</span> 06:55 README
+&gt; -rw-rw-r-- <span style="color:#ae81ff">1</span> root root  <span style="color:#ae81ff">1226</span> May <span style="color:#ae81ff">14</span> 06:55 app.js
+&gt; drwxrwxr-x <span style="color:#ae81ff">2</span> root root  <span style="color:#ae81ff">4096</span> May <span style="color:#ae81ff">14</span> 06:55 bin
+&gt; -rw-rw-r-- <span style="color:#ae81ff">1</span> root root   <span style="color:#ae81ff">306</span> May <span style="color:#ae81ff">14</span> 06:55 build.sh
+&gt; drwxrwxr-x <span style="color:#ae81ff">1</span> root root  <span style="color:#ae81ff">4096</span> May <span style="color:#ae81ff">14</span> 06:55 node_modules
+&gt; -rw-rw-r-- <span style="color:#ae81ff">1</span> root root <span style="color:#ae81ff">26382</span> May <span style="color:#ae81ff">14</span> 06:55 package-lock.json
+&gt; -rw-rw-r-- <span style="color:#ae81ff">1</span> root root   <span style="color:#ae81ff">307</span> May <span style="color:#ae81ff">14</span> 06:55 package.json
+&gt; drwxrwxr-x <span style="color:#ae81ff">5</span> root root  <span style="color:#ae81ff">4096</span> May <span style="color:#ae81ff">14</span> 06:55 public
+&gt; drwxrwxr-x <span style="color:#ae81ff">2</span> root root  <span style="color:#ae81ff">4096</span> May <span style="color:#ae81ff">14</span> 06:55 routes
+&gt; drwxrwxr-x <span style="color:#ae81ff">2</span> root root  <span style="color:#ae81ff">4096</span> May <span style="color:#ae81ff">14</span> 06:55 views
+
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>List the web files for the node application</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root@9bffd6c12fb0:/app# cd public/
+</code></pre></div><p>``</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root@9bffd6c12fb0:/app# ls -al
+   
+&gt; total <span style="color:#ae81ff">144</span>
+&gt; drwxrwxr-x <span style="color:#ae81ff">1</span> root root  <span style="color:#ae81ff">4096</span> May <span style="color:#ae81ff">14</span> 06:55 .
+&gt; drwxr-xr-x <span style="color:#ae81ff">1</span> root root  <span style="color:#ae81ff">4096</span> May <span style="color:#ae81ff">14</span> 07:25 ..
+&gt; -rw-rw-r-- <span style="color:#ae81ff">1</span> root root  <span style="color:#ae81ff">6148</span> May <span style="color:#ae81ff">14</span> 06:55 .DS_Store
+&gt; -rw-rw-r-- <span style="color:#ae81ff">1</span> root root <span style="color:#ae81ff">32939</span> May <span style="color:#ae81ff">14</span> 06:55 404.html
+&gt; -rw-rw-r-- <span style="color:#ae81ff">1</span> root root <span style="color:#ae81ff">55515</span> May <span style="color:#ae81ff">14</span> 06:55 500.html
+&gt; drwxrwxr-x <span style="color:#ae81ff">2</span> root root  <span style="color:#ae81ff">4096</span> May <span style="color:#ae81ff">14</span> 06:55 images
+&gt; -rwxrwxr-x <span style="color:#ae81ff">1</span> root root  <span style="color:#ae81ff">6240</span> May <span style="color:#ae81ff">19</span> 08:22 index.html
+&gt; -rwxrwxr-x <span style="color:#ae81ff">1</span> root root  <span style="color:#ae81ff">1188</span> May <span style="color:#ae81ff">14</span> 06:55 index.js
+&gt; drwxrwxr-x <span style="color:#ae81ff">4</span> root root  <span style="color:#ae81ff">4096</span> May <span style="color:#ae81ff">14</span> 06:55 public
+&gt; -rwxrwxr-x <span style="color:#ae81ff">1</span> root root  <span style="color:#ae81ff">1157</span> May <span style="color:#ae81ff">14</span> 06:55 style.css
+&gt; drwxrwxr-x <span style="color:#ae81ff">2</span> root root  <span style="color:#ae81ff">4096</span> May <span style="color:#ae81ff">14</span> 06:55 stylesheets
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Modify the HTML code for the running container.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root@9bffd6c12fb0:/app# echo <span style="color:#e6db74">&#34;HELLO&#34;</span> &gt;&gt; index.html 
+   
+</code></pre></div><p>``</p>
+</li>
+<li>
+<p>Reload the Web App and look for the HELLO text displayed in the lower left part of the page.</p>
+</li>
+<li>
+<p>Type <code>exit</code> in order to get back to the commandline</p>
+</li>
+</ol>
+
+
+    
+
+
+                    
+                    <div class="row"><div class="position-relative mx-auto col-lg-9">
+                          <div class="bg-primary overflow-hidden p-3 mt-5 shadow">
+
+    <h4 class="text-white text-center">Read more</h4>
+
+    <div class="d-flex justify-content-center"><a class="p-1 mr-3 d-inline-block text-white" href="/jtc01/lab2/" title="Lab 2: Docker Basics"><i class="fas fa-chevron-left p-1"></i>Lab 2: Docker Basics</a>
+        <a class="p-1 ml-3 d-inline-block text-white text-right" href="/jtc01/lab4/" title="Lab 4: Cleanup">Lab 4: Cleanup<i class="fas fa-chevron-right p-1"></i></a>
+    </div>
+</div>
+
+
+                        </div></div> 
+
+                </div>
+
+            </div> 
+
+        </div> 
+<script src="http://niklaushirt.github.io/lib/jquery.min.js"></script> 
+<script src="http://niklaushirt.github.io/lib/popper.min.js"></script> 
+
+<script src="http://niklaushirt.github.io/js/bootstrap.min.js"></script> 
+
+
+<script type="text/javascript" src="/plugins/lunr.min.js"></script>
+<script type="text/javascript" src="/plugins/auto-complete.js"></script>
+<link href="/plugins/auto-complete.css" rel="stylesheet">
+<script type="text/javascript">
+  
+      var baseurl = "http:\/\/niklaushirt.github.io\/";
+  
+</script>
+<script type="text/javascript" src="/plugins/search.js"></script>
+
+
+<script type="text/javascript" src="/plugins/clipboard.js"></script>
+<script>
+  new ClipboardJS('.btn');
+</script>
+</body>
+</html>
