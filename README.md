@@ -1,6 +1,11 @@
 
 # Prerequisites for the Lab
 
+
+Using the provided Lab VM is the easiest way to get started with the Labs for the training.
+
+For this you'll need:
+
 - Internet Access
 - PC with at least:
   - 4 Core CPU
@@ -8,8 +13,10 @@
   - 40GB of free Disk Space
 
 
+If you want to use your own environment (IBM Cloud or natively on your PC) you can follow the instructions here:
+[https://github.com/niklaushirt/training/tree/master/standalone](https://github.com/niklaushirt/training/tree/master/standalone)
 
-
+This is untested and I cannot guarantee that all the Labs will be working 100%.
 
 ### Getting set up
 
@@ -54,28 +61,13 @@ The VM is an 13GB zip file that has to be downloaded.
 
 
 
-### Option 1: Download with Aspera (recommended)
+### Download from Google Drive 
 
-The easiest way to download the file is with IBM Aspera high-speed transfer solution.
-
-Download it here:
-
-
-[Aspera VMWare](https://aspera.pub/zM7YiFk/k8s_training)
-
-
-[Aspera VirtualBox](https://aspera.pub/zM7YiFk/k8s_training)
-
-
-[Aspera OVA](https://aspera.pub/zM7YiFk/k8s_training)
-
-### Option 2: Download from Google Drive (not recommended)
-
-You can also download it from Google Drive, which is **much** slower.
-
-Download it here (VirtualBox only):
+Download it here (VirtualBox and VMWare):
 
 [Google Drive VirtualBox](https://drive.google.com/drive/folders/12YFacjjc92Ens-XEecqgmOG9d0YCz4IQ?usp=sharing)
+
+[Google Drive VMWare](https://drive.google.com/drive/folders/12YFacjjc92Ens-XEecqgmOG9d0YCz4IQ?usp=sharing)
 
 
 
